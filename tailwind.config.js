@@ -1000,10 +1000,10 @@ module.exports = {
     },
   },
   content: [
-    './src/pug/*.pug',
-    './src/html/*.html',
-    './src/pages/*.js',
-    './src/components/*/*.js',
+    './src/**/*.{js,ts,jsx,tsx,scss}',
+    './*.php',
+    './template-parts/**/*.php',
+    './page-templates/**/*.php',
   ],
   plugins: [],
 };
