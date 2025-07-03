@@ -6,9 +6,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root: './src',
+  publicDir: '../public',
   build: {
-    publicDir: '../public',
     emptyOutDir: true,
+    outDir: '../dist',
     rollupOptions: {
       input: {
         main: resolve(__dirname, './src/index.html'),
