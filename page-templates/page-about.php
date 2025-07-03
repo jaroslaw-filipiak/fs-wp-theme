@@ -19,7 +19,7 @@ Template Name: About
                 ślady czasu i opowiadają swoje własne historie. Nasza pasja do odkrywania zapomnianych skarbów sprawia,
                 że każda wizyta w naszym sklepie to podróż przez różne epoki i style. Pomagamy tworzyć wnętrza pełne
                 charakteru, gdzie każdy detal ma swoje miejsce i znaczenie.</p>
-            <a href="#"
+            <a href="mailto:info@fajnestarocie.pl"
                 class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800">info@fajnestarocie.pl</a>
         </div>
     </div>

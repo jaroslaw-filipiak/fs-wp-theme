@@ -21,29 +21,13 @@
                 <h3 class="text-lg font-medium text-teal-900 mb-4">Filtruj wg. kategorii</h3>
                 <div class="flex flex-wrap gap-3">
                     <button
-                        class="filter-btn active px-4 py-2 text-sm font-medium bg-teal-900 text-white hover:bg-teal-800 transition duration-300"
+                        class="h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-transparent border-zinc-500 text-zinc-500 hover:bg-zinc-800 hover:text-white"
                         data-filter="all">Wszystkie produkty</button>
+
                     <button
-                        class="filter-btn px-4 py-2 text-sm font-medium bg-white text-teal-900 border border-teal-900 hover:bg-teal-900 hover:text-white transition duration-300"
-                        data-filter="solar">Kategoria</button>
-                    <button
-                        class="filter-btn px-4 py-2 text-sm font-medium bg-white text-teal-900 border border-teal-900 hover:bg-teal-900 hover:text-white transition duration-300"
-                        data-filter="wind">Kategoria</button>
-                    <button
-                        class="filter-btn px-4 py-2 text-sm font-medium bg-white text-teal-900 border border-teal-900 hover:bg-teal-900 hover:text-white transition duration-300"
-                        data-filter="storage">Kategoria</button>
-                    <button
-                        class="filter-btn px-4 py-2 text-sm font-medium bg-white text-teal-900 border border-teal-900 hover:bg-teal-900 hover:text-white transition duration-300"
-                        data-filter="monitoring">Kategoria</button>
-                    <button
-                        class="filter-btn px-4 py-2 text-sm font-medium bg-white text-teal-900 border border-teal-900 hover:bg-teal-900 hover:text-white transition duration-300"
-                        data-filter="heating">Kategoria</button>
-                    <button
-                        class="filter-btn px-4 py-2 text-sm font-medium bg-white text-teal-900 border border-teal-900 hover:bg-teal-900 hover:text-white transition duration-300"
-                        data-filter="lighting">Kategoria</button>
-                    <button
-                        class="filter-btn px-4 py-2 text-sm font-medium bg-white text-teal-900 border border-teal-900 hover:bg-teal-900 hover:text-white transition duration-300"
-                        data-filter="ev">Kategoria</button>
+                        class="h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800"
+                        data-filter="all">Kategoria</button>
+
                 </div>
             </div>
         </div>
@@ -199,17 +183,18 @@
         <!-- Pagination Controls -->
         <div class="pagination-container flex justify-center items-center mt-12 space-x-2">
             <button
-                class="pagination-prev px-4 py-2 bg-white text-teal-900 border border-teal-900 hover:bg-teal-900 hover:text-white transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                class="pagination-prev h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-transparent border-zinc-500 text-zinc-500 hover:bg-zinc-800 hover:text-white"
                 disabled>Poprzednia</button>
             <div class="pagination-numbers flex space-x-1">
-                <button class="pagination-number px-3 py-2 bg-teal-900 text-white border border-teal-900"
+                <button
+                    class="pagination-number h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800"
                     data-page="1">1</button>
                 <button
-                    class="pagination-number px-3 py-2 bg-white text-teal-900 border border-teal-900 hover:bg-teal-900 hover:text-white transition duration-300"
+                    class="pagination-number h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-transparent border-zinc-500 text-zinc-500 hover:bg-zinc-800 hover:text-white"
                     data-page="2">2</button>
             </div>
             <button
-                class="pagination-next px-4 py-2 bg-white text-teal-900 border border-teal-900 hover:bg-teal-900 hover:text-white transition duration-300">Następna</button>
+                class="pagination-next h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-transparent border-zinc-500 text-zinc-500 hover:bg-zinc-800 hover:text-white">Następna</button>
         </div>
     </div>
 </section>
