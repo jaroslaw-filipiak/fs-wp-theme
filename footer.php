@@ -45,9 +45,16 @@
                     <div class="w-full xs:w-1/3 px-4">
                         <h3 class="mb-6 font-bold">Fajnestarocie.pl</h3>
                         <ul class="flex flex-col gap-4">
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">O nas</a></li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Kontakt</a></li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Ostatnio sprzedane</a></li>
+                            <li><a class="inline-block text-gray-600 font-medium"
+                                    href="<?php echo home_url('/o-nas'); ?>">O nas</a></li>
+                            <li><a class="inline-block text-gray-600 font-medium"
+                                    href="<?php echo home_url('/kontakt'); ?>">Kontakt</a></li>
+                            <li><a class="inline-block text-gray-600 font-medium"
+                                    href="<?php echo home_url('/polityka-prywatnosci'); ?>">Polityka prywatności</a>
+                            </li>
+                            <li><a class="inline-block text-gray-600 font-medium"
+                                    href="<?php echo home_url('/polityka-zwrotow'); ?>">Polityka zwrotów</a></li>
+
                         </ul>
                     </div>
                 </div>
