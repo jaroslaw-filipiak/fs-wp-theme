@@ -14,6 +14,9 @@
     &_meta {
       @apply hidden;
     }
+    &_content {
+      @apply mt-6 text-lg;
+    }
 
     .price {
       @apply font-medium mb-4 text-2xl;

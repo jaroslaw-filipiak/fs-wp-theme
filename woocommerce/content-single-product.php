@@ -61,7 +61,7 @@ if ( post_password_required() ) {
 		?>
 
         <!-- Product Content/Description -->
-        <div class="product-content">
+        <div class="product_content">
             <?php the_content(); ?>
         </div>
     </div>
