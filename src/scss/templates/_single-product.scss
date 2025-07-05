@@ -30,4 +30,17 @@
       }
     }
   }
+
+  &-gallery {
+    @apply border border-dashed border-stone-300;
+    &-images {
+      @apply flex flex-wrap gap-4;
+      &-image {
+        @apply w-1/4;
+        &-inner {
+          @apply w-full h-full object-cover;
+        }
+      }
+    }
+  }
 }
