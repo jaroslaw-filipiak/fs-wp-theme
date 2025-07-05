@@ -1,0 +1,33 @@
+.single-product {
+  @apply bg-stone-200;
+
+  .product {
+    @apply border-t pt-16 grid grid-cols-1 lg:grid-cols-2 gap-10;
+
+    // div {
+    //   @apply border border-dashed border-stone-300;
+    // }
+
+    &_title {
+      @apply text-4xl md:text-5xl leading-relaxed font-heading mb-6;
+    }
+    &_meta {
+      @apply hidden;
+    }
+
+    .price {
+      @apply font-medium mb-4 text-2xl;
+    }
+
+    form.cart {
+      // TODO: add to global woo input ?
+
+      @apply flex items-stretch justify-start gap-4 -ml-[16px];
+
+      // hidden because this products has no qty , always 1 item
+      input.qty {
+        @apply hidden py-4 px-6 placeholder-gray-700 outline-none ring-offset-0 focus:ring-2 shadow min-h-[61px] w-20 border-white;
+      }
+    }
+  }
+}

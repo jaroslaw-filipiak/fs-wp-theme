@@ -228,7 +228,7 @@ if ( ! function_exists( 'fajnestarocie_woocommerce_header_cart' ) ) {
 	}
 }
 
-
+// add container class to woocommerce content
 function add_container_before_woocommerce_content() {
     echo '<div class="container container-woocommerce-fajnestarocie">';
 }
@@ -238,3 +238,11 @@ function close_container_after_woocommerce_content() {
     echo '</div>';
 }
 add_action('woocommerce_after_main_content', 'close_container_after_woocommerce_content', 10);
+
+// woo custom product gallery 
+remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20);
+
+function custom_show_product_images() {
+    get_template_part('woocommerce/single-product-gallery');
+}
+add_action('woocommerce_before_single_product_summary', 'custom_show_product_images', 20);

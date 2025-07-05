@@ -1,1 +1,1 @@
-import './templates/single-product.scss';
+import './single-product.scss';
