@@ -278,7 +278,9 @@ module.exports = {
             inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
             none: 'none',
           },
-          container: [],
+          container: {
+            center: true,
+          },
           cursor: {
             auto: 'auto',
             default: 'default',

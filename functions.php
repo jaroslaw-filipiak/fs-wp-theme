@@ -144,6 +144,7 @@ add_action( 'widgets_init', 'fajnestarocie_widgets_init' );
  * Enqueue scripts and styles.
  */
 function fajnestarocie_scripts() {
+	//main global styles / scripts
 	wp_enqueue_style( 'fajnestarocie-main-styles', get_template_directory_uri() . '/dist/assets/main.css', array(), _S_VERSION );
 	wp_enqueue_style( 'fajnestarocie-style', get_stylesheet_uri(), array(), _S_VERSION );
 
@@ -151,6 +152,12 @@ function fajnestarocie_scripts() {
 	
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
+	}
+
+	// single product styles / scripts
+	if ( is_singular( 'product' ) ) {
+		wp_enqueue_style( 'fajnestarocie-single-product-styles', get_template_directory_uri() . '/dist/assets/single-product.css', array(), _S_VERSION );
+		wp_enqueue_script( 'fajnestarocie-single-product-scripts', get_template_directory_uri() . '/dist/assets/single-product.js', array(), _S_VERSION, true );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'fajnestarocie_scripts' );
@@ -188,3 +195,17 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
+
+// Rejestracja custom post type dla opinii klientów z OLX
+add_action('init', function() {
+    register_post_type('olx_review', array(
+        'labels' => array(
+            'name' => 'Opinie klientów',
+            'singular_name' => 'Opinia klienta',
+        ),
+        'public' => true,
+        'show_in_menu' => true,
+        'menu_icon' => 'dashicons-testimonial',
+        'supports' => array('title', 'custom-fields'),
+    ));
+});

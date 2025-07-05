@@ -13,6 +13,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, './src/index.html'),
+        'single-product': resolve(__dirname, './src/single-product.js'),
         // nested: resolve(__dirname, 'nested/index.html'),
       },
       output: {
