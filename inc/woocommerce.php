@@ -243,6 +243,10 @@ add_action('woocommerce_after_main_content', 'close_container_after_woocommerce_
 remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20);
 
 function custom_show_product_images() {
+    global $product;
+    if (!$product) {
+        $product = wc_get_product(get_the_ID());
+    }
     get_template_part('woocommerce/single-product-gallery');
 }
 add_action('woocommerce_before_single_product_summary', 'custom_show_product_images', 20);
