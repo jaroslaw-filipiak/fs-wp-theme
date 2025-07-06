@@ -2,14 +2,14 @@
   @apply bg-stone-200;
 
   .product {
-    @apply border-t pt-16 flex items-start justify-between gap-20;
+    @apply border-t pt-16 grid grid-cols-12 gap-20;
 
 
    .single-product-gallery {
-    @apply w-8/12
+    @apply col-span-8
    }
    .summary {
-    @apply w-4/12
+    @apply col-span-4;
    }
 
     &_title {
