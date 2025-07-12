@@ -230,7 +230,7 @@ if ( ! function_exists( 'fajnestarocie_woocommerce_header_cart' ) ) {
 
 // add container class to woocommerce content
 function add_container_before_woocommerce_content() {
-    echo '<div class="container container-woocommerce-fajnestarocie">';
+    echo '<div class="container-woocommerce-fajnestarocie">';
 }
 add_action('woocommerce_before_main_content', 'add_container_before_woocommerce_content', 10);
 
@@ -250,3 +250,18 @@ function custom_show_product_images() {
     get_template_part('woocommerce/single-product-gallery');
 }
 add_action('woocommerce_before_single_product_summary', 'custom_show_product_images', 20);
+
+
+
+// remove breadcrumbs WooCommerce
+remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
+
+//add breadcrumbs with container class
+add_action( 'woocommerce_before_main_content', 'wrap_woocommerce_breadcrumb', 20 );
+function wrap_woocommerce_breadcrumb() {
+    if ( function_exists( 'woocommerce_breadcrumb' ) ) {
+        echo '<div class="container">';
+        woocommerce_breadcrumb();
+        echo '</div>';
+    }
+}

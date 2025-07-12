@@ -4,18 +4,31 @@
 
 @import './scss/components/buttons';
 
+
+
 //woocommerce global
 .container-woocommerce-fajnestarocie {
   @apply py-12 lg:py-24;
 
   .woocommerce-breadcrumb {
-    @apply flex mb-4 items-center  text-sm font-medium text-teal-900;
+    @apply flex mb-4 items-center  text-sm font-medium text-teal-900 ;
   }
 
   .single_add_to_cart_button {
     @include btn-main;
   }
 }
+
+
+//cart
+#page
+.wc-block-cart__submit-container {
+  @apply h-12 inline-flex w-full mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 cursor-pointer;
+}
+
+//woo parts
+@import './scss/pages/checkout';
+
 
 // swiper
 .fajnestarocie-swiper-button-next, .fajnestarocie-swiper-button-prev {
@@ -139,9 +152,9 @@ form.wpcf7-form {
       @apply py-3;
     }
   }
-  a {
-    @apply text-teal-900 hover:text-teal-700 font-medium;
-  }
+  // a {
+  //   @apply text-teal-900 hover:text-teal-700 font-medium;
+  // }
   img {
     @apply w-full h-auto;
   }

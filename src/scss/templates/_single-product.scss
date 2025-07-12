@@ -47,10 +47,10 @@
     }
   }
 
-  .woocommerce-message {
+  #page .woocommerce-message {
     @apply bg-stone-300 py-10 px-12 text-lg leading-relaxed mb-6 mt-2 outline-none focus:outline-none;
 
-    .button {
+    a.wc-forward {
       @apply h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 ml-6;
     }
   }

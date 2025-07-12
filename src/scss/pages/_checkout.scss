@@ -1,0 +1,59 @@
+body.woocommerce-checkout { 
+
+    #page {
+        .entry-content  {
+         
+            .wc-block-components-form .wc-block-components-text-input input[type=email], .wc-block-components-form .wc-block-components-text-input input[type=number], .wc-block-components-form .wc-block-components-text-input input[type=password], .wc-block-components-form .wc-block-components-text-input input[type=tel], .wc-block-components-form .wc-block-components-text-input input[type=text], .wc-block-components-form .wc-block-components-text-input input[type=url], .wc-block-components-text-input input[type=email], .wc-block-components-text-input input[type=number], .wc-block-components-text-input input[type=password], .wc-block-components-text-input input[type=tel], .wc-block-components-text-input input[type=text], .wc-block-components-text-input input[type=url] { 
+                @apply h-12 w-full px-4 py-1 placeholder-gray-700 outline-none border-none ring-offset-0 focus:ring-2 shadow mb-2 rounded-none;
+            }
+
+            //select 
+            .wc-blocks-components-select .wc-blocks-components-select__select {
+                @apply h-12 w-full px-4 py-1 placeholder-gray-700 outline-none border-none ring-offset-0 focus:ring-2 shadow mb-2 rounded-none;
+
+                
+            }
+
+            // select => label
+            .wc-blocks-components-select .wc-blocks-components-select__label {
+                @apply hidden;
+            }
+
+            //label
+            .wc-block-components-form .wc-block-components-text-input input:-webkit-autofill+label, .wc-block-components-form .wc-block-components-text-input.is-active label, .wc-block-components-text-input input:-webkit-autofill+label, .wc-block-components-text-input.is-active label {
+                @apply hidden;
+            }
+
+            //note 
+            .wc-block-components-textarea {
+                @apply border-none outline-none rounded-none;
+            }
+
+            //coupon button
+            #wc-block-components-totals-coupon__form {
+                button {
+                    @apply h-12 inline-flex w-full mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 cursor-pointer;
+                }
+            }
+
+            //right
+            .wp-block-woocommerce-checkout-order-summary-block {
+                @apply  rounded-none;
+            }
+
+           
+
+        }
+
+    }
+
+    .wc-block-checkout__actions_row {
+        .wc-block-components-checkout-return-to-cart-button , .wc-block-components-checkout-place-order-button {
+            @apply h-12 inline-flex w-full mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 cursor-pointer;
+
+            svg {
+                @apply left-10; 
+            }
+        }
+    }
+}

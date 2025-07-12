@@ -51,14 +51,12 @@
 
                                     <div class="border-t border-teal-900 max-w-[200px]"></div>
 
-                            <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
-                                    href="<?php echo home_url('/polityka-prywatnosci'); ?>">Polityka prywatności</a>
+                            <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium" 
+                                    href="<?php echo get_privacy_policy_url(); ?>">Polityka prywatności</a>
                             </li>
+                          
                             <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
-                                    href="<?php echo home_url('/polityka-zwrotow'); ?>">Polityka zwrotów</a></li>
-                                    <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
-                                    href="<?php echo home_url('/polityka-zwrotow'); ?>">Regulamin</a></li>
-
+                                    href="<?php echo home_url('/regulamin'); ?>">Regulamin</a></li>
 
                         </ul>
                     </div>
