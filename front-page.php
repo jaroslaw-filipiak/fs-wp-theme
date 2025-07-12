@@ -123,7 +123,7 @@
                     }
                 ?>
                 <div class="group">
-                        <div class="group-hover:bg-zinc-800 py-10 px-12 transition-background-color duration-300">
+                        <div class="group-hover:bg-zinc-800 py-10 px-12 transition-background-color duration-300 ">
                             <a href="<?php echo get_term_link($category); ?>">
                                 <h3 class="text-3xl mt-4 text-center font-medium group-hover:text-white"><?php echo $category->name; ?></h3>
                                 <p class="text-center text-gray-600 group-hover:text-white"><?php echo $category->count; ?> produktów</p>
