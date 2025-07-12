@@ -20,181 +20,79 @@
             <div class="mb-12">
                 <h3 class="text-lg font-medium text-teal-900 mb-4">Filtruj wg. kategorii</h3>
                 <div class="flex flex-wrap gap-3">
-                    <button
-                        class="h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-transparent border-zinc-500 text-zinc-500 hover:bg-zinc-800 hover:text-white"
-                        data-filter="all">Wszystkie produkty</button>
+                   
 
-                    <button
-                        class="h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800"
-                        data-filter="all">Kategoria</button>
+                    <?php
+                    $categories = get_terms([
+                        'taxonomy' => 'product_cat',
+                        'hide_empty' => true
+                    ]);
 
+                    if (!empty($categories) && !is_wp_error($categories)) {
+                        foreach ($categories as $category) {
+                          
+                            if ($category->slug === 'uncategorized' || $category->slug === 'bez-kategorii' || $category->name === 'Bez kategorii') {
+                                continue;
+                            }
+                            
+                            $category_link = get_term_link($category);
+                            $post_count = $category->count;
+                            ?>
+                            <a href="<?php echo esc_url($category_link); ?>"
+                                class="h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 <?php echo is_tax('product_cat', $category->term_id) ? 'bg-zinc-500 text-white' : 'bg-transparent border-zinc-500 text-zinc-500'; ?> hover:bg-zinc-800 hover:text-white">
+                                <?php echo esc_html($category->name); ?> (<?php echo $post_count; ?>)
+                            </a>
+                            <?php
+                        }
+                    }
+                    ?>
+
+                  
                 </div>
             </div>
         </div>
         <div class="product-grid mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="product-item group" data-page="1">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400" alt="Product 1">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">Lorem
-                            Ipsum Dolor Sit</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <div class="text-2xl font-bold text-teal-900">9,999 zł</div>
+            <?php
+            if (have_posts()) :
+                while (have_posts()) :
+                    the_post();
+                    global $product;
+                    ?>
+                    <div class="product-item group">
+                        <a href="<?php the_permalink(); ?>" class="block">
+                            <?php if (has_post_thumbnail()) : ?>
+                                <img class="block w-full h-64 mb-6 object-cover" 
+                                     src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>" 
+                                     alt="<?php the_title(); ?>">
+                            <?php endif; ?>
+                            <div>
+                                <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">
+                                    <?php the_title(); ?>
+                                </h4>
+                                <p class="text-gray-700 mb-4 text-sm">
+                                    <?php echo wp_trim_words(get_the_excerpt(), 20); ?>
+                                </p>
+                                <div class="text-2xl font-bold text-teal-900">
+                                    <?php echo $product->get_price_html(); ?>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            <div class="product-item group" data-page="1">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400" alt="Product 2">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">
-                            Consectetur Adipiscing Elit</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="text-2xl font-bold text-teal-900">13,299 zł</div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-item group" data-page="1">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400" alt="Product 3">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">Duis Aute
-                            Irure Dolor</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse cillum dolore eu fugiat nulla pariatur.</p>
-                        <div class="text-2xl font-bold text-teal-900">7,599 zł</div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-item group" data-page="1">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400" alt="Product 4">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">Excepteur
-                            Sint Occaecat</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <div class="text-2xl font-bold text-teal-900">1,199 zł</div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-item group" data-page="1">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400" alt="Product 5">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">Sed Ut
-                            Perspiciatis Unde</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Sed ut perspiciatis unde omnis iste natus error sit
-                            voluptatem accusantium doloremque laudantium.</p>
-                        <div class="text-2xl font-bold text-teal-900">6,399 zł</div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-item group" data-page="1">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400" alt="Product 6">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">Totam Rem
-                            Aperiam</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Totam rem aperiam, eaque ipsa quae ab illo inventore
-                            veritatis et quasi architecto beatae vitae dicta sunt.</p>
-                        <div class="text-2xl font-bold text-teal-900">1,799 zł</div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-item group hidden" data-page="2">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400" alt="Product 7">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">Nemo Enim
-                            Ipsam</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Nemo enim ipsam voluptatem quia voluptas sit aspernatur
-                            aut odit aut fugit, sed quia consequuntur magni dolores.</p>
-                        <div class="text-2xl font-bold text-teal-900">11,199 zł</div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-item group hidden" data-page="2">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400" alt="Product 8">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">Neque
-                            Porro Quisquam</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                            amet, consectetur, adipisci velit.</p>
-                        <div class="text-2xl font-bold text-teal-900">19,999 zł</div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-item group hidden" data-page="2">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400" alt="Product 9">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">Ut Enim
-                            Ad Minima</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Ut enim ad minima veniam, quis nostrum exercitationem
-                            ullam corporis suscipit laboriosam, nisi ut aliquid.</p>
-                        <div class="text-2xl font-bold text-teal-900">2,799 zł</div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-item group hidden" data-page="2">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400"
-                        alt="Product 10">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">Quis
-                            Autem Vel Eum</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Quis autem vel eum iure reprehenderit qui in ea voluptate
-                            velit esse quam nihil molestiae consequatur.</p>
-                        <div class="text-2xl font-bold text-teal-900">15,199 zł</div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-item group hidden" data-page="2">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400"
-                        alt="Product 11">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">At Vero
-                            Eos Et</h4>
-                        <p class="text-gray-700 mb-4 text-sm">At vero eos et accusamus et iusto odio dignissimos ducimus
-                            qui blanditiis praesentium voluptatum deleniti.</p>
-                        <div class="text-2xl font-bold text-teal-900">5,199 zł</div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-item group hidden" data-page="2">
-                <a href="#" class="block">
-                    <img class="block w-full h-64 mb-6 object-cover" src="https://placehold.co/400x400"
-                        alt="Product 12">
-                    <div>
-                        <h4 class="text-xl font-medium group-hover:text-teal-600 transition duration-200 mb-3">Et Harum
-                            Quidem Rerum</h4>
-                        <p class="text-gray-700 mb-4 text-sm">Et harum quidem rerum facilis est et expedita distinctio.
-                            Nam libero tempore, cum soluta nobis est eligendi.</p>
-                        <div class="text-2xl font-bold text-teal-900">3,599 zł</div>
-                    </div>
-                </a>
-            </div>
+                <?php
+                endwhile;
+            endif;
+            ?>
         </div>
         <!-- Pagination Controls -->
         <div class="pagination-container flex justify-center items-center mt-12 space-x-2">
-            <button
-                class="pagination-prev h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-transparent border-zinc-500 text-zinc-500 hover:bg-zinc-800 hover:text-white"
-                disabled>Poprzednia</button>
-            <div class="pagination-numbers flex space-x-1">
-                <button
-                    class="pagination-number h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800"
-                    data-page="1">1</button>
-                <button
-                    class="pagination-number h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-transparent border-zinc-500 text-zinc-500 hover:bg-zinc-800 hover:text-white"
-                    data-page="2">2</button>
-            </div>
-            <button
-                class="pagination-next h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-transparent border-zinc-500 text-zinc-500 hover:bg-zinc-800 hover:text-white">Następna</button>
+            <?php
+            echo paginate_links(array(
+                'prev_text' => '<button class="h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-transparent border-zinc-500 text-zinc-500 hover:bg-zinc-800 hover:text-white">Poprzednia</button>',
+                'next_text' => '<button class="h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-transparent border-zinc-500 text-zinc-500 hover:bg-zinc-800 hover:text-white">Następna</button>',
+                'before_page_number' => '<button class="pagination-number h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 ' . (is_page() ? 'bg-zinc-500 text-white' : 'bg-transparent border-zinc-500 text-zinc-500') . ' hover:bg-zinc-800 hover:text-white">',
+                'after_page_number' => '</button>'
+            ));
+            ?>
         </div>
     </div>
 </section>
