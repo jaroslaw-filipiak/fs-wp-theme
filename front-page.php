@@ -140,7 +140,7 @@
     </div>
 </section>
 
-<section class="p-4 bg-stone-100 pb-40">
+<section class="p-4 bg-stone-100">
     <div class="py-16 px-4 sm:px-8 rounded-3xl bg-stone-300 relative -top-34">
         <div class="container mx-auto px-4">
             <div class="flex mb-4 items-center">

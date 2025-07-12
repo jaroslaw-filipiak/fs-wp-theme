@@ -998,7 +998,7 @@ module.exports = {
       fontFamily: {
         body: '"Cormorant Garamond", serif',
         heading:
-          '"Roboto Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+          '"Lato", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
       },
       backgroundColor: {
         body: '#BFB1A4',
