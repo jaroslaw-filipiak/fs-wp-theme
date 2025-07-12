@@ -13,13 +13,13 @@
 
 <section class="relative py-12 lg:py-24 overflow-hidden bg-stone-300 ">
     <div class="container px-4 mx-auto relative">
-        <div class="flex flex-wrap mb-16 -mx-4">
+        <div class="flex flex-col lg:flex-row flex-wrap mb-16 -mx-4">
          
-            <div class="w-full md:w-7/12 lg:w-8/12 px-4 mb-16 lg:mb-0">
-                <div class="flex flex-wrap -mx-4">
+            <div class="w-full  lg:w-8/12 px-4 mb-16 lg:mb-0">
+                <div class="flex flex-col md:flex-row flex-wrap -mx-4">
 
-                  <!-- linki -->
-                  <div class="w-full xs:w-1/3 px-4">
+                    <!-- linki -->
+                    <div class="w-full xs:w-1/3 px-4">
                         <div class="mb-6 lg:mb-14 font-bold">
                             <a href="<?php echo home_url('/'); ?>">
                                <svg width="107" height="46" viewBox="0 0 107 46" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +64,7 @@
                     </div>
                    
                     <!-- kategorie -->
-                    <div class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0">
+                    <div class="w-full xs:w-1/3 px-4 mb-8 xs:mb-0">
                         <h3 class="mb-6 font-bold">Kategorie</h3>
                         <ul class="flex flex-col gap-4">
                             <?php
@@ -89,11 +89,12 @@
 
                   
                 </div>
+                
             </div>
 
             <!-- newsletter -->
-            <div class="w-full md:w-5/12 lg:w-4/12 px-4">
-                <div class="max-w-sm p-8 mx-auto md:mr-0 bg-stone-200">
+            <div class="w-full  lg:w-4/12 px-4">
+                <div class="md:max-w-sm p-8 mx-auto md:mr-0 bg-stone-200">
                     <h5 class="font-medium mb-4 text-2xl">Bądź pierwszy w kolejce do skarbów</h5>
                     <p class="text-sm opacity-80 leading-normal mb-10">Zapisz się do newslettera i dowiaduj się jako
                         pierwszy o nowych kolekcjach, wyjątkowych znaleziskach i ekskluzywnych promocjach dla miłośników
@@ -112,6 +113,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="flex flex-wrap -mb-3 justify-between">
           

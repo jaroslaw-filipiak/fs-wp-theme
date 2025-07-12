@@ -59,7 +59,6 @@
 }
 
 // pagination 
-
 .pagination-container {
   .current {
 
@@ -70,8 +69,27 @@
   }
 }
 
+//cf7
+
+form.wpcf7-form {
+
+  input:not([type="submit"]) {
+    @apply w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 shadow;
+  }
+
+  textarea {
+    @apply w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 shadow min-h-32;
+  }
+
+  .wpcf7-submit {
+    @include btn-main;
+  }
+
+  .wpcf7-response-output {
+    @apply  text-lg font-medium text-white border transition duration-200 bg-zinc-500   border-none outline-none py-8 px-6;
+  }
 
 
 
-
+}
 

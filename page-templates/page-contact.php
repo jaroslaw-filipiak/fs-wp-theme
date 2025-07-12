@@ -23,7 +23,9 @@ Template Name: Contact
                             <h1 class="font-heading text-4xl sm:text-6xl tracking-sm mb-6">Skontaktuj się z nami</h1>
                             <p class="text-lg text-gray-700 mb-10">Bardzo chętnie udzielimy więcej informacji o naszych
                                 produktach</p>
-                            <form action="">
+
+                                <?php echo do_shortcode('[contact-form-7 id="b198eb7" title="Kontakt"]'); ?>
+                            <!-- <form action="">
                                 <label for="" class="block mb-1 text-md font-medium">Imię</label>
                                 <input type="text"
                                     class="w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2  shadow">
@@ -47,11 +49,11 @@ Template Name: Contact
                                             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg>
                                 </button>
-                            </form>
+                            </form> -->
                         </div>
                     </div>
-                    <div class="w-full lg:w-1/2 px-4 bg-stone-300">
-                        <div class="lg:max-w-md lg:ml-auto h-full"></div>
+                        <div style="background-image: url('<?php echo get_home_url() ?>/wp-content/uploads/2025/07/tmp9yfw4001.avif'); background-size: cover; background-position: center; background-repeat: no-repeat;" class="w-full lg:w-1/2 px-4 bg-stone-300">
+                        <div class="lg:max-w-md lg:ml-auto h-full" ></div>
                     </div>
                 </div>
             </div>
