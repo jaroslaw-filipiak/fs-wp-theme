@@ -41,11 +41,17 @@
     &-images {
       @apply flex flex-wrap gap-4;
       &-image {
-        @apply w-1/4;
-        &-inner {
-          @apply w-full h-full object-cover;
-        }
+          @apply w-1/4 border border-red-500;
+       
       }
+    }
+  }
+
+  .woocommerce-message {
+    @apply bg-stone-300 py-10 px-12 text-lg leading-relaxed mb-6 mt-2 outline-none focus:outline-none;
+
+    .button {
+      @apply h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 ml-6;
     }
   }
 }
@@ -99,8 +105,12 @@
 
 .single-product-gallery-image {
 
+  a {
+    @apply hover:opacity-70 transition-all duration-300;
+  }
+
   img {
-    @apply w-full h-full object-cover;
+    @apply w-full h-full object-cover ;
   }
   &-1 {
     grid-area: one;

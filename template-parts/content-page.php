@@ -10,13 +10,13 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
+	<header class="entry-header container mx-auto">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
 	<?php fajnestarocie_post_thumbnail(); ?>
 
-	<div class="entry-content">
+	<div class="entry-content container mx-auto">
 		<?php
 		the_content();
 

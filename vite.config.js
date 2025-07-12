@@ -14,6 +14,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, './src/index.html'),
         'single-product': resolve(__dirname, './src/single-product.js'),
+        'front-page': resolve(__dirname, './src/front-page.js'),
         // nested: resolve(__dirname, 'nested/index.html'),
       },
       output: {

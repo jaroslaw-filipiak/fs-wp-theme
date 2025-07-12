@@ -18,28 +18,27 @@
                     href="#">{{logotyp}}</a></div>
             <div class="w-full md:w-7/12 lg:w-6/12 px-4 mb-16 lg:mb-0">
                 <div class="flex flex-wrap -mx-4">
-                    <div class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0">
-                        <h3 class="mb-6 font-bold">Warto sprawdzić</h3>
-                        <ul class="flex flex-col gap-4">
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Najnowsze przedmioty</a></li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Lampy vintage</a></li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Niesamowita porcelana</a>
-                            </li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Srebro</a></li>
-                        </ul>
-                    </div>
+                   
                     <div class="w-1/2 xs:w-1/3 px-4 mb-8 xs:mb-0">
                         <h3 class="mb-6 font-bold">Kategorie</h3>
                         <ul class="flex flex-col gap-4">
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Motoryzacja (2)</a></li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Moda (22)</a></li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Dla dzieci (5)</a></li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Dom i ogród (11)</a></li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Muzyka i edukacja (44)</a>
-                            </li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Zdrowie i uroda (2)</a></li>
-                            <li><a class="inline-block text-gray-600 font-medium" href="#">Antyki i kolekcje (120)</a>
-                            </li>
+                            <?php
+                            $args = array(
+                                'taxonomy' => 'product_cat',
+                                'hide_empty' => true,
+                                'parent' => 0,
+                                'exclude' => array(get_option('default_product_cat')) 
+                            );
+                            $categories = get_terms($args);
+                            
+                            foreach($categories as $category) {
+                                $category_link = get_term_link($category);
+                                $product_count = $category->count;
+                                if($product_count > 0) {
+                                    echo '<li><a class="inline-block text-gray-600 font-medium" href="' . esc_url($category_link) . '">' . esc_html($category->name) . ' (' . $product_count . ')</a></li>';
+                                }
+                            }
+                            ?>
                         </ul>
                     </div>
                     <div class="w-full xs:w-1/3 px-4">
@@ -49,11 +48,15 @@
                                     href="<?php echo home_url('/o-nas'); ?>">O nas</a></li>
                             <li><a class="inline-block text-gray-600 font-medium"
                                     href="<?php echo home_url('/kontakt'); ?>">Kontakt</a></li>
+                                    <div class="border-t border-zinc-400">
                             <li><a class="inline-block text-gray-600 font-medium"
                                     href="<?php echo home_url('/polityka-prywatnosci'); ?>">Polityka prywatności</a>
                             </li>
                             <li><a class="inline-block text-gray-600 font-medium"
                                     href="<?php echo home_url('/polityka-zwrotow'); ?>">Polityka zwrotów</a></li>
+                                    <li><a class="inline-block text-gray-600 font-medium"
+                                    href="<?php echo home_url('/polityka-zwrotow'); ?>">Regulamin</a></li>
+
 
                         </ul>
                     </div>
@@ -139,7 +142,7 @@
                 </a>
             </div>
             <p class="text-gray-500 mb-3 text-md">© 2025 fajnestarocie.pl. All rights reserved. Projekt i wykonanie:
-                j-filipiak.pl</p>
+                <a href="https://j-filipiak.pl" target="_blank">j-filipiak.pl</a></p>
         </div>
     </div>
 </section>

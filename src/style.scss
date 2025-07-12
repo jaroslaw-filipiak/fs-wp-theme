@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import './scss/components/buttons';
+
 //woocommerce global
 
 .container-woocommerce-fajnestarocie {
@@ -16,3 +17,23 @@
     @include btn-main;
   }
 }
+
+// swiper
+.fajnestarocie-swiper-button-next, .fajnestarocie-swiper-button-prev {
+  @apply -rotate-1 inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800 outline-none border-none z-10 absolute top-1/2 -translate-y-1/2;
+}
+
+.fajnestarocie-swiper-button-prev {
+ @apply left-0;
+  
+}
+
+.fajnestarocie-swiper-button-next {
+  @apply right-0;
+}
+
+
+
+
+
+

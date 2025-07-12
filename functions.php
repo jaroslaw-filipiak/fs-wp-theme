@@ -156,8 +156,16 @@ function fajnestarocie_scripts() {
 
 	// single product styles / scripts
 	if ( is_singular( 'product' ) ) {
-		wp_enqueue_style( 'fajnestarocie-single-product-styles', get_template_directory_uri() . '/dist/assets/single-product.css', array(), _S_VERSION );
-		wp_enqueue_script( 'fajnestarocie-single-product-scripts', get_template_directory_uri() . '/dist/assets/single-product.js', array(), _S_VERSION, true );
+		wp_enqueue_style( 'fajnestarocie-single-product-styles', get_template_directory_uri() . '/dist/assets/single-product.css', array(), _S_VERSION, false );
+		wp_enqueue_script( 'fajnestarocie-single-product-scripts', get_template_directory_uri() . '/dist/assets/single-product.js', array(), _S_VERSION, false );
+		wp_enqueue_script( 'fajnestarocie-lightbox-scripts', get_template_directory_uri() . '/public/libs/lightbox/js/lightbox.min.js', array('jquery'), _S_VERSION, false );
+		wp_enqueue_style( 'fajnestarocie-lightbox-styles', get_template_directory_uri() . '/public/libs/lightbox/css/lightbox.min.css', array(), _S_VERSION, false );
+	}
+
+	// front page styles / scripts
+	if ( is_front_page() ) {
+		wp_enqueue_style( 'fajnestarocie-front-page-styles', get_template_directory_uri() . '/dist/assets/front-page.css', array(), _S_VERSION, false );
+		wp_enqueue_script( 'fajnestarocie-front-page-scripts', get_template_directory_uri() . '/dist/assets/front-page.js', array(), _S_VERSION, false );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'fajnestarocie_scripts' );
