@@ -44,19 +44,19 @@
                             </a>
                         </div>
                         <ul class="flex flex-col gap-4">
-                            <li><a class="inline-block text-gray-600 font-medium"
+                            <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
                                     href="<?php echo home_url('/o-nas'); ?>">O nas</a></li>
-                            <li><a class="inline-block text-gray-600 font-medium"
+                            <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
                                     href="<?php echo home_url('/kontakt'); ?>">Kontakt</a></li>
 
-                                    <div class="border-t border-zinc-400 max-w-[200px]"></div>
+                                    <div class="border-t border-teal-900 max-w-[200px]"></div>
 
-                            <li><a class="inline-block text-gray-600 font-medium"
+                            <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
                                     href="<?php echo home_url('/polityka-prywatnosci'); ?>">Polityka prywatności</a>
                             </li>
-                            <li><a class="inline-block text-gray-600 font-medium"
+                            <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
                                     href="<?php echo home_url('/polityka-zwrotow'); ?>">Polityka zwrotów</a></li>
-                                    <li><a class="inline-block text-gray-600 font-medium"
+                                    <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
                                     href="<?php echo home_url('/polityka-zwrotow'); ?>">Regulamin</a></li>
 
 
@@ -80,7 +80,7 @@
                                 $category_link = get_term_link($category);
                                 $product_count = $category->count;
                                 if($product_count > 0) {
-                                    echo '<li><a class="inline-block text-gray-600 font-medium" href="' . esc_url($category_link) . '">' . esc_html($category->name) . ' (' . $product_count . ')</a></li>';
+                                    echo '<li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium" href="' . esc_url($category_link) . '">' . esc_html($category->name) . ' (' . $product_count . ')</a></li>';
                                 }
                             }
                             ?>
@@ -115,8 +115,8 @@
         </div>
         <div class="flex flex-wrap -mb-3 justify-between">
           
-            <p class="text-gray-500 mb-3 text-md">© 2025 fajnestarocie.pl. All rights reserved. Projekt i wykonanie:
-                <a href="https://j-filipiak.pl" target="_blank">j-filipiak.pl</a></p>
+            <p class="text-gray-500  mb-3 text-md">© 2025 fajnestarocie.pl. All rights reserved. Projekt i wykonanie:
+                <a class="hvr__item-dark inline-block text-gray-500 hover:text-teal-700" href="https://j-filipiak.pl" target="_blank">j-filipiak.pl</a></p>
         </div>
     </div>
 </section>
@@ -127,7 +127,6 @@
 <script>
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
 </script>
-<script src="<?php echo get_template_directory_uri(); ?>/src/newsletter.js"></script>
 
 </body>
 

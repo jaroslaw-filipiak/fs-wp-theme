@@ -43,7 +43,7 @@
                 ?>
                     <div class="swiper-slide px-2 sm:px-4 group ">
                         <a class="relative" href="<?php the_permalink(); ?>">
-                            <img class="block w-full h-full object-cover" src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>">
+                            <img loading="lazy" class="block w-full h-full object-cover" src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>">
                             <div class="absolute top-0 left-0 w-full h-full bg-black/50 flex items-end justify-center pb-24 px-12 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                                 <h3 class="text-white text-2xl font-bold"><?php the_title(); ?></h3>
                             </div>
@@ -125,8 +125,6 @@
                 <div class="group">
                         <div class="group-hover:bg-zinc-800 py-10 px-12 transition-background-color duration-300">
                             <a href="<?php echo get_term_link($category); ?>">
-                                <!-- narazie bez foto -->
-                                <img class="block w-72 h-96 object-cover hidden" src="<?php echo $image; ?>" alt="<?php echo $category->name; ?>">
                                 <h3 class="text-3xl mt-4 text-center font-medium group-hover:text-white"><?php echo $category->name; ?></h3>
                                 <p class="text-center text-gray-600 group-hover:text-white"><?php echo $category->count; ?> produktów</p>
                             </a>

@@ -165,7 +165,7 @@ function fajnestarocie_scripts() {
 	// front page styles / scripts
 	if ( is_front_page() ) {
 		wp_enqueue_style( 'fajnestarocie-front-page-styles', get_template_directory_uri() . '/dist/assets/front-page.css', array(), _S_VERSION, false );
-		wp_enqueue_script( 'fajnestarocie-front-page-scripts', get_template_directory_uri() . '/dist/assets/front-page.js', array(), _S_VERSION, false );
+		wp_enqueue_script( 'fajnestarocie-front-page-scripts', get_template_directory_uri() . '/dist/assets/front-page.js', array('jquery'), _S_VERSION, false );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'fajnestarocie_scripts' );

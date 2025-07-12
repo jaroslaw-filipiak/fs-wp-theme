@@ -62,13 +62,13 @@
 
                             </a>
                             <ul class="hidden md:flex ml-10">
-                                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium"
+                                <li class="mr-8"><a class="hvr__item-dark inline-block text-teal-900 hover:text-teal-700 font-medium"
                                         href="<?php echo home_url('/o-nas'); ?>">O nas</a></li>
-                                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium"
+                                <li class="mr-8"><a class=" hvr__item-dark inline-block text-teal-900 hover:text-teal-700 font-medium"
                                         href="<?php echo home_url('/kolekcje'); ?>">Kolekcje</a></li>
-                                <li class="mr-8"><a class="inline-block text-teal-900 hover:text-teal-700 font-medium"
+                                <li class="mr-8"><a class=" hvr__item-dark inline-block text-teal-900 hover:text-teal-700 font-medium"
                                         href="<?php echo home_url('/kontakt'); ?>">Kontakt</a></li>
-                                <li><a class="inline-block text-teal-900 hover:text-teal-700 font-medium"
+                                <li><a class=" hvr__item-dark inline-block text-teal-900 hover:text-teal-700 font-medium"
                                         href="<?php echo home_url('/nowosci'); ?>">Nowości</a></li>
                             </ul>
                         </div>
@@ -81,9 +81,7 @@
                 <div x-on:click="mobileNavOpen = !mobileNavOpen" class="fixed inset-0 bg-violet-900 opacity-20"></div>
                 <nav class="relative flex flex-col py-7 px-10 w-full h-full bg-white overflow-y-auto">
                     <div class="flex items-center justify-between">
-                        <a href="#" class="inline-block">
-                            <img class="h-8" src="flow-assets/logos/sign-logo-flow.svg" alt="">
-                        </a>
+                       
                         <div class="flex items-center">
                             <a href="#"
                                 class="inline-flex py-2.5 px-4 mr-6 items-center justify-center text-sm font-medium text-teal-900 hover:text-white border border-teal-900 hover:bg-teal-900 rounded-full transition duration-200">Login</a>
