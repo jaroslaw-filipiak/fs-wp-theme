@@ -37,7 +37,6 @@
 }
 
 // global hover 
-
 .hvr {
 
   &__item-dark {
@@ -56,6 +55,18 @@
       }
     }
 
+  }
+}
+
+// pagination 
+
+.pagination-container {
+  .current {
+
+    button {
+      @apply bg-zinc-500 text-white;
+    }
+ 
   }
 }
 
