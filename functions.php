@@ -191,6 +191,11 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/customizer.php';
 
 /**
+ * Handle subscription form
+ */
+require get_template_directory() . '/inc/subscription-form.php';
+
+/**
  * Load Jetpack compatibility file.
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
@@ -204,7 +209,9 @@ if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
 
-// Rejestracja custom post type dla opinii klientów z OLX
+/**
+ * Register custom post type for client reviews
+ */
 add_action('init', function() {
     register_post_type('olx_review', array(
         'labels' => array(
