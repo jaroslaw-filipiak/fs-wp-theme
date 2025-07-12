@@ -48,7 +48,7 @@
                                     href="<?php echo home_url('/o-nas'); ?>">O nas</a></li>
                             <li><a class="inline-block text-gray-600 font-medium"
                                     href="<?php echo home_url('/kontakt'); ?>">Kontakt</a></li>
-                                    <div class="border-t border-zinc-400">
+                                    <div class="border-t border-zinc-400 "></div>
                             <li><a class="inline-block text-gray-600 font-medium"
                                     href="<?php echo home_url('/polityka-prywatnosci'); ?>">Polityka prywatności</a>
                             </li>
