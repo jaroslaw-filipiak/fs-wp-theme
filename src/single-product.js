@@ -14,11 +14,14 @@ gsap.registerPlugin(ScrollTrigger,ScrollSmoother,ScrollToPlugin);
 gsap.timeline({
 	scrollTrigger: {
 		trigger: '.single-product-gallery',
-		pin: '.entry-summary', 
+		pin: '.entry-summary',
+		pinSpacing: true,
 		start: 'top 20%', 
-		end: '+=100%', 
-		scrub: 1, 
+		end: '+=100%',
+		scrub: 1,
 		markers: false,
+		anticipatePin: 1,
+		
 	}
 });
 });

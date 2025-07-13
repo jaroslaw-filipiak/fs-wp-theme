@@ -61,11 +61,24 @@
 .images-length-3 {
   display: grid;
   gap: 40px;
-  grid-template-columns: repeat(2, 1fr);  
-  grid-template-rows: 400px 260px ;
+  grid-template-columns: 1fr 1fr;  
+  grid-template-rows: 500px 500px;
+  grid-template-areas:
+    "one two"
+    "three three";
+
+   
+    
+}
+
+.images-length-4 {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(4, 1fr);  
+  grid-template-rows: 1fr ;
   grid-template-areas:
     "one one two two"
-    "one one three three"
+    "three three four four"
     
 }
 
@@ -104,6 +117,8 @@
 }
 
 .single-product-gallery-image {
+
+  @apply overflow-hidden;
 
   a {
     @apply hover:opacity-70 transition-all duration-300;

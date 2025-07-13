@@ -27,7 +27,7 @@ $images_length = count($attachment_ids);
                     ?>
         <div  class="single-product-gallery-image single-product-gallery-image-<?php echo $i; ?>">  
             <a href="<?php echo wp_get_attachment_url($attachment_id); ?>" data-lightbox="gallery" >
-                <img src="<?php echo wp_get_attachment_url($attachment_id); ?>"
+                <img loading="lazy" src="<?php echo wp_get_attachment_url($attachment_id); ?>"
                     alt="<?php echo get_post_meta($attachment_id, '_wp_attachment_image_alt', true); ?>">
             </a>
         </div>

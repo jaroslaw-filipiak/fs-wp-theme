@@ -24,9 +24,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
 
+    <!-- favicon -->
+    <link rel="icon" type="image/png" href="<?php echo get_theme_file_uri() ?>/dist/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="<?php echo get_theme_file_uri() ?>/dist/images/favicon.svg" />
+    <link rel="shortcut icon" href="<?php echo get_theme_file_uri() ?>/dist/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_theme_file_uri() ?>/dist/images/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="fajnestarocie" />
+    <link rel="manifest" href="<?php echo get_theme_file_uri() ?>/dist/images/site.webmanifest" />
+
     <?php wp_head(); ?>
 
-   
 </head>
 
 <body <?php body_class(); ?>>
