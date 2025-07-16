@@ -15,12 +15,13 @@
     <div class="container px-4 mx-auto relative">
         <div class="flex flex-col lg:flex-row flex-wrap mb-16 -mx-4">
          
-            <div class="w-full  lg:w-8/12 px-4 mb-16 lg:mb-0">
-                <div class="flex flex-col md:flex-row flex-wrap -mx-4">
+            <div class="w-full lg:w-6/12 xl:w-8/12 px-4 mb-16 lg:mb-0">
+                <div class="flex flex-col md:flex-row flex-wrap -mx-4 ">
 
                     <!-- linki -->
-                    <div class="w-full xs:w-1/3 px-4">
-                        <div class="mb-6 lg:mb-14 font-bold">
+                    <div class="w-full lg:w-1/2 px-4">
+                        <!-- logo -->
+                        <div class="mb-10 lg:mb-14 font-bold flex justify-center lg:justify-start">
                             <a href="<?php echo home_url('/'); ?>">
                                <svg width="107" height="46" viewBox="0 0 107 46" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M18.564 20.8689C18.564 20.1872 18.2814 19.7136 17.9115 19.3724C17.5205 19.0116 17.0417 18.8135 16.7541 18.7486L16.7242 18.7418L16.6947 18.7328L15.6927 18.4324L14.8287 17.6404H13.4209L12.5569 18.4324L11.5549 18.7328L11.5254 18.7418L11.4955 18.7486C11.2079 18.8135 10.7291 19.0116 10.3381 19.3724C9.96821 19.7136 9.68557 20.1872 9.68557 20.8689C9.68557 21.5529 9.97039 22.0445 10.3491 22.4061C10.7052 22.7461 11.1317 22.9546 11.4253 23.0482H16.8243C17.1179 22.9546 17.5443 22.7461 17.9005 22.4061C18.2792 22.0445 18.564 21.5529 18.564 20.8689ZM20.3397 20.8689C20.3397 22.122 19.7905 23.0564 19.1266 23.6902C18.4815 24.3062 17.7153 24.6553 17.1716 24.7956L17.0625 24.8239H11.1871L11.078 24.7956C10.5343 24.6553 9.76806 24.3062 9.12294 23.6902C8.45911 23.0564 7.90988 22.122 7.90988 20.8689C7.90988 19.6135 8.4613 18.6881 9.13398 18.0674C9.77106 17.4797 10.5238 17.1547 11.0678 17.0253L11.6566 16.8485L12.7301 15.8647H15.5195L16.5928 16.8485L17.1816 17.0253C17.7257 17.1547 18.4785 17.4796 19.1156 18.0674C19.7883 18.6881 20.3397 19.6135 20.3397 20.8689Z" fill="black"/>
@@ -43,13 +44,15 @@
                                </svg>
                             </a>
                         </div>
-                        <ul class="flex flex-col gap-4">
+                        <!-- menu -->
+                        <ul class="flex flex-col items-center lg:items-start gap-4">
                             <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
                                     href="<?php echo home_url('/o-nas'); ?>">O nas</a></li>
                             <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
                                     href="<?php echo home_url('/kontakt'); ?>">Kontakt</a></li>
 
-                                    <div class="border-t border-teal-900 max-w-[200px]"></div>
+                            <!-- separator -->
+                            <div class="border-t border-zinc-800 max-w-[200px] w-full"></div>
 
                             <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium" 
                                     href="<?php echo get_privacy_policy_url(); ?>">Polityka prywatności</a>
@@ -62,9 +65,9 @@
                     </div>
                    
                     <!-- kategorie -->
-                    <div class="w-full xs:w-1/3 px-4 mb-8 xs:mb-0">
-                        <h3 class="mb-6 font-bold">Kategorie</h3>
-                        <ul class="flex flex-col gap-4">
+                    <div class="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
+                        <h3 class="mb-6 font-bold text-center lg:text-left mt-4 lg:mt-0">Kategorie</h3>
+                        <ul class="flex flex-col items-center lg:items-start gap-4">
                             <?php
                             $args = array(
                                 'taxonomy' => 'product_cat',
@@ -91,8 +94,8 @@
             </div>
 
             <!-- newsletter -->
-            <div class="w-full  lg:w-4/12 px-4">
-                <div class="md:max-w-sm p-8 mx-auto md:mr-0 bg-stone-200">
+            <div class="w-full flex justify-center lg:w-6/12 xl:w-4/12 px-4">
+                <div class="md:w-sm p-8 mx-auto md:mr-0 bg-stone-200">
                     <h5 class="font-medium mb-4 text-2xl">Bądź pierwszy w kolejce do skarbów</h5>
                     <p class="text-sm opacity-80 leading-normal mb-10">Zapisz się do newslettera i dowiaduj się jako
                         pierwszy o nowych kolekcjach, wyjątkowych znaleziskach i ekskluzywnych promocjach dla miłośników
@@ -113,10 +116,25 @@
             </div>
 
         </div>
-        <div class="flex flex-wrap -mb-3 justify-between">
-          
-            <p class="text-gray-500  mb-3 text-md">© 2025 fajnestarocie.pl. All rights reserved. Projekt i wykonanie:
-                <a class="hvr__item-dark inline-block text-gray-500 hover:text-teal-700" href="https://j-filipiak.pl" target="_blank">j-filipiak.pl</a></p>
+        <div class="flex flex-wrap flex-col -mb-3 justify-between">
+            
+          <div>
+            <p class="text-gray-500 text-center xl:text-left mb-3 text-md">© <?php echo date('Y'); ?> fajnestarocie.pl. All rights reserved. Projekt i wykonanie:
+                <a class="hvr__item-dark inline-block text-gray-500 hover:text-teal-700" href="https://j-filipiak.pl" target="_blank">j-filipiak.pl</a>
+            </p>
+          </div>
+
+            
+          <div>
+            <p class=" text-gray-500 mb-3 text-sm max-w-186">Fajne Starocie - sklep z antykami europejskimi i przedmiotami vintage. Lampy secesyjne, porcelana angielska, meble antyczne oraz dekoracje retro z dostawą w całej Polsce. Specjalizujemy się w antykach francuskich i lampach vintage dla miłośników stylu vintage i wnętrz z charakterem.</p>
+          </div>
+
+          <div class="max-w-186 border-t border-black border-opacity-20 mb-3"></div>
+
+          <div>
+            <p class="mb-3 text-sm max-w-186 flex items-center gap-1">Zauważyłeś problem ze stroną? <svg  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg><a class="hvr__item-dark inline-block hover:text-teal-700" href="mailto:it@fajnestarocie.pl">zgłoś go bezpośrednio do działu it klikając tutaj</a></p>
+          </div>
+
         </div>
     </div>
 </section>

@@ -12,11 +12,11 @@
                 </div>
                 <div class="w-full lg:w-1/2 px-4">
                     <div class="max-w-lg lg:max-w-none mx-auto">
-                        <p class="text-lg text-gray-700 mb-10 font-heading">Odkrywamy najpiękniejsze antyki i
+                        <h2 class="text-lg text-gray-700 mb-10 font-heading">Odkrywamy najpiękniejsze antyki i
                             elementy vintage w całej Europie, aby przynieść do Twojego domu kawałek historii
                             pełen charakteru. Każdy przedmiot to unikalna opowieść - od francuskich secesyjnych
                             lamp po angielskie porcelanowe serwisy, wszystko starannie wyselekcjonowane dla
-                            miłośników wyjątkowego stylu.</p>
+                            miłośników wyjątkowego stylu.</h2>
                         <a href="#categories"
                             class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800">Przeglądaj
                             spośród <?php echo wp_count_posts('product')->publish; ?> ofert</a>
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="flex -mx-4 products-slider transform rotate-1 z-20">
-        <div class="swiper-wrapper relative top-20 z-20">
+        <div class="swiper-wrapper relative xl:top-20 z-20">
                 <?php
                 $args = array(
                     'post_type' => 'product',
@@ -44,8 +44,8 @@
                     <div class="swiper-slide px-2 sm:px-4 group ">
                         <a class="relative" href="<?php the_permalink(); ?>">
                             <img loading="lazy" class="block w-full h-full object-cover" src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>">
-                            <div class="absolute top-0 left-0 w-full h-full bg-black/50 flex items-end justify-center pb-24 px-12 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                <h3 class="text-white text-2xl font-bold"><?php the_title(); ?></h3>
+                            <div class="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center lg:items-end justify-center lg:pb-24 px-12 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                <h3 class="text-white text-xl sm:text-2xl font-bold"><?php the_title(); ?></h3>
                             </div>
                         </a>
                     </div>
@@ -94,13 +94,13 @@
 <section id="categories" class="py-12 lg:py-24 overflow-hidden bg-stone-200">
     <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto mb-10 text-center">
-            <h1 class="font-heading text-4xl md:text-5xl mb-6 mt-12 lg:mt-24 leading-relaxed">Nasze kolekcje stale się odnawiają dzięki
-                regularnym podróżom po europejskich targach i aukcjach.</h1>
-            <h3 class="font-heading mb-16 leading-relaxed text-lg pb-6">Najnowsza dostawa z czerwca 2025 to prawdziwa
+            <h3 class="font-heading text-3xl md:text-5xl mb-6 mt-12 lg:mt-24 lg:leading-relaxed">Nasze kolekcje stale się odnawiają dzięki
+                regularnym podróżom po europejskich targach i aukcjach.</h3>
+            <h4 class="font-heading mb-16 leading-relaxed text-lg pb-6">Najnowsza dostawa z czerwca 2025 to prawdziwa
                 niespodzianka - od niemieckich lamp naftowych i duńskich barometrów po kryształowe patery i masywne
-                świeczniki, które czekają na swoich nowych właścicieli.</h3>
+                świeczniki, które czekają na swoich nowych właścicieli.</h4>
 
-                <h4 class="font-heading  leading-relaxed text-3xl md:text-4xl mt-12 lg:mt-24 max-w-112 mx-auto">Najpopularniejsze kategorie produktów</h4>
+                <p class="font-heading  lg:leading-relaxed text-3xl md:text-4xl mt-12 lg:mt-24 max-w-112 mx-auto">Najpopularniejsze kategorie produktów</p>
 
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center py-12 lg:py-24">
@@ -123,9 +123,9 @@
                     }
                 ?>
                 <div class="group">
-                        <div class="group-hover:bg-zinc-800 py-10 px-12 transition-background-color duration-300 ">
+                        <div class="group-hover:bg-zinc-800 py-6 px-8 md:py-10 md:px-12 transition-background-color duration-300 ">
                             <a href="<?php echo get_term_link($category); ?>">
-                                <h3 class="text-3xl mt-4 text-center font-medium group-hover:text-white"><?php echo $category->name; ?></h3>
+                                <p class="text-xl md:text-2xl lg:text-3xl mt-4 text-center font-medium group-hover:text-white"><?php echo $category->name; ?></p>
                                 <p class="text-center text-gray-600 group-hover:text-white"><?php echo $category->count; ?> produktów</p>
                             </a>
                         </div>
@@ -139,7 +139,7 @@
 </section>
 
 <section class="p-4 bg-stone-100">
-    <div class="py-16 px-4 sm:px-8 rounded-3xl bg-stone-300 relative -top-34">
+    <div class="py-16 px-4 sm:px-8 rounded-3xl bg-stone-300 relative -top-12 lg:-top-34">
         <div class="container mx-auto px-4">
             <div class="flex mb-4 items-center">
                 <svg width="8" height="8" viewbox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,7 +152,7 @@
                     <div class="flex flex-wrap -mx-4">
                         <div class="w-full lg:w-2/3 px-4 mb-12 lg:mb-0">
                             <div class="max-w-3xl">
-                                <h1 class="font-heading text-5xl sm:text-6xl mb-6 max-w-2xl leading-relaxed">Pasja do autentycznej historii</h1>
+                                <p class="font-heading text-5xl sm:text-6xl mb-6 max-w-2xl lg:leading-relaxed">Pasja do autentycznej historii</p>
                                 <p class="text-lg text-gray-700 font-heading"> Jako doświadczeni kolekcjonerzy i
                                     miłośnicy historii, od lat podróżujemy po całej Europie w poszukiwaniu wyjątkowych
                                     antyków i przedmiotów vintage. Nasza misja jest prosta, lecz głęboka: odkrywanie i
