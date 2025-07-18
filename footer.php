@@ -109,6 +109,8 @@
                             <input type="text" name="name" placeholder="Twoje imię" class="h-12 w-full px-4 py-1 placeholder-gray-700 outline-none ring-offset-0 focus:ring-2 shadow mb-2">
                             <input type="submit" value="Zapisuje się"
                                 class="h-12 inline-flex w-full mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 cursor-pointer">
+                                <div class="text-sm text-gray-500 mt-6 text-center">Zaufaj nam, nie cierpiemy spamu tak samo jak ty :)</div>
+                            </div>
                             <div class="newsletter-message"></div>
                         </form>
                     </div>
@@ -116,10 +118,12 @@
             </div>
 
         </div>
-        <div class="flex flex-wrap flex-col -mb-3 justify-between">
+
+
+        <div class="flex flex-wrap flex-col justify-between mt-12 px-4 lg:container lg:px-0">
             
           <div>
-            <p class="text-gray-500 text-center xl:text-left mb-3 text-md">© <?php echo date('Y'); ?> fajnestarocie.pl. All rights reserved. Projekt i wykonanie:
+            <p class="text-gray-500  mb-12 text-md">© <?php echo date('Y'); ?> fajnestarocie.pl. All rights reserved. Projekt i wykonanie:
                 <a class="hvr__item-dark inline-block text-gray-500 hover:text-teal-700" href="https://j-filipiak.pl" target="_blank">j-filipiak.pl</a>
             </p>
           </div>
@@ -132,7 +136,7 @@
           <div class="max-w-186 border-t border-black border-opacity-20 mb-3"></div>
 
           <div>
-            <p class="mb-3 text-sm max-w-186 flex items-center gap-1">Zauważyłeś problem ze stroną? <svg  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg><a class="hvr__item-dark inline-block hover:text-teal-700" href="mailto:it@fajnestarocie.pl">zgłoś go bezpośrednio do działu it klikając tutaj</a></p>
+            <p class="mb-3 text-sm max-w-186 flex flex-col lg:flex-row items-center gap-1">Zauważyłeś problem ze stroną? <svg class="hidden lg:flex"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg><a class="hvr__item-dark inline-block hover:text-teal-700" href="mailto:it@fajnestarocie.pl">zgłoś go bezpośrednio do działu it klikając tutaj</a></p>
           </div>
 
         </div>
