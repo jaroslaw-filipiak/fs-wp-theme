@@ -13,25 +13,21 @@ Template Name: About
         <div class="max-w-6xl mx-auto text-center" >
 
         
-             <h1 class="font-heading text-5xl sm:text-6xl mb-8 lg:mb-12">Od lat przemierzamy europejskie targi, aukcje i prywatne
-             kolekcje w poszukiwaniu wyjątkowych przedmiotów z duszą.</h1>
+             <h1 class="font-heading text-5xl sm:text-6xl mb-8 lg:mb-12"><?php the_field( 'heading' ); ?></h1>
 
-             <img loading="lazy" class="hidden lg:block" src="<?php echo wp_upload_dir()['baseurl']; ?>/2025/07/logo-draw.avif" alt="Logo">
-            
-            <h2 class="text-2xl mg:text-4xl text-teal-900 font-medium mb-10"> Każdy antyk i element vintage, który trafia do
-                naszej oferty, jest starannie wyselekcjonowany pod kątem jakości, autentyczności i unikalnego
-                charakteru. Wierzymy, że prawdziwe piękno tkwi w przedmiotach z historią - tych, które noszą w sobie
-                ślady czasu i opowiadają swoje własne historie. </h2>
+             <?php $image = get_field( 'image' ); ?>
+                <?php if ( $image ) : ?>
+                    <img loading="lazy" class="hidden lg:block" src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" />
+             <?php endif; ?>
 
-            <h3 class="text-xl md:text-2xl text-teal-900 font-medium mb-10">
-               Nasza pasja do odkrywania zapomnianych skarbów sprawia,
-                że każda wizyta w naszym sklepie to podróż przez różne epoki i style. Pomagamy tworzyć wnętrza pełne
-                charakteru, gdzie każdy detal ma swoje miejsce i znaczenie.
-            </h3>
+
+             <?php the_field( 'text' ); ?>
 
            
             <a href="mailto:info@fajnestarocie.pl"
-                class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800">info@fajnestarocie.pl</a>
+                class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800">info@fajnestarocie.pl
+            </a>
+            
         </div>
     </div>
 </section>
