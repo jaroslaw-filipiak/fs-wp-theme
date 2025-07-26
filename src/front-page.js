@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
         direction: 'horizontal',
         loop: true,
         slidesPerView: 2,
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: true,
-        },
+        // autoplay: {
+        //     delay: 2500,
+        //     disableOnInteraction: true,
+        // },
         centeredSlides: true,
        
         navigation: {

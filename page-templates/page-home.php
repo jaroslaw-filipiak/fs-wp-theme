@@ -1,4 +1,14 @@
+<?php
+
+/*
+Template Name: Home
+*/
+
+?>
+
 <?php get_header(); ?>
+
+<?php echo the_content(); ?>
 
 <section class="bg-stone-200 overflow-hidden">
     <div class="container mx-auto px-4">
@@ -25,8 +35,8 @@
             </div>
         </div>
     </div>
-    <div class="flex -mx-4 products-slider transform rotate-1 z-20">
-        <div class="swiper-wrapper relative xl:top-20 z-20">
+    <div class="flex -mx-4 products-slider relative">
+        <div class="swiper-wrapper ">
                 <?php
                 $args = array(
                     'post_type' => 'product',
@@ -42,8 +52,8 @@
                         $image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
                 ?>
                     <div class="swiper-slide px-2 sm:px-4 group ">
-                        <a class="relative" href="<?php the_permalink(); ?>">
-                            <img loading="lazy" class="block w-full h-full object-cover" src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>">
+                        <a class="block relative" href="<?php the_permalink(); ?>">
+                            <img  src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>">
                             <div class="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center lg:items-end justify-center lg:pb-24 px-12 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                                 <h3 class="text-white text-xl sm:text-2xl font-bold"><?php the_title(); ?></h3>
                             </div>
