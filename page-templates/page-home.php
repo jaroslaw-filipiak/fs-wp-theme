@@ -11,22 +11,26 @@ Template Name: Home
 <?php echo the_content(); ?>
 
 <section class="bg-stone-200 overflow-hidden">
+
+    <?php
+
+        $heading = get_field('heading');
+        $subheading = get_field('subheading');
+    
+    ?>
+    
     <div class="container mx-auto px-4">
         <div class="py-12 md:pt-20 md:pb-32">
             <div class="flex flex-wrap -mx-4 xl:items-center">
                 <div class="w-full lg:w-1/2 px-4 mb-8 lg:mb-0">
                     <div class="max-w-lg lg:max-w-none mx-auto">
                         <h1 class="font-heading text-5xl xs:text-6xl sm:text-7xl xl:text-8xl tracking-tight">
-                            Antyki dla Twojego Domu </h1>
+                            <?php echo $heading; ?> </h1>
                     </div>
                 </div>
                 <div class="w-full lg:w-1/2 px-4">
                     <div class="max-w-lg lg:max-w-none mx-auto">
-                        <h2 class="text-lg text-gray-700 mb-10 font-heading">Odkrywamy najpiękniejsze antyki i
-                            elementy vintage w całej Europie, aby przynieść do Twojego domu kawałek historii
-                            pełen charakteru. Każdy przedmiot to unikalna opowieść - od francuskich secesyjnych
-                            lamp po angielskie porcelanowe serwisy, wszystko starannie wyselekcjonowane dla
-                            miłośników wyjątkowego stylu.</h2>
+                        <h2 class="text-lg text-gray-700 mb-10 font-heading"><?php echo $subheading; ?></h2>
                         <a href="#categories"
                             class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800">Przeglądaj
                             spośród <?php echo wp_count_posts('product')->publish; ?> ofert</a>
@@ -36,15 +40,20 @@ Template Name: Home
         </div>
     </div>
     <div class="flex -mx-4 products-slider relative">
-        <div class="swiper-wrapper ">
+        <div class="swiper-wrapper">
                 <?php
-                $args = array(
-                    'post_type' => 'product',
-                    'posts_per_page' => 40,
-                    'orderby' => 'date',
-                    'order' => 'DESC'
-                );
-                $latest_products = new WP_Query($args);
+
+                    $product_ids = get_field('products');
+
+                    $args = array(
+                        'post_type' => 'product',
+                        'posts_per_page' => 40,
+                        'orderby' => 'date',
+                        'order' => 'DESC',
+                        'post__in' => $product_ids
+                    );
+                
+                  $latest_products = new WP_Query($args);
                 
                 if($latest_products->have_posts()) :
                     while($latest_products->have_posts()) : $latest_products->the_post();
@@ -102,17 +111,23 @@ Template Name: Home
 </section>
 
 <section id="categories" class="py-12 lg:py-24 overflow-hidden bg-stone-200">
+
+    <?php
+
+        $categories_group = get_field('categories_group');
+        $categories_heading = $categories_group['categories_heading'];
+        $categories_subheading = $categories_group['categories_subheading'];
+
+    ?>
+
     <div class="container mx-auto px-4">
+
         <div class="max-w-6xl mx-auto mb-10 text-center">
-            <h3 class="font-heading text-3xl md:text-5xl mb-6 mt-12 lg:mt-24 lg:leading-relaxed">Nasze kolekcje stale się odnawiają dzięki
-                regularnym podróżom po europejskich targach i aukcjach.</h3>
-            <h4 class="font-heading mb-16 leading-relaxed text-lg pb-6">Najnowsza dostawa z czerwca 2025 to prawdziwa
-                niespodzianka - od niemieckich lamp naftowych i duńskich barometrów po kryształowe patery i masywne
-                świeczniki, które czekają na swoich nowych właścicieli.</h4>
-
-                <p class="font-heading  lg:leading-relaxed text-3xl md:text-4xl mt-12 lg:mt-24 max-w-112 mx-auto">Najpopularniejsze kategorie produktów</p>
-
+            <h3 class="font-heading text-3xl md:text-6xl mb-6 mt-12 lg:mt-24 "><?php echo $categories_heading; ?></h3>
+            <h4 class="font-heading mb-16 leading-relaxed text-lg pb-6"><?php echo $categories_subheading; ?></h4>
+            <p class="font-heading  lg:leading-relaxed text-3xl md:text-4xl mt-12 lg:mt-24 max-w-112 mx-auto">Najpopularniejsze kategorie produktów</p>
         </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center py-12 lg:py-24">
             <?php
             $args = array(
@@ -149,6 +164,14 @@ Template Name: Home
 </section>
 
 <section class="p-4 bg-stone-100">
+
+    <?php 
+
+    $about_us_heading = get_field('about_us_heading');
+    $about_us_subheading = get_field('about_us_subheading');
+
+    ?>
+    
     <div class="py-16 px-4 sm:px-8 rounded-3xl bg-stone-300 relative -top-12 lg:-top-34">
         <div class="container mx-auto px-4">
             <div class="flex mb-4 items-center">
@@ -162,14 +185,8 @@ Template Name: Home
                     <div class="flex flex-wrap -mx-4">
                         <div class="w-full lg:w-2/3 px-4 mb-12 lg:mb-0">
                             <div class="max-w-3xl">
-                                <p class="font-heading text-5xl sm:text-6xl mb-6 max-w-2xl lg:leading-relaxed">Pasja do autentycznej historii</p>
-                                <p class="text-lg text-gray-700 font-heading"> Jako doświadczeni kolekcjonerzy i
-                                    miłośnicy historii, od lat podróżujemy po całej Europie w poszukiwaniu wyjątkowych
-                                    antyków i przedmiotów vintage. Nasza misja jest prosta, lecz głęboka: odkrywanie i
-                                    ratowanie pięknych obiektów z przeszłości, które zasługują na drugie życie w
-                                    nowoczesnych domach. Wierzymy, że każdy antyk niesie ze sobą duszę i opowieść, która
-                                    może wzbogacić Twoje wnętrze i stworzyć niepowtarzalny klimat pełen charakteru i
-                                    elegancji.</p>
+                                <p class="font-heading text-5xl sm:text-6xl mb-6 max-w-2xl"><?php echo $about_us_heading; ?></p>
+                                <p class="text-lg text-gray-700 font-heading"><?php echo $about_us_subheading; ?></p>
                             </div>
                         </div>
                         <div class="w-full lg:w-1/3 px-4">
