@@ -1,0 +1,176 @@
+name: WordPress Theme Deployment
+
+on:
+  workflow_dispatch: # Manual trigger only
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'deploy'
+        type: choice
+        options:
+          - build-only
+          - deploy
+          - rollback
+
+env:
+  # Server configuration (same as in look.sh)
+  SSH_HOST: 'wet19.nazwa.pl'
+  SSH_PORT: '22'
+  SSH_USER: 'wet19'
+  REMOTE_THEME_PATH: 'domains/fajnestarocie.pl/public_html/wp-content/themes/fajnestarocie'
+
+jobs:
+  build:
+    name: Build Assets
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.action == 'build-only' || github.event.inputs.action == 'deploy' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          npm ci
+
+      - name: Build assets
+        run: |
+          echo "Building assets..."
+          npm run build
+          echo "Build completed successfully!"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: theme-build-${{ github.sha }}
+          path: dist/
+          retention-days: 1
+
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ github.event.inputs.action == 'deploy' }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: theme-build-${{ github.sha }}
+          path: dist/
+
+      - name: Setup SSH
+        run: |
+          # Install required packages
+          sudo apt-get update
+          sudo apt-get install -y openssh-client rsync
+
+          # Setup SSH
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Prepare deployment files
+        run: |
+          echo "🚀 Starting theme deployment..."
+          echo "📁 Target: $SSH_USER@$SSH_HOST:$REMOTE_THEME_PATH"
+
+          # Create a temporary directory for deployment files
+          mkdir -p /tmp/theme-deploy
+
+          # Copy theme files (exclude development files)
+          rsync -av \
+            --exclude='node_modules/' \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='package.json' \
+            --exclude='package-lock.json' \
+            --exclude='temp/' \
+            --exclude='.gitignore' \
+            --exclude='*.md' \
+            --exclude='.env*' \
+            --exclude='.vscode/' \
+            --exclude='.idea/' \
+            --exclude='*.log' \
+            --exclude='.DS_Store' \
+            ./ /tmp/theme-deploy/
+
+      - name: Deploy to server
+        run: |
+          # Deploy to server
+          rsync -avz \
+            -e "ssh -i ~/.ssh/id_rsa -p $SSH_PORT -o StrictHostKeyChecking=no" \
+            /tmp/theme-deploy/ \
+            $SSH_USER@$SSH_HOST:$REMOTE_THEME_PATH/
+
+          echo "✅ Theme deployment completed successfully!"
+
+      - name: Cleanup
+        if: always()
+        run: |
+          # Clean up
+          rm -rf /tmp/theme-deploy
+          rm -f ~/.ssh/id_rsa
+
+  rollback:
+    name: Rollback Deployment
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.action == 'rollback' }}
+
+    steps:
+      - name: Setup SSH
+        run: |
+          # Install required packages
+          sudo apt-get update
+          sudo apt-get install -y openssh-client
+
+          # Setup SSH
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Perform rollback
+        run: |
+          echo "🔄 Rolling back to previous version..."
+          ssh -i ~/.ssh/id_rsa -p $SSH_PORT -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST "
+            cd domains/fajnestarocie.pl/public_html/wp-content/themes/ &&
+            if [ -d 'fajnestarocie-backup' ]; then
+              rm -rf fajnestarocie-temp &&
+              mv fajnestarocie fajnestarocie-temp &&
+              mv fajnestarocie-backup fajnestarocie &&
+              mv fajnestarocie-temp fajnestarocie-backup &&
+              echo 'Rollback completed successfully!'
+            else
+              echo 'No backup found for rollback'
+              exit 1
+            fi
+          "
+
+      - name: Cleanup
+        if: always()
+        run: |
+          rm -f ~/.ssh/id_rsa
