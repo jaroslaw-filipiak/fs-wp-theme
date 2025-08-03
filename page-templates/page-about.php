@@ -6,7 +6,12 @@ Template Name: About
 
 ?>
 
-<?php get_header(); ?>
+<?php get_header();
+
+$email = get_field('email', 'option'); 
+
+?>
+
 
 <section class="relative py-12 lg:pt-20 lg:py-32 overflow-hidden bg-stone-200">
     <div class="container mx-auto px-4 relative">
@@ -24,8 +29,8 @@ Template Name: About
              <?php the_field( 'text' ); ?>
 
            
-            <a href="mailto:info@fajnestarocie.pl"
-                class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800">info@fajnestarocie.pl
+            <a href="mailto:<?php echo $email; ?>"
+                class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800"><?php echo $email; ?>
             </a>
             
         </div>

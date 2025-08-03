@@ -224,3 +224,8 @@ add_action('init', function() {
         'supports' => array('title', 'custom-fields'),
     ));
 });
+
+/**
+ * Load translations
+ */
+require get_template_directory() . '/inc/translations.php';

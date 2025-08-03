@@ -3,15 +3,14 @@
 @tailwind utilities;
 
 @import './scss/components/buttons';
-
-
+@import './scss/vendors/hamburgers/hamburgers.scss';
 
 //woocommerce global
 .container-woocommerce-fajnestarocie {
   @apply py-12 lg:py-24;
 
   .woocommerce-breadcrumb {
-    @apply flex mb-4 items-center  text-sm font-medium text-teal-900 ;
+    @apply flex mb-4 items-center  text-sm font-medium text-teal-900;
   }
 
   .single_add_to_cart_button {
@@ -19,47 +18,41 @@
   }
 }
 
-
 //cart
-#page
-.wc-block-cart__submit-container {
+#page .wc-block-cart__submit-container {
   @apply h-12 inline-flex w-full mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 cursor-pointer;
 }
 
 //woo parts
 @import './scss/pages/checkout';
 
-
 // swiper
-.fajnestarocie-swiper-button-next, .fajnestarocie-swiper-button-prev {
+.fajnestarocie-swiper-button-next,
+.fajnestarocie-swiper-button-prev {
   @apply -rotate-1 inline-flex py-2 px-4 lg:py-4 lg:px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800 outline-none border-none z-10 absolute top-1/2 -translate-y-1/2 shadow-2xl;
 }
 
 .fajnestarocie-swiper-button-prev {
- @apply left-10;
-  
+  @apply left-10;
 }
 
 .fajnestarocie-swiper-button-next {
-  @apply right-10; 
+  @apply right-10;
 }
 
-//footer 
+//footer
 .newsletter-message {
   @apply text-center pt-3;
 }
 
-// global hover 
+// global hover
 .hvr {
-
   &__item-dark {
-
     @apply relative;
 
     &::before {
       content: '';
       @apply block w-full h-[1px] bg-teal-700 absolute bottom-0 left-0 transition-all duration-300 opacity-0;
-     
     }
 
     &:hover {
@@ -67,26 +60,22 @@
         @apply opacity-100;
       }
     }
-
   }
 }
 
-// pagination 
+// pagination
 .pagination-container {
   .current {
-
     button {
       @apply bg-zinc-500 text-white;
     }
- 
   }
 }
 
 //cf7
 
 form.wpcf7-form {
-
-  input:not([type="submit"]) {
+  input:not([type='submit']) {
     @apply w-full px-4 py-3 mb-6 outline-none ring-offset-0 focus:ring-2 shadow;
   }
 
@@ -99,20 +88,18 @@ form.wpcf7-form {
   }
 
   .wpcf7-response-output {
-    @apply  text-lg font-medium text-white border transition duration-200 bg-zinc-500   border-none outline-none py-8 px-6;
+    @apply text-lg font-medium text-white border transition duration-200 bg-zinc-500   border-none outline-none py-8 px-6;
   }
-
 }
 
+// global for single page
 
-// global for single page 
-
-#page, #primary {
+#page,
+#primary {
   @apply bg-stone-200;
 }
 
 #primary.site-main {
- 
   .entry-title {
     @apply font-heading text-4xl md:text-5xl mb-6 mt-12 lg:mt-24 leading-relaxed;
   }
@@ -141,18 +128,20 @@ form.wpcf7-form {
   ul {
     @apply list-disc list-inside pl-4 pt-3;
 
-    ul , ol {
+    ul,
+    ol {
       @apply py-3;
     }
   }
   ol {
     @apply list-decimal list-inside pl-4 pt-3;
 
-    ul , ol {
+    ul,
+    ol {
       @apply py-3;
     }
   }
- 
+
   img {
     @apply w-full h-auto;
   }
