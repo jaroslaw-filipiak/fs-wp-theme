@@ -36,6 +36,12 @@ get_header( 'shop' ); ?>
 
 <div class="container">
     <?php wc_get_template_part( 'content', 'single-product' ); ?>
+
+    <div class="divider my-10 border-b"></div>
+
+    <div class="upsell-products">
+        <?php woocommerce_upsell_display(); ?>
+    </div>
 </div>
 
 <?php endwhile; // end of the loop. ?>
@@ -57,6 +63,26 @@ get_header( 'shop' ); ?>
 		 */
 		do_action( 'woocommerce_sidebar' );
 	?>
+
+
+
+<!-- sticky bar -->
+<div class="single-product-sticky-bar">
+    <div class="single-product-sticky-bar__inner">
+        <div class="single-product-sticky-bar__product-title">
+            <h1><?php the_title(); ?></h1>
+        </div>
+        <div class="single-product-sticky-bar__content">
+            <div class="single-product-sticky-bar__product-add-to-cart">
+                <a href="<?php echo esc_url( wc_get_cart_url() . '?add-to-cart=' . get_the_ID() ); ?>"
+                    class="single-product-sticky-bar__product-add-to-cart-button">
+                    Dodaj do koszyka
+                    (<?php echo get_post_meta(get_the_ID(), '_price', true); ?><?php echo get_woocommerce_currency_symbol(); ?>)
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php
 get_footer( 'shop' );

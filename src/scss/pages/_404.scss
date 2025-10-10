@@ -1,0 +1,11 @@
+body.error404 {
+  #primary {
+    .page-title {
+      @apply font-heading text-5xl xs:text-6xl sm:text-7xl xl:text-8xl tracking-tight;
+    }
+
+    .page-description {
+      @apply text-lg text-gray-700 mb-10 font-heading;
+    }
+  }
+}

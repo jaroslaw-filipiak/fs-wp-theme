@@ -1,30 +1,25 @@
 import './single-product.scss';
 
-
-import { gsap } from "gsap";
-    
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
 window.addEventListener('DOMContentLoaded', () => {
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1,
+  };
 
-gsap.registerPlugin(ScrollTrigger,ScrollSmoother,ScrollToPlugin);
+  const callback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        stickyBar.classList.remove('single-product-sticky-bar--active');
+      } else {
+        stickyBar.classList.add('single-product-sticky-bar--active');
+      }
+    });
+  };
 
-gsap.timeline({
-	scrollTrigger: {
-		trigger: '.single-product-gallery',
-		pin: '.entry-summary',
-		pinSpacing: true,
-		start: 'top 20%', 
-		end: '+=100%',
-		scrub: 1,
-		markers: false,
-		anticipatePin: 1,
-		
-	}
+  const observer = new IntersectionObserver(callback, observerOptions);
+
+  const btn = document.querySelector('.summary .single_add_to_cart_button');
+  const stickyBar = document.querySelector('.single-product-sticky-bar');
+  observer.observe(btn);
 });
-});
-
-
-

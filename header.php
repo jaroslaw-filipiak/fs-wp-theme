@@ -53,7 +53,7 @@
                 description: "<p>Te pliki cookie są niezbędne do prawidłowego funkcjonowania witryny i nie można ich wyłączyć. Pomagają one między innymi w logowaniu i ustawianiu preferencji prywatności.</p>",
                 required: true,
                 onAccept: function() {
-                    console.log('Add logic for the required Niezbędne here');
+
                 }
             },
             {

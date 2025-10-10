@@ -1,12 +1,36 @@
 <?php
     $phone = get_field('phone', 'option')
 ?>
+<!-- search -->
+<section id="search" class="py-2 border-b">
+    <div class="container mx-auto px-4">
+        <form class="w-full" role="search" method="get" action="<?php echo home_url('/'); ?>">
+            <fieldset class="flex items-center gap-2">
+                <input class="px-4 py-2  outline-none ring-offset-0 focus:ring-2 shadow w-full min-h-[47px] "
+                    type="text" name="s" value="<?php the_search_query(); ?>" placeholder="Szukaj na stronie">
+                <button
+                    class="flex py-2 px-4 gap-4 items-center justify-center text-md font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800 h-[50px] min-w-[172px]">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                        <path d="M21 21l-6 -6" />
+                    </svg>
+                    <div class="inline-flex whitespace-nowrap min-w-[90px] search-button">Szukaj</div>
+                </button>
+            </fieldset>
+        </form>
+    </div>
+</section>
 
 
-<section class="overflow-hidden bg-stone-200 pb-24">
+<section class="overflow-hidden bg-stone-200 pb-12">
     <nav class="mx-4 py-6 border-b">
-        <div class="container mx-auto px-4">
-            <div class="relative flex items-center justify-between">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <div class="relative flex items-center justify-between w-full">
+                <!-- nav -->
                 <div class="flex items-center">
                     <a href="<?php echo home_url('/'); ?>" class="inline-block">
 
@@ -76,48 +100,97 @@
                                 href="<?php echo wc_get_page_permalink('shop'); ?>">Produkty</a></li>
                         <?php if(function_exists('pll_e')): ?>
                         <li class="mr-8"><a
-                                class=" hvr__item-dark inline-block text-teal-900 hover:text-teal-700 font-medium"
+                                class="hvr__item-dark inline-block text-teal-900 hover:text-teal-700 font-medium"
                                 href="<?php echo home_url('/kontakt'); ?>"><?php pll_e('Kontakt') ?></a></li>
                         <?php endif; ?>
+
+                        <li class="mr-8  border-l pl-8">
+                            <div
+                                class="hvr__item-dark cursor-pointer flex items-center gap-2 selection:bg-transparent search-trigger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                    <path d="M21 21l-6 -6" />
+                                </svg>
+                                <span class="selection:bg-transparent">Szukaj na stronie</span>
+                            </div>
+                        </li>
+
+
                     </ul>
                 </div>
 
-                <!-- phone -->
-                <div class=" hidden lg:flex lg:items-center lg:gap-4">
-                    <?php if(function_exists('pll_e')): ?>
-                    <p><?php pll_e('Zadzwoń do Nas') ?></p>
-                    <?php endif; ?>
-                    <div class="flex items-center gap-2">
-                        <a href="tel:<?php echo $phone ?>"
-                            class="flex py-2 px-4 items-center justify-center text-md font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800">
+                <!-- phone + cart -->
+                <div class="flex items-center justify-star gap-6">
 
-                            <svg fill="#fff" class="mr-4" height="32px" width="32px" version="1.1" id="Layer_1"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                viewBox="0 0 511.996 511.996" xml:space="preserve">
-                                <g>
+                    <!-- phone -->
+                    <div class="hidden lg:flex lg:items-center lg:gap-4">
+                        <?php if(function_exists('pll_e')): ?>
+                        <p class="hidden xl:flex"><?php pll_e('Zadzwoń do Nas') ?></p>
+                        <?php endif; ?>
+                        <div class="flex items-center gap-2">
+                            <a href="tel:<?php echo $phone ?>"
+                                class="flex py-2 px-4 items-center justify-center text-md font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800">
+
+                                <svg fill="#fff" class="mr-4" height="32px" width="32px" version="1.1" id="Layer_1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    viewBox="0 0 511.996 511.996" xml:space="preserve">
                                     <g>
-                                        <path d="M508.245,246.953L363.435,102.133c-5.001-5.001-13.099-5.001-18.099,0c-5.001,5-5.001,13.099,0,18.099l122.965,122.965
+                                        <g>
+                                            <path d="M508.245,246.953L363.435,102.133c-5.001-5.001-13.099-5.001-18.099,0c-5.001,5-5.001,13.099,0,18.099l122.965,122.965
 			H12.8c-7.074,0-12.8,5.726-12.8,12.8c0,7.074,5.726,12.8,12.8,12.8h455.492L345.327,391.763c-5.001,5-5.001,13.099,0,18.099
 			c5.009,5.001,13.099,5.001,18.108,0l144.811-144.811C513.246,260.051,513.246,251.953,508.245,246.953z" />
+                                        </g>
                                     </g>
-                                </g>
-                            </svg>
+                                </svg>
 
-                            <div class="inline-flex whitespace-nowrap min-w-[90px]"><?php echo $phone ?></div>
+                                <div class="inline-flex whitespace-nowrap min-w-[90px]"><?php echo $phone ?></div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- cart -->
+                    <div class="mr-8">
+                        <a href="<?php echo wc_get_page_permalink('cart'); ?>"
+                            class="hvr__item-dark text-teal-900 hover:text-teal-700 font-medium flex items-center gap-2">
+                            <div class="relative">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                    <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                    <path d="M17 17h-11v-14h-2" />
+                                    <path d="M6 5l14 1l-1 7h-13" />
+                                </svg>
+                                <?php if(WC()->cart->get_cart_contents_count() > 0): ?>
+                                <span
+                                    class="count absolute -top-2 -right-2 bg-teal-700 text-white text-xs font-medium rounded-full w-5 h-5 flex items-center justify-center"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
+                                <?php endif; ?>
+                            </div>
+                            <span>Koszyk</span>
+
                         </a>
                     </div>
+
                 </div>
 
-                <!-- mobile menu -->
-                <button class="hamburger hamburger--spin z-[999] lg:hidden" type="button">
-                    <span class="hamburger-box">
-                        <span class="hamburger-inner"></span>
-                    </span>
-                </button>
-
             </div>
+
+
+
+            <!-- mobile menu -->
+            <button class="hamburger hamburger--spin z-[999] lg:hidden" type="button">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button>
+
         </div>
     </nav>
-
     <?php get_template_part('template-parts/mobile-navigation'); ?>
 </section>

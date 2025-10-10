@@ -1,16 +1,17 @@
+@use '../components/buttons' as btn;
+
 .single-product {
   @apply bg-stone-200;
 
   .product {
-    @apply border-t pt-16 grid grid-cols-12 gap-20;
+    @apply border-t pt-16 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-12 lg:gap-20;
 
-
-   .single-product-gallery {
-    @apply col-span-8
-   }
-   .summary {
-    @apply col-span-4;
-   }
+    .single-product-gallery {
+      @apply lg:col-span-8;
+    }
+    .summary {
+      @apply lg:col-span-4;
+    }
 
     &_title {
       @apply text-4xl md:text-5xl leading-relaxed font-heading mb-6;
@@ -25,11 +26,8 @@
       @apply font-medium mb-4 text-2xl;
     }
     form.cart {
-      // TODO: add to global woo input ?
-
       @apply flex items-stretch justify-start gap-4 -ml-[16px];
 
-      // hidden because this products has no qty , always 1 item
       input.qty {
         @apply hidden py-4 px-6 placeholder-gray-700 outline-none ring-offset-0 focus:ring-2 shadow min-h-[61px] w-20 border-white;
       }
@@ -37,12 +35,10 @@
   }
 
   &-gallery {
-   
     &-images {
-      @apply flex flex-wrap gap-4;
+      @apply flex flex-wrap lg:gap-4;
       &-image {
-          @apply w-1/4 border border-red-500;
-       
+        @apply w-1/4 border border-red-500;
       }
     }
   }
@@ -54,6 +50,33 @@
       @apply h-12 inline-flex mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 ml-6;
     }
   }
+
+  .summary {
+    @apply sticky top-3;
+  }
+
+  .single-product-sticky-bar {
+    @apply w-full fixed bottom-0 left-0 bg-[#bfbfbf] z-10 shadow-2xl h-0 transition-all duration-300;
+
+    &--active {
+      @apply h-24;
+    }
+
+    &__inner {
+      @apply container flex items-center justify-between  py-2 lg:py-6;
+    }
+
+    &__product-title {
+      @apply text-base lg:text-2xl font-medium;
+    }
+
+    &__product-add-to-cart-button {
+      @include btn.btn-main;
+    }
+    &__content {
+      @apply flex items-center gap-4;
+    }
+  }
 }
 
 // GRID
@@ -61,63 +84,70 @@
 .images-length-3 {
   display: grid;
   gap: 40px;
-  grid-template-columns: 1fr 1fr;  
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 500px 500px;
   grid-template-areas:
-    "one two"
-    "three three";
-
-   
-    
+    'one two'
+    'three three';
+  @apply gap-3 lg:gap-4;
 }
 
 .images-length-4 {
   display: grid;
-  gap: 40px;
-  grid-template-columns: repeat(4, 1fr);  
-  grid-template-rows: 1fr ;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
   grid-template-areas:
-    "one one two two"
-    "three three four four"
-    
+    'one one two two'
+    'three three four four';
+  @apply gap-3 lg:gap-4;
 }
 
 .images-length-5 {
   display: grid;
-  gap: 40px;
-  grid-template-columns: repeat(4, 1fr);  
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 400px 260px 400px;
   grid-template-areas:
-    "one one two two"
-    "one one three three"
-    "four five five five ";
+    'one one two two'
+    'one one three three'
+    'four five five five ';
+  @apply gap-3 lg:gap-4;
+}
+
+.images-length-6 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 400px 260px 200px;
+  grid-template-areas:
+    'one one two two'
+    'one one three three'
+    'four five six six';
+  @apply gap-3 lg:gap-4;
 }
 
 .images-length-7 {
   display: grid;
-  gap: 40px;
-  grid-template-columns: repeat(4, 1fr);  
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 400px 260px 200px;
   grid-template-areas:
-    "one one two two"
-    "one one three three"
-    "four five six seven";
+    'one one two two'
+    'one one three three'
+    'four five six seven';
+  @apply gap-3 lg:gap-4;
 }
 
 .images-length-8 {
   display: grid;
-  gap: 40px;
-  grid-template-columns: repeat(4, 1fr);  
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 400px 260px 200px 610px;
   grid-template-areas:
-    "one one two two"
-    "one one three three"
-    "four five six seven"
-    "eight eight eight eight";
+    'one one two two'
+    'one one three three'
+    'four five six seven'
+    'eight eight eight eight';
+  @apply gap-3 lg:gap-4;
 }
 
 .single-product-gallery-image {
-
   @apply overflow-hidden;
 
   a {
@@ -125,7 +155,7 @@
   }
 
   img {
-    @apply w-full h-full object-cover ;
+    @apply w-full h-full object-cover;
   }
   &-1 {
     grid-area: one;
@@ -150,5 +180,14 @@
   }
   &-8 {
     grid-area: eight;
+  }
+}
+
+// up-sells na stronie produktu
+.up-sells .columns-4 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+
+  .product {
+    @apply flex flex-col items-center justify-center;
   }
 }

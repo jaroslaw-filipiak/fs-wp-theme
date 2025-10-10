@@ -1,0 +1,15 @@
+body.search {
+  .search-results-for {
+    @apply font-medium !text-2xl;
+  }
+  .search-results-query {
+    @apply font-medium !text-2xl;
+  }
+
+  .search-result-item {
+    @apply flex flex-col gap-2.5;
+    h2 {
+      @apply font-medium !text-2xl;
+    }
+  }
+}

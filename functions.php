@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define( '_S_VERSION', '1.1.26' );
 }
 
 /**
@@ -165,8 +165,25 @@ function fajnestarocie_scripts() {
 	// front page styles / scripts
 	if ( is_front_page() ) {
 		wp_enqueue_style( 'fajnestarocie-front-page-styles', get_template_directory_uri() . '/dist/assets/front-page.css', array(), _S_VERSION, false );
-		wp_enqueue_script( 'fajnestarocie-front-page-scripts', get_template_directory_uri() . '/dist/assets/front-page.js', array('jquery'), _S_VERSION, false );
+		wp_enqueue_script( 'fajnestarocie-front-page-scripts', get_template_directory_uri() . '/dist/assets/front-page.js', array(), _S_VERSION, false );
 	}
+
+    // cart page 
+    if ( is_cart() ) {
+        wp_enqueue_style( 'fajnestarocie-cart-styles', get_template_directory_uri() . '/dist/assets/cart.css', array(), _S_VERSION, false );
+        wp_enqueue_script( 'fajnestarocie-cart-scripts', get_template_directory_uri() . '/dist/assets/cart.js', array(), _S_VERSION, false );
+    }
+
+    // search page styles / scripts
+    if ( is_search() ) {
+        wp_enqueue_style( 'fajnestarocie-search-styles', get_template_directory_uri() . '/dist/assets/search.css', array(), _S_VERSION, false );
+    }
+
+    // 404 page styles / scripts
+    if ( is_404() ) {
+        wp_enqueue_style( 'fajnestarocie-404-styles', get_template_directory_uri() . '/dist/assets/404.css', array(), _S_VERSION, false );
+        wp_enqueue_script( 'fajnestarocie-404-scripts', get_template_directory_uri() . '/dist/assets/404.js', array(), _S_VERSION, false );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'fajnestarocie_scripts' );
 
@@ -210,22 +227,138 @@ if ( class_exists( 'WooCommerce' ) ) {
 }
 
 /**
- * Register custom post type for client reviews
- */
-add_action('init', function() {
-    register_post_type('olx_review', array(
-        'labels' => array(
-            'name' => 'Opinie klientów',
-            'singular_name' => 'Opinia klienta',
-        ),
-        'public' => true,
-        'show_in_menu' => true,
-        'menu_icon' => 'dashicons-testimonial',
-        'supports' => array('title', 'custom-fields'),
-    ));
-});
-
-/**
  * Load translations
  */
 require get_template_directory() . '/inc/translations.php';
+
+
+function fajnestarocie_include_products_in_search( $query ) {
+    if ( ! is_admin() && $query->is_main_query() && $query->is_search() ) {
+        $query->set( 'post_type', array( 'post', 'page', 'product' ) );
+        $query->set( 'post_status', 'publish' );
+        
+        // Note: Complete override handles the actual search
+        // This just sets basic query parameters
+    }
+}
+
+function fajnestarocie_setup_fulltext_indexes() {
+    global $wpdb;
+    
+    // Check if FULLTEXT index exists
+    $index_exists = $wpdb->get_var("
+        SELECT COUNT(*) FROM INFORMATION_SCHEMA.STATISTICS 
+        WHERE table_schema = '{$wpdb->dbname}' 
+        AND table_name = '{$wpdb->posts}' 
+        AND index_name = 'fulltext_search_idx'
+    ");
+    
+    // Create FULLTEXT index if it doesn't exist
+    if ( ! $index_exists ) {
+        $wpdb->query("
+            ALTER TABLE {$wpdb->posts} 
+            ADD FULLTEXT fulltext_search_idx (post_title, post_content, post_excerpt)
+        ");
+    }
+}
+
+
+/**
+ * Optimized search for posts and WooCommerce products
+ * Direct SQL query with FULLTEXT support for maximum performance
+ */
+function fajnestarocie_optimized_product_search( $posts, $query ) {
+    // Only handle main search queries
+    if ( ! $query->is_search() || is_admin() || ! $query->is_main_query() ) {
+        return $posts;
+    }
+    
+    $search_term = trim( $query->get( 's' ) );
+    if ( empty( $search_term ) ) {
+        return $posts;
+    }
+    
+    global $wpdb;
+    static $cache = array();
+    
+    // Simple cache for repeated searches
+    $cache_key = md5( $search_term );
+    if ( isset( $cache[ $cache_key ] ) ) {
+        return $cache[ $cache_key ];
+    }
+    
+    $clean_term = $wpdb->esc_like( $search_term );
+    
+    // Check if FULLTEXT index exists for better performance
+    $has_fulltext = $wpdb->get_var("
+        SELECT COUNT(*) FROM INFORMATION_SCHEMA.STATISTICS 
+        WHERE table_schema = '{$wpdb->dbname}' 
+        AND table_name = '{$wpdb->posts}' 
+        AND index_name = 'fulltext_search_idx'
+    ");
+    
+    if ( $has_fulltext ) {
+        // Use FULLTEXT for better relevance and speed
+        $sql = $wpdb->prepare( "
+            SELECT p.ID, p.post_title, p.post_content, p.post_excerpt, p.post_date, p.post_type,
+                   MATCH(p.post_title, p.post_content, p.post_excerpt) AGAINST(%s IN NATURAL LANGUAGE MODE) as relevance
+            FROM {$wpdb->posts} p
+            WHERE p.post_type IN ('post', 'page', 'product')
+            AND p.post_status = 'publish'
+            AND (
+                MATCH(p.post_title, p.post_content, p.post_excerpt) AGAINST(%s IN NATURAL LANGUAGE MODE)
+                OR p.post_title LIKE %s
+                OR EXISTS (
+                    SELECT 1 FROM {$wpdb->postmeta} pm 
+                    WHERE pm.post_id = p.ID 
+                    AND pm.meta_value LIKE %s
+                    AND pm.meta_key IN ('_sku', '_product_attributes')
+                )
+            )
+            ORDER BY relevance DESC, p.post_title LIKE %s DESC, p.post_date DESC
+            LIMIT 20
+        ", $search_term, $search_term, "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%" );
+    } else {
+        // Fallback to LIKE queries
+        $sql = $wpdb->prepare( "
+            SELECT p.ID, p.post_title, p.post_content, p.post_excerpt, p.post_date, p.post_type
+            FROM {$wpdb->posts} p
+            WHERE p.post_type IN ('post', 'page', 'product')
+            AND p.post_status = 'publish'
+            AND (
+                p.post_title LIKE %s
+                OR p.post_content LIKE %s  
+                OR p.post_excerpt LIKE %s
+                OR EXISTS (
+                    SELECT 1 FROM {$wpdb->postmeta} pm 
+                    WHERE pm.post_id = p.ID 
+                    AND pm.meta_value LIKE %s
+                    AND pm.meta_key IN ('_sku', '_product_attributes')
+                )
+            )
+            ORDER BY p.post_title LIKE %s DESC, p.post_date DESC
+            LIMIT 20
+        ", "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%" );
+    }
+    
+    $results = $wpdb->get_results( $sql );
+    
+    if ( $results ) {
+        // Convert to WP_Post objects for theme compatibility
+        $post_objects = array();
+        foreach ( $results as $result ) {
+            $post_objects[] = new WP_Post( $result );
+        }
+        
+        $cache[ $cache_key ] = $post_objects;
+        return $post_objects;
+    }
+    
+    $cache[ $cache_key ] = array();
+    return array();
+}
+
+// Hook up the optimized search functions
+add_action( 'pre_get_posts', 'fajnestarocie_include_products_in_search' );
+add_action( 'init', 'fajnestarocie_setup_fulltext_indexes' );
+add_filter( 'the_posts', 'fajnestarocie_optimized_product_search', 10, 2 );

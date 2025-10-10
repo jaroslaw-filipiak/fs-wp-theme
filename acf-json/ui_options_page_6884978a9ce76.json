@@ -1,0 +1,26 @@
+{
+    "key": "ui_options_page_6884978a9ce76",
+    "title": "Fajnestarocie",
+    "active": true,
+    "menu_order": 0,
+    "page_title": "Fajnestarocie",
+    "menu_slug": "settings",
+    "parent_slug": "none",
+    "advanced_configuration": 1,
+    "icon_url": "",
+    "menu_title": "",
+    "position": "",
+    "redirect": 0,
+    "description": "",
+    "menu_icon": {
+        "type": "dashicons",
+        "value": "dashicons-admin-generic"
+    },
+    "update_button": "Aktualizuj",
+    "updated_message": "Opcja zaktualizowane",
+    "capability": "edit_posts",
+    "data_storage": "options",
+    "post_id": "",
+    "autoload": 0,
+    "modified": 1760031695
+}

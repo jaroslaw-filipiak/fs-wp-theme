@@ -15,6 +15,9 @@ export default defineConfig({
         main: resolve(__dirname, './src/index.html'),
         'single-product': resolve(__dirname, './src/single-product.js'),
         'front-page': resolve(__dirname, './src/front-page.js'),
+        cart: resolve(__dirname, './src/cart.js'),
+        search: resolve(__dirname, './src/search.js'),
+        404: resolve(__dirname, './src/404.js'),
         // nested: resolve(__dirname, 'nested/index.html'),
       },
       output: {

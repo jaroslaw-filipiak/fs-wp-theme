@@ -10,11 +10,45 @@
   @apply py-12 lg:py-24;
 
   .woocommerce-breadcrumb {
-    @apply flex mb-4 items-center  text-sm font-medium text-teal-900;
+    @apply flex flex-wrap lg:mb-4 items-center text-sm font-medium text-teal-900;
+
+    &:last-child {
+      @apply w-full;
+    }
+
+    a {
+      @apply inline-block whitespace-nowrap;
+
+      &:last-of-type {
+        &::after {
+          content: '';
+          @apply block w-full;
+        }
+      }
+    }
   }
 
   .single_add_to_cart_button {
     @include btn-main;
+  }
+}
+
+.woocommerce-page {
+  .wp-block-button__link {
+    @include btn-main;
+    @apply rounded-none max-h-[48px];
+  }
+
+  .up-sells .columns-4 {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+
+    .product {
+      @apply flex flex-col gap-10 items-center justify-center p-4 lg:p-7 border border-dashed border-[#71717A];
+
+      .add_to_cart_button {
+        @include btn-main;
+      }
+    }
   }
 }
 
@@ -52,7 +86,7 @@
 
     &::before {
       content: '';
-      @apply block w-full h-[1px] bg-teal-700 absolute bottom-0 left-0 transition-all duration-300 opacity-0;
+      @apply block w-full h-[1px] bg-teal-700 absolute -bottom-3 left-0 transition-all duration-300 opacity-0;
     }
 
     &:hover {
@@ -101,11 +135,11 @@ form.wpcf7-form {
 
 #primary.site-main {
   .entry-title {
-    @apply font-heading text-4xl md:text-5xl mb-6 mt-12 lg:mt-24 leading-relaxed;
+    @apply font-heading text-4xl md:text-5xl mb-6  lg:leading-relaxed;
   }
 
   h1 {
-    @apply font-heading text-4xl mb-6 mt-12 lg:mt-24 leading-relaxed;
+    @apply font-heading text-4xl mb-6  leading-relaxed;
   }
   h2 {
     @apply font-heading text-2xl mb-6 mt-6  leading-relaxed;
@@ -147,5 +181,31 @@ form.wpcf7-form {
   }
   .wp-block-image {
     @apply w-full h-auto;
+  }
+}
+
+//search
+
+#search {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+
+  // @apply fixed top-0 left-0 right-0 z-50 lg:static;
+
+  @media (min-width: 1024px) {
+    grid-template-rows: 0fr;
+
+    .container {
+      overflow: hidden;
+    }
+  }
+}
+
+.is-search-visible {
+  grid-template-rows: 1fr !important;
+
+  .container {
+    overflow: visible;
   }
 }

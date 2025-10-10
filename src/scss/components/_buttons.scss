@@ -1,3 +1,3 @@
 @mixin btn-main {
-  @apply inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800 cursor-pointer;
+  @apply inline-flex py-2 lg:py-4 px-3 lg:px-6 items-center justify-center text-sm lg:text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800 cursor-pointer;
 }

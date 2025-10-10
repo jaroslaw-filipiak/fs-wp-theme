@@ -10,20 +10,19 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+<main id="primary" class="site-main container mx-auto">
 
-		<?php if ( have_posts() ) : ?>
+    <?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'fajnestarocie' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
-			</header><!-- .page-header -->
+    <header class="page-header flex items-center justify-start gap-3">
 
-			<?php
+        <p class="search-results-for"><?php pll_e('Wyniki wyszukiwania dla:'); ?></p>
+        <p class="search-results-query">"<?php echo get_search_query(); ?>"</p>
+
+    </header><!-- .page-header -->
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <?php
 			/* Start the Loop */
 			while ( have_posts() ) :
 				the_post();
@@ -45,8 +44,8 @@ get_header();
 
 		endif;
 		?>
-
-	</main><!-- #main -->
+    </div>
+</main><!-- #main -->
 
 <?php
 get_sidebar();

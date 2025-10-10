@@ -1,0 +1,23 @@
+body.woocommerce-cart {
+  // cross sell w koszyku
+  .wp-block-woocommerce-cart-cross-sells-block {
+    // title zobacz inne rwnie interesujace....
+    .wp-block-heading {
+      @apply uppercase !text-xs !font-sans font-extrabold;
+    }
+    .cross-sells-product {
+      .wp-block-cart-cross-sells-product {
+        &__product-image {
+          @apply w-24 h-24  mx-auto overflow-hidden;
+        }
+        &__product-title {
+          @apply text-center !text-2xl !mb-2;
+        }
+      }
+    }
+  }
+
+  .wc-block-components-totals-item {
+    @apply flex items-center justify-around gap-x-6 gap-y-1;
+  }
+}
