@@ -18,8 +18,9 @@ Template Name: Contact
         <div class="border-t pt-16">
             <div class="max-w-lg mx-auto lg:max-w-none">
                 <div class="flex flex-wrap -mx-4">
-                    <div class="w-full lg:w-1/2 px-4 mb-12 lg:mb-0">
-                        <div class="max-w-lg py-7">
+                    <!-- form -->
+                    <div class="w-full lg:w-1/2 px-4 mb-12 lg:mb-0 ">
+                        <div class="py-7">
                             <h1 class="font-heading text-4xl sm:text-6xl tracking-sm mb-6">
                                 <?php the_field( 'title' ); ?></h1>
                             <p class="text-lg text-gray-700 mb-10"><?php the_field( 'subtitle' ); ?></p>
@@ -28,8 +29,9 @@ Template Name: Contact
                     </div>
                     <?php $contact_img = get_field( 'contact_img' ); ?>
                     <?php if($contact_img): ?>
+                    <!-- img -->
                     <div style="background-image: url('<?php echo esc_url( $contact_img['url'] ); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;"
-                        class="w-full lg:w-1/2 px-4 bg-stone-300">
+                        class="w-full lg:w-1/2 px-4 bg-stone-300 ">
                         <div class="lg:max-w-md lg:ml-auto h-full"></div>
                     </div>
                     <?php endif; ?>

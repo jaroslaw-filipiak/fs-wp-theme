@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.1.26' );
+	define( '_S_VERSION', '1.2.0' );
 }
 
 /**
@@ -184,6 +184,18 @@ function fajnestarocie_scripts() {
         wp_enqueue_style( 'fajnestarocie-404-styles', get_template_directory_uri() . '/dist/assets/404.css', array(), _S_VERSION, false );
         wp_enqueue_script( 'fajnestarocie-404-scripts', get_template_directory_uri() . '/dist/assets/404.js', array(), _S_VERSION, false );
     }
+
+	// product archive page styles / scripts
+	if ( is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) ) {
+		wp_enqueue_style( 'fajnestarocie-archive-product-styles', get_template_directory_uri() . '/dist/assets/archive-product.css', array(), _S_VERSION, false );
+		wp_enqueue_script( 'fajnestarocie-archive-product-scripts', get_template_directory_uri() . '/dist/assets/archive-product.js', array(), _S_VERSION, false );
+	}
+	
+	// page template contact
+	if ( is_page_template( 'page-templates/page-contact.php' ) ) {
+		wp_enqueue_style( 'fajnestarocie-contact-styles', get_template_directory_uri() . '/dist/assets/contact.css', array(), _S_VERSION, false );
+		wp_enqueue_script( 'fajnestarocie-contact-scripts', get_template_directory_uri() . '/dist/assets/contact.js', array(), _S_VERSION, false );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'fajnestarocie_scripts' );
 
@@ -362,3 +374,104 @@ function fajnestarocie_optimized_product_search( $posts, $query ) {
 add_action( 'pre_get_posts', 'fajnestarocie_include_products_in_search' );
 add_action( 'init', 'fajnestarocie_setup_fulltext_indexes' );
 add_filter( 'the_posts', 'fajnestarocie_optimized_product_search', 10, 2 );
+
+/**
+ * Set products per page for shop archive
+ */
+function fajnestarocie_products_per_page( $query ) {
+	if ( ! is_admin() && $query->is_main_query() && ( is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) ) ) {
+		$query->set( 'posts_per_page', 40 );
+	}
+}
+add_action( 'pre_get_posts', 'fajnestarocie_products_per_page' );
+
+/**
+ * Register REST API endpoint for infinite scroll products
+ */
+function fajnestarocie_register_products_api() {
+	register_rest_route( 'fajnestarocie/v1', '/products', array(
+		'methods'  => 'GET',
+		'callback' => 'fajnestarocie_get_products_ajax',
+		'permission_callback' => '__return_true',
+		'args' => array(
+			'page' => array(
+				'default' => 1,
+				'sanitize_callback' => 'absint',
+			),
+			'category' => array(
+				'default' => '',
+				'sanitize_callback' => 'sanitize_text_field',
+			),
+		),
+	) );
+}
+add_action( 'rest_api_init', 'fajnestarocie_register_products_api' );
+
+/**
+ * AJAX handler for loading products
+ */
+function fajnestarocie_get_products_ajax( $request ) {
+	$page = $request->get_param( 'page' );
+	$category_id = $request->get_param( 'category' );
+
+	// Przygotuj argumenty zapytania
+	$args = array(
+		'post_type'      => 'product',
+		'posts_per_page' => 40,
+		'paged'          => $page,
+		'post_status'    => 'publish',
+	);
+
+	// Dodaj filtr kategorii jeśli jest podany
+	if ( ! empty( $category_id ) ) {
+		$args['tax_query'] = array(
+			array(
+				'taxonomy' => 'product_cat',
+				'field'    => 'term_id',
+				'terms'    => $category_id,
+			),
+		);
+	}
+
+	$query = new WP_Query( $args );
+	$products = array();
+
+	// Tablica z klasami wysokości obrazków (tak jak w archive-product.php)
+	$height_classes = array( 'h-64', 'h-72', 'h-80', 'h-88', 'h-96' );
+	$index = 0;
+
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			global $product;
+
+			// Wybierz klasę wysokości obrazka cyklicznie
+			$image_class = $height_classes[ $index % 5 ];
+			$index++;
+
+			// Pobierz obrazek produktu
+			$image_url = has_post_thumbnail()
+				? get_the_post_thumbnail_url( get_the_ID(), 'full' )
+				: get_template_directory_uri() . '/dist/images/placeholder.jpg';
+
+			$products[] = array(
+				'id'        => get_the_ID(),
+				'title'     => get_the_title(),
+				'excerpt'   => wp_trim_words( get_the_excerpt(), 20 ),
+				'permalink' => get_permalink(),
+				'image'     => $image_url,
+				'imageClass' => $image_class,
+				'price'     => $product->get_price_html(),
+			);
+		}
+	}
+
+	wp_reset_postdata();
+
+	return rest_ensure_response( array(
+		'products'   => $products,
+		'page'       => $page,
+		'max_pages'  => $query->max_num_pages,
+		'found'      => $query->found_posts,
+	) );
+}

@@ -77,7 +77,7 @@ get_header( 'shop' ); ?>
                 <a href="<?php echo esc_url( wc_get_cart_url() . '?add-to-cart=' . get_the_ID() ); ?>"
                     class="single-product-sticky-bar__product-add-to-cart-button">
                     Dodaj do koszyka
-                    (<?php echo get_post_meta(get_the_ID(), '_price', true); ?><?php echo get_woocommerce_currency_symbol(); ?>)
+                    (<?php $product = wc_get_product( get_the_ID() ); echo wc_price( $product->get_price() ); ?>)
                 </a>
             </div>
         </div>

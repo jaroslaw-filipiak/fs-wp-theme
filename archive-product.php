@@ -51,7 +51,9 @@
                 </div>
             </div>
         </div>
-        <div class="product-grid mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div class="product-grid mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+             data-max-pages="<?php echo esc_attr($GLOBALS['wp_query']->max_num_pages); ?>"
+             data-category-id="<?php echo is_tax('product_cat') ? get_queried_object_id() : ''; ?>">
             <?php
             if (have_posts()) :
                 while (have_posts()) :
@@ -103,6 +105,12 @@
                 'after_page_number' => '</button>'
             ));
             ?>
+        </div>
+
+        <!-- Infinite Scroll Loader -->
+        <div class="infinite-scroll-loader hidden">
+            <div class="loader-spinner"></div>
+            <p class="loader-text">Ładowanie produktów...</p>
         </div>
     </div>
 </section>

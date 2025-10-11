@@ -1,0 +1,23 @@
+.acceptance-box__wrapper {
+  @apply mb-10 relative;
+
+  label {
+    @apply flex items-start gap-4 text-sm text-gray-700 leading-tight;
+  }
+
+  input[type='checkbox'] {
+    @apply accent-slate-500 !w-4 mt-1;
+  }
+
+  &::after {
+    @apply content-[''] block h-[1px] bg-gray-300 mb-4 absolute -bottom-10 w-full;
+  }
+}
+
+.cf7-required-info {
+  @apply text-xs text-gray-700;
+}
+
+.cf7-submit__wrapper {
+  @apply flex flex-col lg:flex-row items-center justify-start gap-4;
+}

@@ -157,8 +157,8 @@ Template Name: Home
                     <a href="<?php echo get_term_link($category); ?>">
                         <p class="text-xl md:text-2xl lg:text-3xl mt-4 text-center font-medium group-hover:text-white">
                             <?php echo $category->name; ?></p>
-                        <p class="text-center text-gray-600 group-hover:text-white"><?php echo $category->count; ?>
-                            produktów</p>
+                        <p class="text-center text-gray-600 group-hover:text-white">
+                            Ilość produktów: <?php echo $category->count; ?></p>
                     </a>
                 </div>
             </div>
