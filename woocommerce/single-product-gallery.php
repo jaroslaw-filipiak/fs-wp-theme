@@ -25,12 +25,10 @@ $images_length = count($attachment_ids);
                 foreach ($attachment_ids as $attachment_id) {
                     $i++;
                     ?>
-        <div  class="single-product-gallery-image single-product-gallery-image-<?php echo $i; ?>">  
-            <a href="<?php echo wp_get_attachment_url($attachment_id); ?>" data-lightbox="gallery" >
-                <img loading="lazy" src="<?php echo wp_get_attachment_url($attachment_id); ?>"
-                    alt="<?php echo get_post_meta($attachment_id, '_wp_attachment_image_alt', true); ?>">
-            </a>
-        </div>
+        <a style="background-image: url('<?php echo wp_get_attachment_url($attachment_id); ?>')"
+            class="single-product-gallery-image single-product-gallery-image-<?php echo $i; ?>" data-lightbox="gallery"
+            href="<?php echo wp_get_attachment_url($attachment_id); ?>">
+        </a>
         <?php
                 }
             }
@@ -40,15 +38,14 @@ $images_length = count($attachment_ids);
 </div>
 
 <script>
-    jQuery(document).ready(function($) {
-        lightbox.option({
-            'resizeDuration': 400,
-            'wrapAround': true,
-            'albumLabel': 'Zdjęcie %1 z %2',
-            'fadeDuration': 400,
-            'imageFadeDuration': 400,
-            'resizeDuration': 400,
-        })
-    });
+jQuery(document).ready(function($) {
+    lightbox.option({
+        'resizeDuration': 400,
+        'wrapAround': true,
+        'albumLabel': 'Zdjęcie %1 z %2',
+        'fadeDuration': 400,
+        'imageFadeDuration': 400,
+        'resizeDuration': 400,
+    })
+});
 </script>
-
