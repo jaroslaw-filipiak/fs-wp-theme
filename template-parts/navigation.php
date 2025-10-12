@@ -33,6 +33,7 @@
                 <!-- nav -->
                 <div class="flex items-center">
                     <a href="<?php echo home_url('/'); ?>" class="inline-block">
+                        <span class="hidden"> Link do strony głownej fajnestarocie</span>
 
                         <svg width="107" height="46" viewBox="0 0 107 46" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -172,7 +173,7 @@
                                     class="count absolute -top-2 -right-2 bg-teal-700 text-white text-xs font-medium rounded-full w-5 h-5 flex items-center justify-center"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
                                 <?php endif; ?>
                             </div>
-                            <span>Koszyk</span>
+                            <span class="hidden md:block">Koszyk</span>
 
                         </a>
                     </div>
@@ -181,10 +182,9 @@
 
             </div>
 
-
-
             <!-- mobile menu -->
             <button class="hamburger hamburger--spin z-[999] lg:hidden" type="button">
+                <span class="hidden"> Otwórz menu mobilne</span>
                 <span class="hamburger-box">
                     <span class="hamburger-inner"></span>
                 </span>

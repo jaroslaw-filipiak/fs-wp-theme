@@ -4,7 +4,7 @@
   @apply bg-stone-200;
 
   .product {
-    @apply border-t pt-16 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-12 lg:gap-20;
+    @apply border-t pt-4 xl:pt-16 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-12 lg:gap-20;
 
     .single-product-gallery {
       @apply lg:col-span-8;
@@ -63,7 +63,7 @@
     }
 
     &__inner {
-      @apply container flex items-center justify-between  py-2 lg:py-6;
+      @apply container flex flex-col lg:flex-row gap-3 items-center justify-between  py-2 lg:py-6;
     }
 
     &__product-title {

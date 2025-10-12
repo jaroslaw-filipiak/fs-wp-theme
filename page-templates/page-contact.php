@@ -15,7 +15,7 @@ Template Name: Contact
                 xmlns="http://www.w3.org/2000/svg"></svg>
             <span class="inline-block ml-2 text-sm font-medium text-teal-900"><?php the_title(); ?></span>
         </div>
-        <div class="border-t pt-16">
+        <div class="border-t pt-4 xl:pt-16">
             <div class="max-w-lg mx-auto lg:max-w-none">
                 <div class="flex flex-wrap -mx-4">
                     <!-- form -->

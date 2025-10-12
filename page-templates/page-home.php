@@ -31,9 +31,9 @@ Template Name: Home
                 <div class="w-full lg:w-1/2 px-4">
                     <div class="max-w-lg lg:max-w-none mx-auto">
                         <h2 class="text-lg text-gray-700 mb-10 font-heading"><?php echo $subheading; ?></h2>
-                        <a href="#categories"
+                        <button href="#categories"
                             class="inline-flex py-4 px-6 items-center justify-center text-lg font-medium text-white border transition duration-200 bg-zinc-500 hover:bg-zinc-800">Przeglądaj
-                            spośród <?php echo wp_count_posts('product')->publish; ?> ofert</a>
+                            spośród <?php echo wp_count_posts('product')->publish; ?> ofert</button>
                     </div>
                 </div>
             </div>
@@ -187,12 +187,12 @@ Template Name: Home
                 </svg>
                 <span class="inline-block ml-2 text-sm font-medium text-teal-900">O nas</span>
             </div>
-            <div class="border-t pt-16 border-zinc-400">
+            <div class="border-t pt-4 xl:pt-16 border-zinc-400">
                 <div class="max-w-lg mx-auto lg:max-w-none">
                     <div class="flex flex-wrap -mx-4">
                         <div class="w-full lg:w-2/3 px-4 mb-12 lg:mb-0">
                             <div class="max-w-3xl">
-                                <p class="font-heading text-5xl sm:text-6xl mb-6 max-w-2xl">
+                                <p class="font-heading text-3xl sm:text-4xl xl:text-5xl mb-6 max-w-2xl">
                                     <?php echo $about_us_heading; ?></p>
                                 <p class="text-lg text-gray-700 font-heading"><?php echo $about_us_subheading; ?></p>
                             </div>

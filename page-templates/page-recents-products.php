@@ -16,7 +16,7 @@ Template Name: Recents Products
                 xmlns="http://www.w3.org/2000/svg"></svg>
             <span class="inline-block ml-2 text-sm font-medium text-teal-900">Nowości</span>
         </div>
-        <div class="border-t pt-16">
+        <div class="border-t pt-4 xl:pt-16">
             <div class="flex flex-wrap items-center justify-between mb-20 -mx-4">
                 <div class="w-full sm:w-2/3 px-4 mb-10 sm:mb-0">
                     <div class="sm:max-w-lg xl:max-w-none">

@@ -20,4 +20,11 @@
 
 .cf7-submit__wrapper {
   @apply flex flex-col lg:flex-row items-center justify-start gap-4;
+
+  p {
+    @apply max-lg:w-full mt-3;
+  }
+  input[type='submit'] {
+    @apply w-full min-h-12;
+  }
 }

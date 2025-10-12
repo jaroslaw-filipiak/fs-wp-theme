@@ -30,6 +30,7 @@
 
   .single_add_to_cart_button {
     @include btn-main;
+    @apply max-lg:w-full min-h-12;
   }
 }
 
