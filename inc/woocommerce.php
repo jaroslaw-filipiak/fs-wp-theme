@@ -242,3 +242,59 @@ function wrap_woocommerce_breadcrumb() {
         echo '</div>';
     }
 }
+
+/**
+ * Disable purchasability for products with 'individual' shipping class
+ *
+ * @param bool $purchasable
+ * @param WC_Product $product
+ * @return bool
+ */
+function fajnestarocie_disable_individual_shipping_purchase( $purchasable, $product ) {
+    if ( $product->get_shipping_class() === 'individual' ) {
+        return false;
+    }
+    return $purchasable;
+}
+add_filter( 'woocommerce_is_purchasable', 'fajnestarocie_disable_individual_shipping_purchase', 10, 2 );
+
+/**
+ * Display custom message for products with 'individual' shipping class
+ *
+ * @return void
+ */
+function fajnestarocie_individual_shipping_message() {
+    global $product;
+
+    if ( ! $product ) {
+        return;
+    }
+
+    if ( $product->get_shipping_class() === 'individual' ) {
+        echo '<div class="individual-shipping-notice" style="margin: 20px 0; padding: 15px; background-color: #f0f0f0; border-left: 4px solid #0073aa;">';
+        echo '<p style="margin: 0; font-size: 16px; font-weight: 500;">';
+        echo esc_html__( 'Zadzwoń do nas w celu ustalenia kosztów dostawy', 'fajnestarocie' );
+        echo '</p>';
+        echo '</div>';
+    }
+}
+add_action( 'woocommerce_single_product_summary', 'fajnestarocie_individual_shipping_message', 30 );
+
+/**
+ * Add body class for products with 'individual' shipping class
+ *
+ * @param array $classes
+ * @return array
+ */
+function fajnestarocie_individual_shipping_body_class( $classes ) {
+    if ( is_product() ) {
+        global $product;
+
+        if ( $product && $product->get_shipping_class() === 'individual' ) {
+            $classes[] = 'product-shipping-individual';
+        }
+    }
+
+    return $classes;
+}
+add_filter( 'body_class', 'fajnestarocie_individual_shipping_body_class' );

@@ -217,3 +217,8 @@ form.wpcf7-form {
 blockquote {
   @apply italic;
 }
+
+// Hide Przelewy24 installments only for products with individual shipping
+.product-shipping-individual #p24_installments {
+  display: none !important;
+}
