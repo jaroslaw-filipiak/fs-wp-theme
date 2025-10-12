@@ -90,17 +90,17 @@
   grid-template-areas:
     'one two'
     'three three';
-  @apply gap-3 lg:gap-4;
+  @apply gap-3 lg:gap-4 h-full;
 }
 
 .images-length-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
+  grid-template-rows: 300px 260px;
   grid-template-areas:
     'one one two two'
     'three three four four';
-  @apply gap-3 lg:gap-4;
+  @apply gap-3 lg:gap-4 h-full;
 }
 
 .images-length-5 {
@@ -111,7 +111,7 @@
     'one one two two'
     'one one three three'
     'four five five five ';
-  @apply gap-3 lg:gap-4;
+  @apply gap-3 lg:gap-4 h-full;
 }
 
 .images-length-6 {
@@ -122,7 +122,7 @@
     'one one two two'
     'one one three three'
     'four five six six';
-  @apply gap-3 lg:gap-4;
+  @apply gap-3 lg:gap-4 h-full;
 }
 
 .images-length-7 {
@@ -133,7 +133,7 @@
     'one one two two'
     'one one three three'
     'four five six seven';
-  @apply gap-3 lg:gap-4;
+  @apply gap-3 lg:gap-4 h-full;
 }
 
 .images-length-8 {
@@ -145,7 +145,7 @@
     'one one three three'
     'four five six seven'
     'eight eight eight eight';
-  @apply gap-3 lg:gap-4;
+  @apply gap-3 lg:gap-4 h-full;
 }
 
 .single-product-gallery-image {

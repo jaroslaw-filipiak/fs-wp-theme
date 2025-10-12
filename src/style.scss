@@ -5,7 +5,7 @@
 @import './scss/components/buttons';
 @import './scss/vendors/hamburgers/hamburgers.scss';
 
-@import './scss/vendors/debug';
+// @import './scss/vendors/debug';
 
 //woocommerce global
 .container-woocommerce-fajnestarocie {
@@ -211,4 +211,9 @@ form.wpcf7-form {
   .container {
     overflow: visible;
   }
+}
+
+//blockquote
+blockquote {
+  @apply italic;
 }

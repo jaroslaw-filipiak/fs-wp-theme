@@ -230,7 +230,6 @@ function custom_show_product_images() {
 add_action('woocommerce_before_single_product_summary', 'custom_show_product_images', 20);
 
 
-
 // remove breadcrumbs WooCommerce
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 

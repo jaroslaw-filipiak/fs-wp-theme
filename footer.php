@@ -161,16 +161,18 @@
     <div class="flex flex-wrap flex-col justify-between mt-12 px-4 lg:container lg:px-0">
 
         <div>
-            <p class="text-gray-500  mb-12 text-md">© <?php echo date('Y'); ?> fajnestarocie.pl. All rights reserved.
+            <p class="text-gray-500  mb-4 text-md">© <?php echo date('Y'); ?> fajnestarocie.pl. All rights reserved.
                 Projekt i wykonanie:
-                <a class="hvr__item-dark inline-block text-gray-500 hover:text-teal-700" href="https://j-filipiak.pl"
+                <a title="Projektowanie stron internetowych, usługi programistyczne, sklepy internetowe, strony firmowe, sklepy internetowe"
+                    class="hvr__item-dark inline-block text-gray-500 hover:text-teal-700" href="https://j-filipiak.pl"
                     target="_blank">j-filipiak.pl</a>
             </p>
         </div>
 
 
         <div>
-            <p class=" text-gray-500 mb-3 text-sm max-w-186">Fajne Starocie - sklep z antykami europejskimi i
+            <p class=" text-gray-500 mb-3 text-sm max-w-186">Fajne Starocie - sklep z antykami / starociami europejskimi
+                i
                 przedmiotami vintage. Lampy secesyjne, porcelana angielska, meble antyczne oraz dekoracje retro z
                 dostawą w całej Polsce. Specjalizujemy się w antykach francuskich i lampach vintage dla miłośników stylu
                 vintage i wnętrz z charakterem.</p>
@@ -179,7 +181,7 @@
         <div class="max-w-186 border-t border-black border-opacity-20 mb-3"></div>
 
         <div>
-            <p class="mb-3 text-sm max-w-186 flex flex-col lg:flex-row items-center gap-1">Zauważyłeś problem ze stroną?
+            <p class="text-sm max-w-186 flex flex-col lg:flex-row items-center gap-1">Zauważyłeś problem ze stroną?
                 <svg class="hidden lg:flex" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right">

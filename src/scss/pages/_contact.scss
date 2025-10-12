@@ -12,6 +12,10 @@
   &::after {
     @apply content-[''] block h-[1px] bg-gray-300 mb-4 absolute -bottom-10 w-full;
   }
+
+  a {
+    @apply underline opacity-100 hover:opacity-60 transition-all duration-200;
+  }
 }
 
 .cf7-required-info {
