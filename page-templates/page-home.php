@@ -215,7 +215,7 @@ Template Name: Home
                                 <div class="mb-16">
                                     <span
                                         class="block text-5xl"><?php echo wp_count_posts('product')->publish; ?></span>
-                                    <p class="text-gray-700 text-xl mt-3">Unikalne strocie w ofercie</p>
+                                    <p class="text-gray-700 text-xl mt-3">Unikalne starocie w ofercie</p>
                                 </div>
                                 <div class="mb-16">
                                     <span
