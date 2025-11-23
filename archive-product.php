@@ -1,21 +1,8 @@
 <?php get_header(); ?>
 
-
 <section class="py-12 lg:py-24 overflow-hidden bg-stone-200">
     <div class="container mx-auto px-4">
-        <div class="flex mb-4 items-center">
-            <svg id="svg_2fcf097058cb7e4ce3e79e8bfd5757d4" width="8" height="8" viewbox="0 0 9 9" fill="none"
-                xmlns="http://www.w3.org/2000/svg"></svg>
-            <span class="inline-block ml-2 text-sm font-medium text-teal-900">
-                <?php
-                if (is_tax('product_cat')) {
-                    echo single_term_title('', false);
-                } else {
-                    echo 'Produkty';
-                }
-                ?>
-            </span>
-        </div>
+        <?php echo get_template_part('template-parts/breadcrumbs'); ?>
         <div class="border-t pt-4 xl:pt-16">
             <div class="flex flex-wrap items-center justify-between mb-20 -mx-4">
                 <div class="w-full sm:w-2/3 px-4 mb-10 sm:mb-0">

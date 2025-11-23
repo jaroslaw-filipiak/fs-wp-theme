@@ -233,12 +233,14 @@ add_action('woocommerce_before_single_product_summary', 'custom_show_product_ima
 // remove breadcrumbs WooCommerce
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 
-//add breadcrumbs with container class
-add_action( 'woocommerce_before_main_content', 'wrap_woocommerce_breadcrumb', 20 );
-function wrap_woocommerce_breadcrumb() {
-    if ( function_exists( 'woocommerce_breadcrumb' ) ) {
+//add RankMath breadcrumbs with container class
+add_action( 'woocommerce_before_main_content', 'wrap_rankmath_breadcrumb', 20 );
+function wrap_rankmath_breadcrumb() {
+    if ( function_exists( 'rank_math_the_breadcrumbs' ) ) {
         echo '<div class="container">';
-        woocommerce_breadcrumb();
+        echo '<div class="flex mb-4 items-center">';
+        rank_math_the_breadcrumbs();
+        echo '</div>';
         echo '</div>';
     }
 }
@@ -298,3 +300,166 @@ function fajnestarocie_individual_shipping_body_class( $classes ) {
     return $classes;
 }
 add_filter( 'body_class', 'fajnestarocie_individual_shipping_body_class' );
+
+/**
+ * Customize RankMath breadcrumbs to show specific product categories
+ */
+function fajnestarocie_customize_rankmath_breadcrumbs( $crumbs, $class ) {
+	// Only modify on single product pages
+	if ( ! is_product() ) {
+		return $crumbs;
+	}
+	
+	global $post;
+	$product_id = $post->ID;
+	
+	// Get product categories
+	$product_cats = get_the_terms( $product_id, 'product_cat' );
+	
+	if ( $product_cats && ! is_wp_error( $product_cats ) ) {
+		// Get existing breadcrumb names to avoid duplicates
+		$existing_names = array();
+		foreach ( $crumbs as $crumb ) {
+			$existing_names[] = strtolower( $crumb[0] );
+		}
+		
+		// Find the most specific category (child category, not parent)
+		$best_category = null;
+		$max_depth = -1;
+		
+		foreach ( $product_cats as $cat ) {
+			// Skip if this category is already in breadcrumbs
+			if ( in_array( strtolower( $cat->name ), $existing_names ) ) {
+				continue;
+			}
+			
+			// Count depth by checking parents
+			$depth = 0;
+			$current_cat = $cat;
+			while ( $current_cat->parent > 0 ) {
+				$depth++;
+				$current_cat = get_term( $current_cat->parent, 'product_cat' );
+				if ( is_wp_error( $current_cat ) ) break;
+			}
+			
+			// Choose category with maximum depth (most specific)
+			if ( $depth > $max_depth ) {
+				$max_depth = $depth;
+				$best_category = $cat;
+			}
+		}
+		
+		// If we found a specific category, add it
+		if ( $best_category ) {
+			$insert_position = count( $crumbs ) - 1; // Before last item (product name)
+			
+			$category_crumb = [
+				$best_category->name,
+				get_term_link( $best_category ),
+				'hide_in_schema' => false,
+			];
+			
+			array_splice( $crumbs, $insert_position, 0, [$category_crumb] );
+		}
+	}
+	
+	return $crumbs;
+}
+add_filter( 'rank_math/frontend/breadcrumb/items', 'fajnestarocie_customize_rankmath_breadcrumbs', 10, 2 );
+
+/**
+ * Add classification block to product summary for vinyl products with Schema markup
+ */
+function fajnestarocie_add_product_classification() {
+	// Only on single product pages
+	if ( ! is_product() ) {
+		return;
+	}
+	
+	global $product;
+	
+	// Check if product has 'winyle' category
+	$product_categories = wp_get_post_terms( $product->get_id(), 'product_cat', array( 'fields' => 'slugs' ) );
+	
+	if ( ! is_wp_error( $product_categories ) && in_array( 'winyle', $product_categories ) ) {
+		// Get classification field from ACF
+		$classification = get_field( 'classification', $product->get_id() );
+		
+		if ( $classification ) {
+			// Schema markup for vinyl classification
+			$schema_data = array(
+				'@context' => 'https://schema.org',
+				'@type' => 'MusicRecording',
+				'name' => $product->get_name(),
+				'url' => get_permalink( $product->get_id() ),
+				'genre' => $classification,
+				'recordingOf' => array(
+					'@type' => 'MusicComposition',
+					'name' => $product->get_name()
+				),
+				'additionalProperty' => array(
+					'@type' => 'PropertyValue',
+					'name' => 'Klasyfikacja winyla',
+					'value' => $classification,
+					'propertyID' => 'vinyl_classification'
+				)
+			);
+			
+			// Output HTML with microdata
+			echo '<div class="product-classification" itemscope itemtype="https://schema.org/MusicRecording">';
+			echo '<meta itemprop="name" content="' . esc_attr( $product->get_name() ) . '">';
+			echo '<meta itemprop="url" content="' . esc_url( get_permalink( $product->get_id() ) ) . '">';
+			echo '<meta itemprop="genre" content="' . esc_attr( $classification ) . '">';
+			
+			echo '<div class="classification-inline">';
+			echo '<span class="classification-label">Klasyfikacja płyty:</span>';
+			echo '<span class="classification-value" itemprop="genre">' . esc_html( $classification ) . '</span>';
+			echo '<a href="https://fajnestarocie.pl/klasyfikacja-winyli/" target="_blank" class="classification-help" title="Informacja o gatunku muzycznym płyty winylowej"><span class="text-xs">więcej informacji o klasyfikacji</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-external-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6" /><path d="M11 13l9 -9" /><path d="M15 4h5v5" /></svg> </a>';
+			echo '</div>';
+			echo '</div>';
+			
+			// Add JSON-LD schema
+			echo '<script type="application/ld+json">' . wp_json_encode( $schema_data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>';
+		}
+	}
+}
+// Hook after product meta (priority 45) but before sharing (priority 50)
+add_action( 'woocommerce_single_product_summary', 'fajnestarocie_add_product_classification', 45 );
+
+/**
+ * Add vinyl-specific schema to existing product schema
+ */
+function fajnestarocie_enhance_product_schema( $markup, $product ) {
+	// Only for vinyl products
+	$product_categories = wp_get_post_terms( $product->get_id(), 'product_cat', array( 'fields' => 'slugs' ) );
+	
+	if ( ! is_wp_error( $product_categories ) && in_array( 'winyle', $product_categories ) ) {
+		$classification = get_field( 'classification', $product->get_id() );
+		
+		if ( $classification ) {
+			// Keep @type as Product but add music properties
+			// WooCommerce doesn't handle array @type values properly
+			$markup['genre'] = $classification;
+			$markup['musicReleaseFormat'] = 'Vinyl';
+			
+			// Initialize additionalProperty if not exists
+			if ( ! isset( $markup['additionalProperty'] ) ) {
+				$markup['additionalProperty'] = array();
+			}
+			
+			$markup['additionalProperty'][] = array(
+				'@type' => 'PropertyValue',
+				'name' => 'Format',
+				'value' => 'Płyta winylowa'
+			);
+			$markup['additionalProperty'][] = array(
+				'@type' => 'PropertyValue', 
+				'name' => 'Klasyfikacja',
+				'value' => $classification
+			);
+		}
+	}
+	
+	return $markup;
+}
+add_filter( 'woocommerce_structured_data_product', 'fajnestarocie_enhance_product_schema', 10, 2 );

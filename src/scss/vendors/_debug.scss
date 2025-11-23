@@ -3,6 +3,6 @@ body {
   &::after {
     content: '';
     position: fixed;
-    @apply py-3 px-6 bg-black text-white flex items-center justify-center text-xs left-0 top-0 z-50 sm:content-['sm'] md:content-['md'] lg:content-['lg'] xl:content-['xl'] 2xl:content-['2xl'];
+    @apply py-3 px-6 bg-black text-white flex items-center justify-center text-xs right-0 bottom-0 z-50 sm:content-['sm'] md:content-['md'] lg:content-['lg'] xl:content-['xl'] 2xl:content-['2xl'];
   }
 }

@@ -5,7 +5,7 @@
 @import './scss/components/buttons';
 @import './scss/vendors/hamburgers/hamburgers.scss';
 
-// @import './scss/vendors/debug';
+@import './scss/vendors/debug';
 
 //woocommerce global
 .container-woocommerce-fajnestarocie {
@@ -98,6 +98,10 @@
       }
     }
   }
+}
+
+.hvr-underline {
+  @apply hover:underline underline-offset-8 transition-all duration-200;
 }
 
 // pagination
@@ -221,4 +225,34 @@ blockquote {
 // Hide Przelewy24 installments only for products with individual shipping
 .product-shipping-individual #p24_installments {
   display: none !important;
+}
+
+//rank math breadcrumbs
+.rank-math-breadcrumb {
+  a {
+    @apply hvr__item-dark inline-block text-teal-900 hover:text-teal-700 font-medium px-1 text-base;
+  }
+  span.last {
+    @apply pl-1 inline-block cursor-default selection:bg-transparent text-base;
+  }
+}
+
+// cleaning winyls banner
+.cleaning-winyls-banner {
+  @apply py-12 lg:py-24 lg:px-12 2xl:px-24 border border-dashed bg-[#D1D1D3] flex flex-col lg:flex-row items-center lg:gap-6;
+
+  .cleaing-winyls-content {
+    @apply text-center;
+    h4 {
+      @apply pb-2;
+    }
+
+    h5 {
+      @apply text-[#71717a];
+    }
+
+    h6 {
+      @apply py-4 max-w-[80%] mx-auto text-center;
+    }
+  }
 }

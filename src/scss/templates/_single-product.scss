@@ -6,6 +6,10 @@
   .product {
     @apply border-t pt-4 xl:pt-16 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-12 lg:gap-20;
 
+    .product_title {
+      @apply pt-4 lg:pt-0 !mb-0 lg:!mb-3;
+    }
+
     .single-product-gallery {
       @apply lg:col-span-8;
     }
@@ -14,7 +18,7 @@
     }
 
     &_title {
-      @apply text-3xl md:text-4xl xl:text-5xl xl:leading-relaxed font-heading mb-6;
+      @apply text-3xl md:text-4xl xl:text-5xl  font-heading mb-6;
     }
     &_meta {
       @apply hidden;
@@ -23,7 +27,7 @@
       @apply mt-6 text-lg;
     }
     .price {
-      @apply font-medium mb-4 text-2xl;
+      @apply font-medium !mt-0  mb-4 text-2xl;
     }
     form.cart {
       @apply flex items-stretch justify-start gap-4 -ml-[16px];
@@ -183,5 +187,29 @@
 
   .product {
     @apply flex flex-col items-center justify-center;
+  }
+}
+
+#primary.site-main {
+  // klasyfikacja winyli
+  .product-classification {
+    @apply pt-4;
+
+    .classification-inline {
+      @apply flex items-center gap-1 border-b border-gray-200 py-3;
+    }
+
+    .classification-label {
+      @apply text-base md:text-lg leading-relaxed;
+    }
+
+    .classification-help {
+      // @apply cursor-help text-gray-400 hover:text-gray-600 transition-colors duration-200 text-lg;
+      @apply text-xs pl-2 opacity-60 flex items-center gap-1 hover:underline underline-offset-2 hover:opacity-100 transition-all duration-200;
+
+      svg {
+        @apply w-4;
+      }
+    }
   }
 }
