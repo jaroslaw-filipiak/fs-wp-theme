@@ -20,12 +20,32 @@ export default defineConfig({
         search: resolve(__dirname, './src/search.js'),
         404: resolve(__dirname, './src/404.js'),
         contact: resolve(__dirname, './src/contact.js'),
-        // nested: resolve(__dirname, 'nested/index.html'),
+        // ACF Components - manually defined for now
+        'acf-image_left_content_right': resolve(
+          __dirname,
+          './src/js/components/acf/image_left_content_right.js'
+        ),
+        'acf-image_left_content_right-styles': resolve(
+          __dirname,
+          './src/scss/components/acf/image_left_content_right.scss'
+        ),
       },
       output: {
-        entryFileNames: 'assets/[name].js',
+        entryFileNames: (chunkInfo) => {
+          // Place ACF component files in acf subfolder
+          if (chunkInfo.name.startsWith('acf-')) {
+            return 'assets/acf/[name].js';
+          }
+          return 'assets/[name].js';
+        },
         chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name][extname]',
+        assetFileNames: (assetInfo) => {
+          // Place ACF component CSS in acf subfolder
+          if (assetInfo.name && assetInfo.name.startsWith('acf-')) {
+            return 'assets/acf/[name][extname]';
+          }
+          return 'assets/[name][extname]';
+        },
       },
     },
   },

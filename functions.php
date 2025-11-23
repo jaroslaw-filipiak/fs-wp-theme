@@ -243,6 +243,53 @@ if ( class_exists( 'WooCommerce' ) ) {
  */
 require get_template_directory() . '/inc/translations.php';
 
+/**
+ * Enqueue ACF component specific assets dynamically
+ * Only loads CSS/JS for components that are actually used on the page
+ */
+function fajnestarocie_enqueue_acf_assets( $layouts ) {
+    if( empty($layouts) || !is_array($layouts) ) {
+        return;
+    }
+    
+    $theme_uri = get_template_directory_uri();
+    $theme_path = get_template_directory();
+    
+    foreach( $layouts as $layout ) {
+        $handle = 'fajnestarocie-acf-' . $layout;
+        
+        // Check and enqueue CSS (styles file has different naming convention)
+        $css_file = '/dist/assets/acf/acf-' . $layout . '-styles.css';
+        if( file_exists($theme_path . $css_file) ) {
+            wp_enqueue_style( 
+                $handle . '-styles', 
+                $theme_uri . $css_file, 
+                array(), 
+                _S_VERSION 
+            );
+        }
+        
+        // Check and enqueue JS
+        $js_file = '/dist/assets/acf/acf-' . $layout . '.js';
+        if( file_exists($theme_path . $js_file) ) {
+            wp_enqueue_script( 
+                $handle . '-scripts', 
+                $theme_uri . $js_file, 
+                array(), 
+                _S_VERSION, 
+                true 
+            );
+        }
+        
+        // Debug info in development
+        if( defined('WP_DEBUG') && WP_DEBUG ) {
+            $css_exists = file_exists($theme_path . $css_file) ? '✓' : '✗';
+            $js_exists = file_exists($theme_path . $js_file) ? '✓' : '✗';
+            error_log("ACF Asset Check - Layout: {$layout}, CSS: {$css_exists}, JS: {$js_exists}");
+        }
+    }
+}
+
 
 function fajnestarocie_include_products_in_search( $query ) {
     if ( ! is_admin() && $query->is_main_query() && $query->is_search() ) {

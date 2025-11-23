@@ -1,0 +1,13 @@
+/**
+ * ACF Component: Image Left Content Right
+ * Specific styles for the image_left_content_right flexible content layout
+ */
+
+.acf-image-left-content-right {
+  @apply flex flex-col xl:flex-row gap-4 lg:gap-10 items-start;
+
+  .image-container,
+  .content-container {
+    @apply w-full lg:w-1/2;
+  }
+}

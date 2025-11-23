@@ -5,7 +5,7 @@
 @import './scss/components/buttons';
 @import './scss/vendors/hamburgers/hamburgers.scss';
 
-@import './scss/vendors/debug';
+// @import './scss/vendors/debug';
 
 //woocommerce global
 .container-woocommerce-fajnestarocie {
@@ -140,7 +140,8 @@ form.wpcf7-form {
   @apply bg-stone-200;
 }
 
-#primary.site-main {
+#primary.site-main,
+#acf-flexible-content {
   .entry-title {
     @apply font-heading text-3xl lg:text-4xl xl:text-5xl mb-6  xl:leading-relaxed;
   }

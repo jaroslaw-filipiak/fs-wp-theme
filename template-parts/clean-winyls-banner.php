@@ -8,7 +8,8 @@
                 płyt winylowych</h4>
             <h5>Już od 10zł / płyta</h5>
             <h6>Z wykorzystaniem specjalistycznego, w pełni profesjonalnego sprzętu</h6>
-            <a href="#" class="btn-main" target="_blank">Dowiedz się więcej</a>
+            <a href="<?php echo home_url('mycie-plyt-winylowych'); ?>" class="btn-main" target="_blank">Dowiedz się
+                więcej</a>
         </div>
     </div>
 </section>
