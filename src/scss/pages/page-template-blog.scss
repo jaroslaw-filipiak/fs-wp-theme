@@ -1,0 +1,7 @@
+.page-template-page-blog {
+  article.blog-card {
+    img {
+      @apply aspect-video object-cover;
+    }
+  }
+}

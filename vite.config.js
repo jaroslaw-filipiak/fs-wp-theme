@@ -16,6 +16,10 @@ export default defineConfig({
         'single-product': resolve(__dirname, './src/single-product.js'),
         'front-page': resolve(__dirname, './src/front-page.js'),
         'archive-product': resolve(__dirname, './src/archive-product.js'),
+        'page-template-blog-styles': resolve(
+          __dirname,
+          './src/scss/pages/page-template-blog.scss'
+        ),
         cart: resolve(__dirname, './src/cart.js'),
         search: resolve(__dirname, './src/search.js'),
         404: resolve(__dirname, './src/404.js'),

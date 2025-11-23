@@ -4,4 +4,8 @@
 
 .btn-main {
   @include btn-main;
+
+  &--small {
+    @apply inline-flex  items-center justify-center text-sm font-medium text-white  transition duration-200 bg-zinc-500 hover:bg-zinc-800 cursor-pointer;
+  }
 }

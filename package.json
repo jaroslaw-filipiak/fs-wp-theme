@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:watch": "vite build --watch"
+    "build:watch": "vite build --watch",
+    "zip-theme": "node scripts/zip-theme.js"
   },
   "devDependencies": {
+    "archiver": "^7.0.1",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
     "sass": "^1.69.7",

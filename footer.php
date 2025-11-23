@@ -86,6 +86,9 @@
                             <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
                                     href="<?php echo home_url('/kontakt'); ?>">Kontakt</a></li>
 
+                            <li><a class="hvr__item-dark inline-block  text-teal-900 hover:text-teal-700 font-medium"
+                                    href="<?php echo home_url('/blog'); ?>">Blog</a></li>
+
                             <!-- separator -->
                             <div class="border-t border-zinc-800 max-w-[200px] w-full"></div>
 

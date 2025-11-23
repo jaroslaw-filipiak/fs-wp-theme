@@ -105,6 +105,10 @@
                                 href="<?php echo home_url('/kontakt'); ?>"><?php pll_e('Kontakt') ?></a></li>
                         <?php endif; ?>
 
+                        <li class="mr-8"><a
+                                class=" hvr__item-dark inline-block text-teal-900 hover:text-teal-700 font-medium"
+                                href="<?php echo home_url('/blog'); ?>">Blog</a></li>
+
                         <li class="mr-8  border-l pl-8">
                             <div
                                 class="hvr__item-dark cursor-pointer flex items-center gap-2 selection:bg-transparent search-trigger">

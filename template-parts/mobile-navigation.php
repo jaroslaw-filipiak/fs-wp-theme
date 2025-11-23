@@ -23,6 +23,8 @@
                 <li><a class=" hvr__item-dark inline-block text-teal-900 hover:text-teal-700 font-medium text-center"
                         href="<?php echo home_url('/kontakt'); ?>"><?php pll_e('Kontakt') ?></a></li>
                 <?php endif; ?>
+                <li><a class=" hvr__item-dark inline-block text-teal-900 hover:text-teal-700 font-medium text-center"
+                        href="<?php echo home_url('/blog'); ?>">Blog</a></li>
             </ul>
 
         </nav>

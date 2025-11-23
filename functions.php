@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '2.1.0' );
+	define( '_S_VERSION', '2.1.1' );
 }
 
 /**
@@ -195,6 +195,11 @@ function fajnestarocie_scripts() {
 	if ( is_page_template( 'page-templates/page-contact.php' ) ) {
 		wp_enqueue_style( 'fajnestarocie-contact-styles', get_template_directory_uri() . '/dist/assets/contact.css', array(), _S_VERSION, false );
 		wp_enqueue_script( 'fajnestarocie-contact-scripts', get_template_directory_uri() . '/dist/assets/contact.js', array(), _S_VERSION, false );
+	}
+
+	// page template blog
+	if ( is_page_template( 'page-templates/page-blog.php' ) ) {
+		wp_enqueue_style( 'fajnestarocie-blog-styles', get_template_directory_uri() . '/dist/assets/page-template-blog-styles.css', array(), _S_VERSION, false );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'fajnestarocie_scripts' );
