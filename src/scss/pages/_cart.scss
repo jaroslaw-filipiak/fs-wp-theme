@@ -1,3 +1,5 @@
+@use '../components/buttons' as btn;
+
 body.woocommerce-cart {
   // cross sell w koszyku
   .wp-block-woocommerce-cart-cross-sells-block {
@@ -20,4 +22,27 @@ body.woocommerce-cart {
   .wc-block-components-totals-item {
     @apply flex items-center justify-around gap-x-6 gap-y-1;
   }
+}
+
+// kupony
+#wc-block-components-totals-coupon__form button {
+  @apply h-12 inline-flex w-full mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 cursor-pointer;
+}
+
+#wc-block-components-totals-coupon__form input {
+  @apply border-none;
+}
+
+#validate-error-coupon {
+  svg {
+    @apply hidden;
+  }
+}
+
+li.wc-block-components-totals-discount__coupon-list-item.is-removable.wc-block-components-chip.wc-block-components-chip--radius-large {
+  @apply bg-zinc-500 text-white border-zinc-500;
+}
+
+.wc-block-components-totals-discount .wc-block-components-totals-item__value {
+  @apply text-black;
 }
