@@ -282,3 +282,4 @@ setupScrollAnimations() {
 3. **Storybook** dla documentation
 4. **Unit tests** dla komponentów
 5. **Performance monitoring** w production
+

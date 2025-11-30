@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '2.1.1' );
+	define( '_S_VERSION', '2.1.4' );
 }
 
 /**
@@ -186,7 +186,7 @@ function fajnestarocie_scripts() {
     }
 
 	// product archive page styles / scripts
-	if ( is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) ) {
+	if ( is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) || is_tax( 'winyle' ) || is_tax( 'product_cat' ) ) {
 		wp_enqueue_style( 'fajnestarocie-archive-product-styles', get_template_directory_uri() . '/dist/assets/archive-product.css', array(), _S_VERSION, false );
 		wp_enqueue_script( 'fajnestarocie-archive-product-scripts', get_template_directory_uri() . '/dist/assets/archive-product.js', array(), _S_VERSION, false );
 	}
@@ -428,11 +428,13 @@ add_action( 'init', 'fajnestarocie_setup_fulltext_indexes' );
 add_filter( 'the_posts', 'fajnestarocie_optimized_product_search', 10, 2 );
 
 /**
- * Set products per page for shop archive
+ * Set products per page for shop archive and alphabetical sorting
  */
 function fajnestarocie_products_per_page( $query ) {
 	if ( ! is_admin() && $query->is_main_query() && ( is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) ) ) {
 		$query->set( 'posts_per_page', 40 );
+		$query->set( 'orderby', 'title' );
+		$query->set( 'order', 'ASC' );
 	}
 }
 add_action( 'pre_get_posts', 'fajnestarocie_products_per_page' );
@@ -472,6 +474,8 @@ function fajnestarocie_get_products_ajax( $request ) {
 		'posts_per_page' => 40,
 		'paged'          => $page,
 		'post_status'    => 'publish',
+		'orderby'        => 'title',
+		'order'          => 'ASC',
 	);
 
 	// Dodaj filtr kategorii jeśli jest podany

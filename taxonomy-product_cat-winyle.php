@@ -1,14 +1,30 @@
-<?php get_header(); ?>
+<?php 
+
+get_header();
+
+?>
+
+<!-- kategoria winyle -->
 
 <section class="py-12 lg:py-24 overflow-hidden bg-stone-200">
     <div class="container mx-auto px-4">
         <?php echo get_template_part('template-parts/breadcrumbs'); ?>
         <div class="border-t pt-4 xl:pt-16">
-            <div class="flex flex-wrap items-center justify-between mb-20 -mx-4">
+            <div class="flex flex-wrap items-center justify-between mb-12 -mx-4">
                 <div class="w-full sm:w-2/3 px-4 mb-10 sm:mb-0">
                     <div class="sm:max-w-lg xl:max-w-none">
                         <h1 class="font-heading text-4xl xs:text-6xl"><?php woocommerce_page_title(); ?></h1>
                     </div>
+                </div>
+            </div>
+
+            <!-- banners  -->
+            <div class="flex flex-col lg:flex-row items-stretch justify-stretch gap-4 mb-4 xl:mb-16">
+                <div class="w-full lg:w-6/12 xl:w-8/12 min-h-full">
+                    <?php echo get_template_part('template-parts/clean-winyls-banner-small'); ?>
+                </div>
+                <div class="w-full lg:w-6/12 xl:w-4/12 min-h-full">
+                    <?php echo get_template_part('template-parts/winyls-classification-banner'); ?>
                 </div>
             </div>
 
@@ -124,5 +140,4 @@
         </div>
     </div>
 </section>
-
 <?php get_footer(); ?>

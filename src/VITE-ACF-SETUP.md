@@ -198,3 +198,4 @@ console.log('ACF Component loaded:', componentName, performance.now());
 **System jest gotowy do produkcji!** 🚀
 
 Każdy nowy komponent będzie automatycznie ładowany tylko wtedy, gdy jest używany na stronie, co zapewnia optymalną wydajność.
+

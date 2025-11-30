@@ -257,3 +257,38 @@ blockquote {
     }
   }
 }
+
+// TODO: te cssy wydzielić do osobnego chunka
+.cleaning-winyls-banner--small {
+  @apply py-12 bg-[#D1D1D3] flex flex-col 2xl:flex-row items-center lg:gap-6;
+
+  .cleaing-winyls-content {
+    @apply text-center;
+    h4 {
+      @apply pb-2;
+    }
+
+    h5 {
+      @apply text-[#71717a];
+    }
+
+    h6 {
+      @apply py-4 max-w-[80%] mx-auto text-center;
+    }
+  }
+}
+
+.winyls-classification-banner {
+  @apply py-12 bg-[#D1D1D3] flex flex-col lg:flex-row items-center lg:gap-6 min-h-full;
+
+  .winyls-classification-content {
+    @apply text-center w-full;
+    h4 {
+      @apply pb-2;
+    }
+
+    h5 {
+      @apply pb-4 max-w-[80%] mx-auto text-center;
+    }
+  }
+}
