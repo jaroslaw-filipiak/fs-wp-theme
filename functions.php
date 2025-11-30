@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '2.1.4' );
+	define( '_S_VERSION', '2.2.0' );
 }
 
 /**
@@ -241,7 +241,90 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  */
 if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
+	require get_template_directory() . '/inc/vinyl-cleaning-addon.php';
 }
+
+/**
+ * Add additional WooCommerce-specific body classes for better styling control
+ */
+function fajnestarocie_woocommerce_body_classes( $classes ) {
+	// Add class for WooCommerce pages
+	if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
+		$classes[] = 'is-woocommerce-page';
+	}
+
+	// Product category pages
+	if ( is_tax( 'product_cat' ) ) {
+		$classes[] = 'is-product-category';
+		
+		$current_category = get_queried_object();
+		if ( $current_category ) {
+			// Add category slug as class
+			$classes[] = 'product-cat-' . $current_category->slug;
+			
+			// Special handling for vinyl category
+			if ( $current_category->slug === 'winyle' ) {
+				$classes[] = 'is-vinyl-category';
+			}
+			
+			// Add parent category info
+			if ( $current_category->parent > 0 ) {
+				$classes[] = 'has-parent-category';
+				$parent_category = get_term( $current_category->parent, 'product_cat' );
+				if ( $parent_category && ! is_wp_error( $parent_category ) ) {
+					$classes[] = 'parent-cat-' . $parent_category->slug;
+				}
+			} else {
+				$classes[] = 'is-top-level-category';
+			}
+		}
+	}
+
+	// Product archive page
+	if ( is_post_type_archive( 'product' ) ) {
+		$classes[] = 'is-product-archive';
+	}
+
+	// Single product page
+	if ( is_singular( 'product' ) ) {
+		$classes[] = 'is-single-product';
+		
+		global $product;
+		if ( $product ) {
+			// Add product categories as classes
+			$product_cats = get_the_terms( $product->get_id(), 'product_cat' );
+			if ( $product_cats && ! is_wp_error( $product_cats ) ) {
+				foreach ( $product_cats as $cat ) {
+					$classes[] = 'has-product-cat-' . $cat->slug;
+				}
+				
+				// Special vinyl handling
+				$cat_slugs = wp_list_pluck( $product_cats, 'slug' );
+				if ( in_array( 'winyle', $cat_slugs ) ) {
+					$classes[] = 'is-vinyl-product';
+				}
+			}
+		}
+	}
+
+	// Cart page
+	if ( is_cart() ) {
+		$classes[] = 'is-cart-page';
+	}
+
+	// Checkout page
+	if ( is_checkout() ) {
+		$classes[] = 'is-checkout-page';
+	}
+
+	// Account pages
+	if ( is_account_page() ) {
+		$classes[] = 'is-account-page';
+	}
+
+	return $classes;
+}
+add_filter( 'body_class', 'fajnestarocie_woocommerce_body_classes' );
 
 /**
  * Load translations

@@ -211,4 +211,42 @@
       }
     }
   }
+
+  // vinyls
+
+  // Vinyl cleaning addon
+}
+
+//vinyl
+
+.is-vinyl-product {
+  form.cart {
+    @apply flex flex-col items-start justify-start gap-1;
+
+    input.qty {
+      @apply hidden py-4 px-6 placeholder-gray-700 outline-none ring-offset-0 focus:ring-2 shadow min-h-[61px] w-20 border-white;
+    }
+  }
+
+  .vinyl-cleaning-addon {
+    @apply mt-5 mb-0 p-4 bg-stone-100 rounded text-base md:text-lg;
+
+    &__label {
+      @apply flex items-center cursor-pointer mb-2;
+    }
+
+    &__checkbox {
+      @apply mr-3 w-5 h-5 cursor-pointer accent-gray-600;
+    }
+
+    &__description {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      @apply opacity-60;
+    }
+
+    &__price {
+      @apply text-gray-600;
+    }
+  }
 }
