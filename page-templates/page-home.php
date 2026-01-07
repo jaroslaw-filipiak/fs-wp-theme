@@ -50,7 +50,14 @@ Template Name: Home
                         'posts_per_page' => 40,
                         'orderby' => 'date',
                         'order' => 'DESC',
-                        'post__in' => $product_ids
+                        'post__in' => $product_ids,
+                        'meta_query' => array(
+                            array(
+                                'key'     => '_stock_status',
+                                'value'   => 'outofstock',
+                                'compare' => '!='
+                            )
+                        )
                     );
                 
                   $latest_products = new WP_Query($args);

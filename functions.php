@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '2.2.0' );
+	define( '_S_VERSION', '2.2.3' );
 }
 
 /**
@@ -453,6 +453,15 @@ function fajnestarocie_optimized_product_search( $posts, $query ) {
             WHERE p.post_type IN ('post', 'page', 'product')
             AND p.post_status = 'publish'
             AND (
+                p.post_type != 'product'
+                OR NOT EXISTS (
+                    SELECT 1 FROM {$wpdb->postmeta} pm_stock
+                    WHERE pm_stock.post_id = p.ID
+                    AND pm_stock.meta_key = '_stock_status'
+                    AND pm_stock.meta_value = 'outofstock'
+                )
+            )
+            AND (
                 MATCH(p.post_title, p.post_content, p.post_excerpt) AGAINST(%s IN NATURAL LANGUAGE MODE)
                 OR p.post_title LIKE %s
                 OR EXISTS (
@@ -472,6 +481,15 @@ function fajnestarocie_optimized_product_search( $posts, $query ) {
             FROM {$wpdb->posts} p
             WHERE p.post_type IN ('post', 'page', 'product')
             AND p.post_status = 'publish'
+            AND (
+                p.post_type != 'product'
+                OR NOT EXISTS (
+                    SELECT 1 FROM {$wpdb->postmeta} pm_stock
+                    WHERE pm_stock.post_id = p.ID
+                    AND pm_stock.meta_key = '_stock_status'
+                    AND pm_stock.meta_value = 'outofstock'
+                )
+            )
             AND (
                 p.post_title LIKE %s
                 OR p.post_content LIKE %s  
@@ -512,12 +530,27 @@ add_filter( 'the_posts', 'fajnestarocie_optimized_product_search', 10, 2 );
 
 /**
  * Set products per page for shop archive and alphabetical sorting
+ * Also hide out of stock products from catalog
  */
 function fajnestarocie_products_per_page( $query ) {
 	if ( ! is_admin() && $query->is_main_query() && ( is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) ) ) {
 		$query->set( 'posts_per_page', 40 );
 		$query->set( 'orderby', 'title' );
 		$query->set( 'order', 'ASC' );
+		
+		// Hide out of stock products from catalog
+		$meta_query = $query->get( 'meta_query' );
+		if ( ! is_array( $meta_query ) ) {
+			$meta_query = array();
+		}
+		
+		$meta_query[] = array(
+			'key'     => '_stock_status',
+			'value'   => 'outofstock',
+			'compare' => '!='
+		);
+		
+		$query->set( 'meta_query', $meta_query );
 	}
 }
 add_action( 'pre_get_posts', 'fajnestarocie_products_per_page' );
@@ -559,6 +592,13 @@ function fajnestarocie_get_products_ajax( $request ) {
 		'post_status'    => 'publish',
 		'orderby'        => 'title',
 		'order'          => 'ASC',
+		'meta_query'     => array(
+			array(
+				'key'     => '_stock_status',
+				'value'   => 'outofstock',
+				'compare' => '!='
+			)
+		),
 	);
 
 	// Dodaj filtr kategorii jeśli jest podany

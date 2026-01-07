@@ -82,6 +82,81 @@
   @apply text-center pt-3;
 }
 
+// Social Share Buttons
+.social-share {
+  &__buttons {
+    @apply flex flex-wrap gap-2;
+  }
+
+  &__btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-sm transition-all duration-200 cursor-pointer;
+    background-color: #71717a;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    span {
+      @apply hidden sm:inline;
+    }
+
+    // Platform-specific colors
+    &--facebook {
+      background-color: #1877f2;
+
+      &:hover {
+        background-color: #0d65d9;
+      }
+    }
+
+    &--messenger {
+      background-color: #00b2ff;
+
+      &:hover {
+        background-color: #0099e6;
+      }
+    }
+
+    &--twitter {
+      background-color: #000000;
+
+      &:hover {
+        background-color: #333333;
+      }
+    }
+
+    &--email {
+      background-color: #ea4335;
+
+      &:hover {
+        background-color: #d33426;
+      }
+    }
+
+    &--copy {
+      background-color: #52525b;
+      border: none;
+
+      &:hover {
+        background-color: #3f3f46;
+      }
+
+      &.copied {
+        background-color: #16a34a;
+      }
+    }
+  }
+}
+
 // global hover
 .hvr {
   &__item-dark {
