@@ -25,6 +25,10 @@ export default function handleSocialShare() {
           shareUrl = `https://www.facebook.com/dialog/send?link=${pageUrl}&app_id=291494419107518&redirect_uri=${pageUrl}`;
           break;
 
+        case 'whatsapp':
+          shareUrl = `https://wa.me/?text=${pageTitle}%20${pageUrl}`;
+          break;
+
         case 'twitter':
           shareUrl = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
           break;

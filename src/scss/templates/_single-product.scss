@@ -36,6 +36,15 @@
         @apply hidden py-4 px-6 placeholder-gray-700 outline-none ring-offset-0 focus:ring-2 shadow min-h-[61px] w-20 border-white;
       }
     }
+
+    .product-share-link {
+      @apply h-12 flex items-center justify-center gap-2 font-medium bg-transparent text-zinc-600 px-5 py-1;
+      @apply self-stretch underline underline-offset-4;
+
+      &__icon {
+        @apply flex-shrink-0;
+      }
+    }
   }
 
   &-gallery {
