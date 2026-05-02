@@ -232,11 +232,32 @@
 
 
         <div>
-            <p class=" text-gray-500 mb-3 text-sm max-w-186">Fajne Starocie - sklep z antykami / starociami europejskimi
-                i
-                przedmiotami vintage. Lampy secesyjne, porcelana angielska, meble antyczne oraz dekoracje retro z
-                dostawą w całej Polsce. Specjalizujemy się w antykach francuskich i lampach vintage dla miłośników stylu
-                vintage i wnętrz z charakterem.</p>
+            <p class="text-gray-500 mb-3 text-sm max-w-186">Fajne Starocie – internetowy sklep z antykami i starociami europejskimi. Oferujemy figurki szklane, szklane figurki Murano, żelazka na węgiel, stare wagi szalkowe i laboratoryjne, brytfanny żeliwne, krajalnice retro, lampy naftowe z palnikiem Kosmos Brenner, kieliszki ze szkła uranowego, stare narzędzia stolarskie i zegarmistrzowskie oraz inne unikalne przedmioty vintage i retro. Dostawa w całej Polsce.</p>
+            <div class="flex flex-wrap gap-2 mb-4 max-w-186">
+                <?php
+                $footer_tags = [
+                    'Figurki szklane'           => 'figurki szklane',
+                    'Żelazko na węgiel'         => 'żelazko na węgiel',
+                    'Waga szalkowa'             => 'waga szalkowa',
+                    'Brytfanna żeliwna'         => 'brytfanna żeliwna',
+                    'Krajalnica retro'          => 'krajalnica retro',
+                    'Lampa naftowa'             => 'lampa naftowa',
+                    'Kieliszki uranowe'         => 'kieliszki uranowe',
+                    'Stare narzędzia'           => 'stare narzędzia',
+                    'Szklana figurka Murano'    => 'szklana figurka',
+                    'Stary grzejnik żeliwny'    => 'stary grzejnik żeliwny',
+                    'Wagi zabytkowe'            => 'stare wagi',
+                    'Gęsiarka żeliwna'          => 'gęsiarka żeliwna',
+                ];
+                foreach ($footer_tags as $label => $query) :
+                    $url = home_url('/?s=' . urlencode($query) . '&post_type=product');
+                ?>
+                <a href="<?php echo esc_url($url); ?>"
+                   class="inline-block px-2.5 py-1 text-xs text-gray-500 border border-gray-300 hover:border-teal-700 hover:text-teal-700 transition-colors duration-200">
+                    <?php echo esc_html($label); ?>
+                </a>
+                <?php endforeach; ?>
+            </div>
         </div>
 
         <div class="max-w-186 border-t border-black border-opacity-20 mb-3"></div>

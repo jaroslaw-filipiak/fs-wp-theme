@@ -14,9 +14,9 @@ Template Name: Home
 
     <?php
 
-        $heading = get_field('heading');
-        $subheading = get_field('subheading');
-    
+    $heading = get_field('heading');
+    $subheading = get_field('subheading');
+
     ?>
 
     <div class="container mx-auto px-4">
@@ -43,44 +43,44 @@ Template Name: Home
         <div class="swiper-wrapper">
             <?php
 
-                    $product_ids = get_field('products');
+            $product_ids = get_field('products');
 
-                    $args = array(
-                        'post_type' => 'product',
-                        'posts_per_page' => 40,
-                        'orderby' => 'date',
-                        'order' => 'DESC',
-                        'post__in' => $product_ids,
-                        'meta_query' => array(
-                            array(
-                                'key'     => '_stock_status',
-                                'value'   => 'outofstock',
-                                'compare' => '!='
-                            )
-                        )
-                    );
-                
-                  $latest_products = new WP_Query($args);
-                
-                if($latest_products->have_posts()) :
-                    while($latest_products->have_posts()) : $latest_products->the_post();
-                        $product = wc_get_product(get_the_ID());
-                        $image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
-                ?>
-            <div class="swiper-slide px-2 sm:px-4 group ">
-                <a class="block relative" href="<?php the_permalink(); ?>">
-                    <img src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>">
-                    <div
-                        class="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center lg:items-end justify-center lg:pb-24 px-12 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <h3 class="text-white text-xl sm:text-2xl font-bold"><?php the_title(); ?></h3>
+            $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => 40,
+                'orderby' => 'date',
+                'order' => 'DESC',
+                'post__in' => $product_ids,
+                'meta_query' => array(
+                    array(
+                        'key'     => '_stock_status',
+                        'value'   => 'outofstock',
+                        'compare' => '!='
+                    )
+                )
+            );
+
+            $latest_products = new WP_Query($args);
+
+            if ($latest_products->have_posts()) :
+                while ($latest_products->have_posts()) : $latest_products->the_post();
+                    $product = wc_get_product(get_the_ID());
+                    $image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full');
+            ?>
+                    <div class="swiper-slide px-2 sm:px-4 group ">
+                        <a class="block relative" href="<?php the_permalink(); ?>">
+                            <img src="<?php echo $image[0]; ?>" alt="<?php the_title(); ?>">
+                            <div
+                                class="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center lg:items-end justify-center lg:pb-24 px-12 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                <h3 class="text-white text-xl sm:text-2xl font-bold"><?php the_title(); ?></h3>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
             <?php
-                    endwhile;
-                    wp_reset_postdata();
-                endif;
-                ?>
+                endwhile;
+                wp_reset_postdata();
+            endif;
+            ?>
         </div>
 
 
@@ -124,9 +124,9 @@ Template Name: Home
 
     <?php
 
-        $categories_group = get_field('categories_group');
-        $categories_heading = $categories_group['categories_heading'];
-        $categories_subheading = $categories_group['categories_subheading'];
+    $categories_group = get_field('categories_group');
+    $categories_heading = $categories_group['categories_heading'];
+    $categories_subheading = $categories_group['categories_subheading'];
 
     ?>
 
@@ -146,10 +146,10 @@ Template Name: Home
                 'orderby'      => 'name',
                 'hide_empty'   => true,
                 'parent'       => 0,
-                'exclude'      => array(get_option('default_product_cat'))  
+                'exclude'      => array(get_option('default_product_cat'))
             );
             $product_categories = get_terms($args);
-            
+
             if (!empty($product_categories)) :
                 foreach ($product_categories as $category) :
                     $thumbnail_id = get_term_meta($category->term_id, 'thumbnail_id', true);
@@ -157,18 +157,18 @@ Template Name: Home
                     if (!$image) {
                         $image = wc_placeholder_img_src();
                     }
-                ?>
-            <div class="group">
-                <div
-                    class="group-hover:bg-zinc-800 py-6 px-8 md:py-10 md:px-12 transition-background-color duration-300 ">
-                    <a href="<?php echo get_term_link($category); ?>">
-                        <p class="text-xl md:text-2xl lg:text-3xl mt-4 text-center font-medium group-hover:text-white">
-                            <?php echo $category->name; ?></p>
-                        <p class="text-center text-gray-600 group-hover:text-white">
-                            Ilość produktów: <?php echo $category->count; ?></p>
-                    </a>
-                </div>
-            </div>
+            ?>
+                    <div class="group">
+                        <div
+                            class="group-hover:bg-zinc-800 py-6 px-8 md:py-10 md:px-12 transition-background-color duration-300 ">
+                            <a href="<?php echo get_term_link($category); ?>">
+                                <p class="text-xl md:text-2xl lg:text-3xl mt-4 text-center font-medium group-hover:text-white">
+                                    <?php echo $category->name; ?></p>
+                                <p class="text-center text-gray-600 group-hover:text-white">
+                                    Ilość produktów: <?php echo $category->count; ?></p>
+                            </a>
+                        </div>
+                    </div>
             <?php
                 endforeach;
             endif;
@@ -177,16 +177,114 @@ Template Name: Home
     </div>
 </section>
 
+<section class="py-12 lg:py-20 bg-white">
+    <div class="container mx-auto px-4">
+
+        <div class="flex mb-4 items-center">
+            <svg width="8" height="8" viewbox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="4" cy="4" r="4" fill="#022C22"></circle>
+            </svg>
+            <span class="inline-block ml-2 text-sm font-medium text-teal-900">Popularne wyszukiwania</span>
+        </div>
+
+        <div class="border-t border-zinc-200 pt-10">
+            <h2 class="font-heading text-3xl md:text-5xl mb-4">Czego szukają nasi klienci?</h2>
+            <p class="text-gray-600 mb-10 text-lg max-w-2xl">Przeglądaj unikalne starocie i antyki, które inni kolekcjonerzy i pasjonaci najczęściej szukają w naszym sklepie.</p>
+
+            <?php
+            $search_groups = [
+                [
+                    'heading' => 'Szkło artystyczne',
+                    'items'   => [
+                        'Figurki szklane',
+                        'Szklana figurka Murano',
+                        'Szklany kogut',
+                        'Szklana dynia',
+                        'Kieliszki ze szkła uranowego',
+                        'Kieliszki uranowe',
+                        'Northwood Glass',
+                    ],
+                ],
+                [
+                    'heading' => 'Żelastwo i kuchnia',
+                    'items'   => [
+                        'Żelazko na węgiel',
+                        'Stare żelazka na węgiel',
+                        'Brytfanna żeliwna',
+                        'Gęsiarka żeliwna',
+                        'Stary grzejnik żeliwny',
+                        'Dzbanek WMF',
+                    ],
+                ],
+                [
+                    'heading' => 'Wagi zabytkowe',
+                    'items'   => [
+                        'Waga szalkowa laboratoryjna',
+                        'Stare wagi kuchenne',
+                        'Waga retro',
+                        'Waga belkowa',
+                        'Waga apteczna',
+                        'Stara waga jubilerska',
+                    ],
+                ],
+                [
+                    'heading' => 'Narzędzia i sprzęt',
+                    'items'   => [
+                        'Stare narzędzia stolarskie',
+                        'Stare narzędzia warsztatowe',
+                        'Krajalnica retro',
+                        'Krajalnica Raadvad',
+                        'Stare narzędzia zegarmistrzowskie',
+                        'Zawiasy do stodoły',
+                    ],
+                ],
+                [
+                    'heading' => 'Oświetlenie i dekoracje',
+                    'items'   => [
+                        'Lampa naftowa',
+                        'Kosmos Brenner',
+                        'Świeczniki kryształowe',
+                        'Dzwon okrętowy',
+                    ],
+                ],
+            ];
+            ?>
+
+            <div class="space-y-8">
+                <?php foreach ($search_groups as $group) : ?>
+                    <div>
+                        <p class="text-xs uppercase tracking-widest text-gray-400 font-medium mb-3"><?php echo esc_html($group['heading']); ?></p>
+                        <div class="flex flex-wrap gap-2">
+                            <?php foreach ($group['items'] as $label) :
+                                $url = home_url('/?s=' . urlencode(strtolower($label)) . '&post_type=product');
+                            ?>
+                                <a href="<?php echo esc_url($url); ?>"
+                                    class="inline-flex items-center gap-1.5 px-4 py-2 bg-stone-100 hover:bg-zinc-800 hover:text-white text-gray-700 text-sm font-medium border border-stone-300 hover:border-zinc-800 transition-colors duration-200">
+                                    <svg class="w-3 h-3 opacity-50 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                    <?php echo esc_html($label); ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <section class="p-4 bg-stone-100">
 
-    <?php 
+    <?php
 
     $about_us_heading = get_field('about_us_heading');
     $about_us_subheading = get_field('about_us_subheading');
 
     ?>
 
-    <div class="py-16 px-4 sm:px-8 rounded-3xl bg-stone-300 relative -top-12 lg:-top-34">
+    <div class="py-16 px-4 lg:px-10 sm:px-8 rounded-3xl ">
         <div class="container mx-auto px-4">
             <div class="flex mb-4 items-center">
                 <svg width="8" height="8" viewbox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -272,59 +370,59 @@ Template Name: Home
                         );
                         $reviews = new WP_Query($args);
 
-                        if($reviews->have_posts()) :
-                            while($reviews->have_posts()) : $reviews->the_post();
-                               
+                        if ($reviews->have_posts()) :
+                            while ($reviews->have_posts()) : $reviews->the_post();
+
                                 $reviewtags = get_field('reviewtags');
                                 $reviewuserlogin = get_field('reviewuserlogin');
                                 $reviewItem = get_field('reviewItem');
                                 $rating = get_field('rating');
                         ?>
-                        <!-- item -->
-                        <div class="swiper-slide flex-shrink-0 w-full sm:w-100 xl:w-1/3 px-4">
-                            <div class="flex flex-col h-full p-10 bg-stone-100">
+                                <!-- item -->
+                                <div class="swiper-slide flex-shrink-0 w-full sm:w-100 xl:w-1/3 px-4">
+                                    <div class="flex flex-col h-full p-10 bg-stone-100">
 
-                                <?php if($rating) : ?>
-                                <div class="flex items-center mb-4">
-                                    <?php for($i = 1; $i <= 5; $i++) : ?>
-                                    <?php if($i <= $rating) : ?>
-                                    <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                                        <path
-                                            d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                                    </svg>
-                                    <?php else : ?>
-                                    <svg class="w-5 h-5 text-gray-300 fill-current" viewBox="0 0 20 20">
-                                        <path
-                                            d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                                    </svg>
-                                    <?php endif; ?>
-                                    <?php endfor; ?>
-                                </div>
-                                <?php endif; ?>
-
-
-                                <p class="text-2xl font-medium mb-10">
-                                    "<?php echo esc_html($reviewtags); ?>"</p>
+                                        <?php if ($rating) : ?>
+                                            <div class="flex items-center mb-4">
+                                                <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                                    <?php if ($i <= $rating) : ?>
+                                                        <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                                                            <path
+                                                                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                                        </svg>
+                                                    <?php else : ?>
+                                                        <svg class="w-5 h-5 text-gray-300 fill-current" viewBox="0 0 20 20">
+                                                            <path
+                                                                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                                                        </svg>
+                                                    <?php endif; ?>
+                                                <?php endfor; ?>
+                                            </div>
+                                        <?php endif; ?>
 
 
-                                <div class="mt-auto flex items-center">
-                                    <div>
-                                        <span class="block text-xl font-medium">
-                                            <?php echo esc_html($reviewuserlogin); ?>, Olx
-                                        </span>
-                                        <span class="block text-lg">
-                                            Dot. <?php echo esc_html($reviewItem); ?>
-                                        </span>
+                                        <p class="text-2xl font-medium mb-10">
+                                            "<?php echo esc_html($reviewtags); ?>"</p>
+
+
+                                        <div class="mt-auto flex items-center">
+                                            <div>
+                                                <span class="block text-xl font-medium">
+                                                    <?php echo esc_html($reviewuserlogin); ?>, Olx
+                                                </span>
+                                                <span class="block text-lg">
+                                                    Dot. <?php echo esc_html($reviewItem); ?>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- item -->
+                                <!-- item -->
                         <?php
                             endwhile;
                             wp_reset_postdata();
                         endif;
-                            ?>
+                        ?>
                     </div>
                 </div>
             </div>
