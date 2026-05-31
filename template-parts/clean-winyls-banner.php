@@ -6,7 +6,7 @@
             <h4 class="font-heading text-2xl lg:text-4xl xl:text-5xl px-10 text-center lg: px-0 lg:tex-left">Usługa
                 mycia
                 płyt winylowych</h4>
-            <h5>Już od 10zł / płyta</h5>
+            <h5>Już od 10zł / płyta <span>Promocja, teraz do każdej płyty dokładamy mycie GRATIS</span></h5>
             <h6>Z wykorzystaniem specjalistycznego, w pełni profesjonalnego sprzętu</h6>
             <a href="<?php echo home_url('mycie-plyt-winylowych'); ?>" class="btn-main" target="_blank">Dowiedz się
                 więcej</a>

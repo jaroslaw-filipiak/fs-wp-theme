@@ -27,7 +27,7 @@
       @apply mt-6 text-lg;
     }
     .price {
-      @apply font-medium !mt-0  mb-4 text-2xl;
+      @apply font-medium !mt-0 mb-4 text-2xl flex flex-col md:flex-row md:items-center gap-2;
     }
     form.cart {
       @apply flex items-stretch justify-start gap-4 -ml-[16px];
@@ -257,5 +257,9 @@
     &__price {
       @apply text-gray-600;
     }
+  }
+
+  .vinyl-cleaning-promo-badge {
+    @apply inline-flex items-center text-sm bg-red-400 py-1 px-4 text-white rounded-3xl font-medium;
   }
 }

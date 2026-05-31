@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.11] - 2026-05-31
+
+### Added
+
+- Promocja: mycie płyt winylowych GRATIS — czerwony badge przy cenie na stronie produktu winylowego zastępuje checkbox z dopłatą +10 zł; układ flex (kolumna na mobile, wiersz od md); oryginalna funkcjonalność checkboxa zachowana w kodzie, gotowa do reaktywacji po zakończeniu promocji
+
 ## [2.2.10] - 2026-05-02
 
 ### Added

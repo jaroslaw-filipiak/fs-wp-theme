@@ -12,19 +12,43 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// PROMOCJA: mycie płyt winylowych GRATIS
+// Aby wrócić do normalnego trybu (checkbox + dopłata +10 zł):
+//   1. Usuń hook vinyl_cleaning_promo_badge
+//   2. Odkomentuj hook vinyl_cleaning_checkbox_display
+// ─────────────────────────────────────────────────────────────────────────────
+
 /**
- * Display cleaning checkbox on single product page for vinyl category
+ * PROMOCJA – badge "Mycie płyty winylowej GRATIS" przy cenie produktu
  */
-add_action('woocommerce_before_add_to_cart_button', 'vinyl_cleaning_checkbox_display');
+add_filter('woocommerce_get_price_html', 'vinyl_cleaning_promo_badge', 10, 2);
+function vinyl_cleaning_promo_badge($price_html, $product) {
+    if (!is_singular('product')) {
+        return $price_html;
+    }
+
+    if (!has_term('winyle', 'product_cat', $product->get_id())) {
+        return $price_html;
+    }
+
+    $badge = '<span class="vinyl-cleaning-promo-badge">Mycie płyty winylowej GRATIS</span>';
+
+    return $price_html . $badge;
+}
+
+/**
+ * Oryginalna funkcja checkboxa (+10 zł) – nieaktywna podczas promocji
+ * Aby reaktywować: odkomentuj add_action poniżej
+ */
+// add_action('woocommerce_before_add_to_cart_button', 'vinyl_cleaning_checkbox_display');
 function vinyl_cleaning_checkbox_display() {
     global $product;
 
-    // Sprawdź czy produkt jest w kategorii "winyle"
     if (!has_term('winyle', 'product_cat', $product->get_id())) {
         return;
     }
 
-    // Wyświetl checkbox
     echo '<div class="vinyl-cleaning-addon">';
     echo '<label class="vinyl-cleaning-addon__label">';
     echo '<input type="checkbox" name="vinyl_cleaning" value="yes" class="vinyl-cleaning-addon__checkbox" />';
@@ -42,7 +66,6 @@ function vinyl_cleaning_add_cart_item_data($cart_item_data, $product_id, $variat
 
     if (isset($_POST['vinyl_cleaning']) && $_POST['vinyl_cleaning'] === 'yes') {
         $cart_item_data['vinyl_cleaning'] = 'yes';
-        // Unikatowy klucz aby każdy item był osobno
         $cart_item_data['unique_key'] = md5(microtime().rand());
     }
 
@@ -62,7 +85,7 @@ function vinyl_cleaning_modify_cart_item_price($cart) {
     foreach ($cart->get_cart() as $cart_item_key => $cart_item) {
         if (isset($cart_item['vinyl_cleaning']) && $cart_item['vinyl_cleaning'] === 'yes') {
             $original_price = $cart_item['data']->get_price();
-            $new_price = $original_price + 10; // Dodaj 10 zł za mycie
+            $new_price = $original_price + 10;
             $cart_item['data']->set_price($new_price);
         }
     }
