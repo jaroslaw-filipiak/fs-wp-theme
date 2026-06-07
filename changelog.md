@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.12] - 2026-06-07
+
+### Added
+
+- Darmowa wysyłka dla klientów z zachowaniem wewnętrznego rozliczania rzeczywistego kosztu InPost według klasy wysyłki produktu.
+- Nowy banner na stronie głównej z możliwością zamknięcia, zapamiętywaną w `sessionStorage` na czas bieżącej sesji przeglądarki.
+- Kolumna „Koszt wysyłki” w panelu administracyjnym produktów oraz zapisywanie kosztu i etykiety klasy wysyłki do pozycji zamówienia.
+
+### Changed
+
+- Odczyt kosztu wysyłki dla klasy produktu został oparty wyłącznie o natywne ustawienia metod wysyłki WooCommerce (instance settings, np. `class_cost_TERM_ID`).
+
+### Fixed
+
+- Usunięto hardcoded ceny klas wysyłki i fallbacki cenowe z logiki motywu.
+- Poprawiono odczyt kosztów tak, aby działał również dla metody InPost (`easypack_parcel_machines`), a nie tylko dla `flat_rate`.
+- Cena produktu jest teraz automatycznie powiększana o koszt przypisanej klasy wysyłkowej z konfiguracji WooCommerce, dzięki czemu klient widzi cenę końcową już na stronie produktu i w koszyku.
+
 ## [2.2.11] - 2026-05-31
 
 ### Added

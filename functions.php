@@ -1,4 +1,5 @@
 <?php
+
 /**
  * fajnestarocie functions and definitions
  *
@@ -7,9 +8,9 @@
  * @package fajnestarocie
  */
 
-if ( ! defined( '_S_VERSION' ) ) {
+if (! defined('_S_VERSION')) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '2.2.11' );
+	define('_S_VERSION', '2.2.12');
 }
 
 /**
@@ -19,17 +20,18 @@ if ( ! defined( '_S_VERSION' ) ) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function fajnestarocie_setup() {
+function fajnestarocie_setup()
+{
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
 		* If you're building a theme based on fajnestarocie, use a find and replace
 		* to change 'fajnestarocie' to the name of your theme in all the template files.
 		*/
-	load_theme_textdomain( 'fajnestarocie', get_template_directory() . '/languages' );
+	load_theme_textdomain('fajnestarocie', get_template_directory() . '/languages');
 
 	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+	add_theme_support('automatic-feed-links');
 
 	// add_theme_support( 'post-thumbnails' );
 
@@ -43,19 +45,19 @@ function fajnestarocie_setup() {
 		* hard-coded <title> tag in the document head, and expect WordPress to
 		* provide it for us.
 		*/
-	add_theme_support( 'title-tag' );
+	add_theme_support('title-tag');
 
 	/*
 		* Enable support for Post Thumbnails on posts and pages.
 		*
 		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		*/
-	add_theme_support( 'post-thumbnails' );
+	add_theme_support('post-thumbnails');
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'fajnestarocie' ),
+			'menu-1' => esc_html__('Primary', 'fajnestarocie'),
 		)
 	);
 
@@ -89,7 +91,7 @@ function fajnestarocie_setup() {
 	);
 
 	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
+	add_theme_support('customize-selective-refresh-widgets');
 
 	/**
 	 * Add support for core custom logo.
@@ -106,7 +108,7 @@ function fajnestarocie_setup() {
 		)
 	);
 }
-add_action( 'after_setup_theme', 'fajnestarocie_setup' );
+add_action('after_setup_theme', 'fajnestarocie_setup');
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -115,22 +117,24 @@ add_action( 'after_setup_theme', 'fajnestarocie_setup' );
  *
  * @global int $content_width
  */
-function fajnestarocie_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'fajnestarocie_content_width', 640 );
+function fajnestarocie_content_width()
+{
+	$GLOBALS['content_width'] = apply_filters('fajnestarocie_content_width', 640);
 }
-add_action( 'after_setup_theme', 'fajnestarocie_content_width', 0 );
+add_action('after_setup_theme', 'fajnestarocie_content_width', 0);
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function fajnestarocie_widgets_init() {
+function fajnestarocie_widgets_init()
+{
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'fajnestarocie' ),
+			'name'          => esc_html__('Sidebar', 'fajnestarocie'),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'fajnestarocie' ),
+			'description'   => esc_html__('Add widgets here.', 'fajnestarocie'),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
@@ -138,71 +142,72 @@ function fajnestarocie_widgets_init() {
 		)
 	);
 }
-add_action( 'widgets_init', 'fajnestarocie_widgets_init' );
+add_action('widgets_init', 'fajnestarocie_widgets_init');
 
 /**
  * Enqueue scripts and styles.
  */
-function fajnestarocie_scripts() {
+function fajnestarocie_scripts()
+{
 	//main global styles / scripts
-	wp_enqueue_style( 'fajnestarocie-main-styles', get_template_directory_uri() . '/dist/assets/main.css', array(), _S_VERSION );
-	wp_enqueue_style( 'fajnestarocie-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_enqueue_style('fajnestarocie-main-styles', get_template_directory_uri() . '/dist/assets/main.css', array(), _S_VERSION);
+	wp_enqueue_style('fajnestarocie-style', get_stylesheet_uri(), array(), _S_VERSION);
 
-	wp_enqueue_script( 'fajnestarocie-main-scripts', get_template_directory_uri() . '/dist/assets/main.js', array(), _S_VERSION, true );
-	
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
+	wp_enqueue_script('fajnestarocie-main-scripts', get_template_directory_uri() . '/dist/assets/main.js', array(), _S_VERSION, true);
+
+	if (is_singular() && comments_open() && get_option('thread_comments')) {
+		wp_enqueue_script('comment-reply');
 	}
 
 	// single product styles / scripts
-	if ( is_singular( 'product' ) ) {
-		wp_enqueue_style( 'fajnestarocie-single-product-styles', get_template_directory_uri() . '/dist/assets/single-product.css', array(), _S_VERSION, false );
-		wp_enqueue_script( 'fajnestarocie-single-product-scripts', get_template_directory_uri() . '/dist/assets/single-product.js', array(), _S_VERSION, false );
-		wp_enqueue_script( 'fajnestarocie-lightbox-scripts', get_template_directory_uri() . '/public/libs/lightbox/js/lightbox.min.js', array('jquery'), _S_VERSION, false );
-		wp_enqueue_style( 'fajnestarocie-lightbox-styles', get_template_directory_uri() . '/public/libs/lightbox/css/lightbox.min.css', array(), _S_VERSION, false );
+	if (is_singular('product')) {
+		wp_enqueue_style('fajnestarocie-single-product-styles', get_template_directory_uri() . '/dist/assets/single-product.css', array(), _S_VERSION, false);
+		wp_enqueue_script('fajnestarocie-single-product-scripts', get_template_directory_uri() . '/dist/assets/single-product.js', array(), _S_VERSION, false);
+		wp_enqueue_script('fajnestarocie-lightbox-scripts', get_template_directory_uri() . '/public/libs/lightbox/js/lightbox.min.js', array('jquery'), _S_VERSION, false);
+		wp_enqueue_style('fajnestarocie-lightbox-styles', get_template_directory_uri() . '/public/libs/lightbox/css/lightbox.min.css', array(), _S_VERSION, false);
 	}
 
 	// front page styles / scripts
-	if ( is_front_page() ) {
-		wp_enqueue_style( 'fajnestarocie-front-page-styles', get_template_directory_uri() . '/dist/assets/front-page.css', array(), _S_VERSION, false );
-		wp_enqueue_script( 'fajnestarocie-front-page-scripts', get_template_directory_uri() . '/dist/assets/front-page.js', array(), _S_VERSION, false );
+	if (is_front_page()) {
+		wp_enqueue_style('fajnestarocie-front-page-styles', get_template_directory_uri() . '/dist/assets/front-page.css', array(), _S_VERSION, false);
+		wp_enqueue_script('fajnestarocie-front-page-scripts', get_template_directory_uri() . '/dist/assets/front-page.js', array(), _S_VERSION, false);
 	}
 
-    // cart page 
-    if ( is_cart() ) {
-        wp_enqueue_style( 'fajnestarocie-cart-styles', get_template_directory_uri() . '/dist/assets/cart.css', array(), _S_VERSION, false );
-        wp_enqueue_script( 'fajnestarocie-cart-scripts', get_template_directory_uri() . '/dist/assets/cart.js', array(), _S_VERSION, false );
-    }
+	// cart page 
+	if (is_cart()) {
+		wp_enqueue_style('fajnestarocie-cart-styles', get_template_directory_uri() . '/dist/assets/cart.css', array(), _S_VERSION, false);
+		wp_enqueue_script('fajnestarocie-cart-scripts', get_template_directory_uri() . '/dist/assets/cart.js', array(), _S_VERSION, false);
+	}
 
-    // search page styles / scripts
-    if ( is_search() ) {
-        wp_enqueue_style( 'fajnestarocie-search-styles', get_template_directory_uri() . '/dist/assets/search.css', array(), _S_VERSION, false );
-    }
+	// search page styles / scripts
+	if (is_search()) {
+		wp_enqueue_style('fajnestarocie-search-styles', get_template_directory_uri() . '/dist/assets/search.css', array(), _S_VERSION, false);
+	}
 
-    // 404 page styles / scripts
-    if ( is_404() ) {
-        wp_enqueue_style( 'fajnestarocie-404-styles', get_template_directory_uri() . '/dist/assets/404.css', array(), _S_VERSION, false );
-        wp_enqueue_script( 'fajnestarocie-404-scripts', get_template_directory_uri() . '/dist/assets/404.js', array(), _S_VERSION, false );
-    }
+	// 404 page styles / scripts
+	if (is_404()) {
+		wp_enqueue_style('fajnestarocie-404-styles', get_template_directory_uri() . '/dist/assets/404.css', array(), _S_VERSION, false);
+		wp_enqueue_script('fajnestarocie-404-scripts', get_template_directory_uri() . '/dist/assets/404.js', array(), _S_VERSION, false);
+	}
 
 	// product archive page styles / scripts
-	if ( is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) || is_tax( 'winyle' ) || is_tax( 'product_cat' ) ) {
-		wp_enqueue_style( 'fajnestarocie-archive-product-styles', get_template_directory_uri() . '/dist/assets/archive-product.css', array(), _S_VERSION, false );
-		wp_enqueue_script( 'fajnestarocie-archive-product-scripts', get_template_directory_uri() . '/dist/assets/archive-product.js', array(), _S_VERSION, false );
+	if (is_post_type_archive('product') || is_tax('product_cat') || is_tax('winyle') || is_tax('product_cat')) {
+		wp_enqueue_style('fajnestarocie-archive-product-styles', get_template_directory_uri() . '/dist/assets/archive-product.css', array(), _S_VERSION, false);
+		wp_enqueue_script('fajnestarocie-archive-product-scripts', get_template_directory_uri() . '/dist/assets/archive-product.js', array(), _S_VERSION, false);
 	}
-	
+
 	// page template contact
-	if ( is_page_template( 'page-templates/page-contact.php' ) ) {
-		wp_enqueue_style( 'fajnestarocie-contact-styles', get_template_directory_uri() . '/dist/assets/contact.css', array(), _S_VERSION, false );
-		wp_enqueue_script( 'fajnestarocie-contact-scripts', get_template_directory_uri() . '/dist/assets/contact.js', array(), _S_VERSION, false );
+	if (is_page_template('page-templates/page-contact.php')) {
+		wp_enqueue_style('fajnestarocie-contact-styles', get_template_directory_uri() . '/dist/assets/contact.css', array(), _S_VERSION, false);
+		wp_enqueue_script('fajnestarocie-contact-scripts', get_template_directory_uri() . '/dist/assets/contact.js', array(), _S_VERSION, false);
 	}
 
 	// page template blog
-	if ( is_page_template( 'page-templates/page-blog.php' ) ) {
-		wp_enqueue_style( 'fajnestarocie-blog-styles', get_template_directory_uri() . '/dist/assets/page-template-blog-styles.css', array(), _S_VERSION, false );
+	if (is_page_template('page-templates/page-blog.php')) {
+		wp_enqueue_style('fajnestarocie-blog-styles', get_template_directory_uri() . '/dist/assets/page-template-blog-styles.css', array(), _S_VERSION, false);
 	}
 }
-add_action( 'wp_enqueue_scripts', 'fajnestarocie_scripts' );
+add_action('wp_enqueue_scripts', 'fajnestarocie_scripts');
 
 /**
  * Implement the Custom Header feature.
@@ -232,14 +237,14 @@ require get_template_directory() . '/inc/subscription-form.php';
 /**
  * Load Jetpack compatibility file.
  */
-if ( defined( 'JETPACK__VERSION' ) ) {
+if (defined('JETPACK__VERSION')) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
 /**
  * Load WooCommerce compatibility file.
  */
-if ( class_exists( 'WooCommerce' ) ) {
+if (class_exists('WooCommerce')) {
 	require get_template_directory() . '/inc/woocommerce.php';
 	require get_template_directory() . '/inc/vinyl-cleaning-addon.php';
 	require get_template_directory() . '/inc/free-shipping.php';
@@ -248,31 +253,32 @@ if ( class_exists( 'WooCommerce' ) ) {
 /**
  * Add additional WooCommerce-specific body classes for better styling control
  */
-function fajnestarocie_woocommerce_body_classes( $classes ) {
+function fajnestarocie_woocommerce_body_classes($classes)
+{
 	// Add class for WooCommerce pages
-	if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
+	if (function_exists('is_woocommerce') && is_woocommerce()) {
 		$classes[] = 'is-woocommerce-page';
 	}
 
 	// Product category pages
-	if ( is_tax( 'product_cat' ) ) {
+	if (is_tax('product_cat')) {
 		$classes[] = 'is-product-category';
-		
+
 		$current_category = get_queried_object();
-		if ( $current_category ) {
+		if ($current_category) {
 			// Add category slug as class
 			$classes[] = 'product-cat-' . $current_category->slug;
-			
+
 			// Special handling for vinyl category
-			if ( $current_category->slug === 'winyle' ) {
+			if ($current_category->slug === 'winyle') {
 				$classes[] = 'is-vinyl-category';
 			}
-			
+
 			// Add parent category info
-			if ( $current_category->parent > 0 ) {
+			if ($current_category->parent > 0) {
 				$classes[] = 'has-parent-category';
-				$parent_category = get_term( $current_category->parent, 'product_cat' );
-				if ( $parent_category && ! is_wp_error( $parent_category ) ) {
+				$parent_category = get_term($current_category->parent, 'product_cat');
+				if ($parent_category && ! is_wp_error($parent_category)) {
 					$classes[] = 'parent-cat-' . $parent_category->slug;
 				}
 			} else {
@@ -282,26 +288,26 @@ function fajnestarocie_woocommerce_body_classes( $classes ) {
 	}
 
 	// Product archive page
-	if ( is_post_type_archive( 'product' ) ) {
+	if (is_post_type_archive('product')) {
 		$classes[] = 'is-product-archive';
 	}
 
 	// Single product page
-	if ( is_singular( 'product' ) ) {
+	if (is_singular('product')) {
 		$classes[] = 'is-single-product';
-		
+
 		global $product;
-		if ( $product ) {
+		if ($product) {
 			// Add product categories as classes
-			$product_cats = get_the_terms( $product->get_id(), 'product_cat' );
-			if ( $product_cats && ! is_wp_error( $product_cats ) ) {
-				foreach ( $product_cats as $cat ) {
+			$product_cats = get_the_terms($product->get_id(), 'product_cat');
+			if ($product_cats && ! is_wp_error($product_cats)) {
+				foreach ($product_cats as $cat) {
 					$classes[] = 'has-product-cat-' . $cat->slug;
 				}
-				
+
 				// Special vinyl handling
-				$cat_slugs = wp_list_pluck( $product_cats, 'slug' );
-				if ( in_array( 'winyle', $cat_slugs ) ) {
+				$cat_slugs = wp_list_pluck($product_cats, 'slug');
+				if (in_array('winyle', $cat_slugs)) {
 					$classes[] = 'is-vinyl-product';
 				}
 			}
@@ -309,23 +315,23 @@ function fajnestarocie_woocommerce_body_classes( $classes ) {
 	}
 
 	// Cart page
-	if ( is_cart() ) {
+	if (is_cart()) {
 		$classes[] = 'is-cart-page';
 	}
 
 	// Checkout page
-	if ( is_checkout() ) {
+	if (is_checkout()) {
 		$classes[] = 'is-checkout-page';
 	}
 
 	// Account pages
-	if ( is_account_page() ) {
+	if (is_account_page()) {
 		$classes[] = 'is-account-page';
 	}
 
 	return $classes;
 }
-add_filter( 'body_class', 'fajnestarocie_woocommerce_body_classes' );
+add_filter('body_class', 'fajnestarocie_woocommerce_body_classes');
 
 /**
  * Load translations
@@ -336,78 +342,81 @@ require get_template_directory() . '/inc/translations.php';
  * Enqueue ACF component specific assets dynamically
  * Only loads CSS/JS for components that are actually used on the page
  */
-function fajnestarocie_enqueue_acf_assets( $layouts ) {
-    if( empty($layouts) || !is_array($layouts) ) {
-        return;
-    }
-    
-    $theme_uri = get_template_directory_uri();
-    $theme_path = get_template_directory();
-    
-    foreach( $layouts as $layout ) {
-        $handle = 'fajnestarocie-acf-' . $layout;
-        
-        // Check and enqueue CSS (styles file has different naming convention)
-        $css_file = '/dist/assets/acf/acf-' . $layout . '-styles.css';
-        if( file_exists($theme_path . $css_file) ) {
-            wp_enqueue_style( 
-                $handle . '-styles', 
-                $theme_uri . $css_file, 
-                array(), 
-                _S_VERSION 
-            );
-        }
-        
-        // Check and enqueue JS
-        $js_file = '/dist/assets/acf/acf-' . $layout . '.js';
-        if( file_exists($theme_path . $js_file) ) {
-            wp_enqueue_script( 
-                $handle . '-scripts', 
-                $theme_uri . $js_file, 
-                array(), 
-                _S_VERSION, 
-                true 
-            );
-        }
-        
-        // Debug info in development
-        if( defined('WP_DEBUG') && WP_DEBUG ) {
-            $css_exists = file_exists($theme_path . $css_file) ? '✓' : '✗';
-            $js_exists = file_exists($theme_path . $js_file) ? '✓' : '✗';
-            error_log("ACF Asset Check - Layout: {$layout}, CSS: {$css_exists}, JS: {$js_exists}");
-        }
-    }
+function fajnestarocie_enqueue_acf_assets($layouts)
+{
+	if (empty($layouts) || !is_array($layouts)) {
+		return;
+	}
+
+	$theme_uri = get_template_directory_uri();
+	$theme_path = get_template_directory();
+
+	foreach ($layouts as $layout) {
+		$handle = 'fajnestarocie-acf-' . $layout;
+
+		// Check and enqueue CSS (styles file has different naming convention)
+		$css_file = '/dist/assets/acf/acf-' . $layout . '-styles.css';
+		if (file_exists($theme_path . $css_file)) {
+			wp_enqueue_style(
+				$handle . '-styles',
+				$theme_uri . $css_file,
+				array(),
+				_S_VERSION
+			);
+		}
+
+		// Check and enqueue JS
+		$js_file = '/dist/assets/acf/acf-' . $layout . '.js';
+		if (file_exists($theme_path . $js_file)) {
+			wp_enqueue_script(
+				$handle . '-scripts',
+				$theme_uri . $js_file,
+				array(),
+				_S_VERSION,
+				true
+			);
+		}
+
+		// Debug info in development
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			$css_exists = file_exists($theme_path . $css_file) ? '✓' : '✗';
+			$js_exists = file_exists($theme_path . $js_file) ? '✓' : '✗';
+			error_log("ACF Asset Check - Layout: {$layout}, CSS: {$css_exists}, JS: {$js_exists}");
+		}
+	}
 }
 
 
-function fajnestarocie_include_products_in_search( $query ) {
-    if ( ! is_admin() && $query->is_main_query() && $query->is_search() ) {
-        $query->set( 'post_type', array( 'post', 'page', 'product' ) );
-        $query->set( 'post_status', 'publish' );
-        
-        // Note: Complete override handles the actual search
-        // This just sets basic query parameters
-    }
+function fajnestarocie_include_products_in_search($query)
+{
+	if (! is_admin() && $query->is_main_query() && $query->is_search()) {
+		$query->set('post_type', array('post', 'page', 'product'));
+		$query->set('post_status', 'publish');
+
+		// Note: Complete override handles the actual search
+		// This just sets basic query parameters
+	}
 }
 
-function fajnestarocie_setup_fulltext_indexes() {
-    global $wpdb;
-    
-    // Check if FULLTEXT index exists
-    $index_exists = $wpdb->get_var("
+function fajnestarocie_setup_fulltext_indexes()
+{
+	global $wpdb;
+
+	// Check if FULLTEXT index exists
+	$index_exists = $wpdb->get_var("
         SELECT COUNT(*) FROM INFORMATION_SCHEMA.STATISTICS 
         WHERE table_schema = '{$wpdb->dbname}' 
         AND table_name = '{$wpdb->posts}' 
         AND index_name = 'fulltext_search_idx'
     ");
-    
-    // Create FULLTEXT index if it doesn't exist
-    if ( ! $index_exists ) {
-        $wpdb->query("
+
+	// Create FULLTEXT index if it doesn't exist
+	if (! $index_exists) {
+		$wpdb->query("
             ALTER TABLE {$wpdb->posts} 
             ADD FULLTEXT fulltext_search_idx (post_title, post_content, post_excerpt)
         ");
-    }
+	}
 }
 
 
@@ -415,39 +424,40 @@ function fajnestarocie_setup_fulltext_indexes() {
  * Optimized search for posts and WooCommerce products
  * Direct SQL query with FULLTEXT support for maximum performance
  */
-function fajnestarocie_optimized_product_search( $posts, $query ) {
-    // Only handle main search queries
-    if ( ! $query->is_search() || is_admin() || ! $query->is_main_query() ) {
-        return $posts;
-    }
-    
-    $search_term = trim( $query->get( 's' ) );
-    if ( empty( $search_term ) ) {
-        return $posts;
-    }
-    
-    global $wpdb;
-    static $cache = array();
-    
-    // Simple cache for repeated searches
-    $cache_key = md5( $search_term );
-    if ( isset( $cache[ $cache_key ] ) ) {
-        return $cache[ $cache_key ];
-    }
-    
-    $clean_term = $wpdb->esc_like( $search_term );
-    
-    // Check if FULLTEXT index exists for better performance
-    $has_fulltext = $wpdb->get_var("
+function fajnestarocie_optimized_product_search($posts, $query)
+{
+	// Only handle main search queries
+	if (! $query->is_search() || is_admin() || ! $query->is_main_query()) {
+		return $posts;
+	}
+
+	$search_term = trim($query->get('s'));
+	if (empty($search_term)) {
+		return $posts;
+	}
+
+	global $wpdb;
+	static $cache = array();
+
+	// Simple cache for repeated searches
+	$cache_key = md5($search_term);
+	if (isset($cache[$cache_key])) {
+		return $cache[$cache_key];
+	}
+
+	$clean_term = $wpdb->esc_like($search_term);
+
+	// Check if FULLTEXT index exists for better performance
+	$has_fulltext = $wpdb->get_var("
         SELECT COUNT(*) FROM INFORMATION_SCHEMA.STATISTICS 
         WHERE table_schema = '{$wpdb->dbname}' 
         AND table_name = '{$wpdb->posts}' 
         AND index_name = 'fulltext_search_idx'
     ");
-    
-    if ( $has_fulltext ) {
-        // Use FULLTEXT for better relevance and speed
-        $sql = $wpdb->prepare( "
+
+	if ($has_fulltext) {
+		// Use FULLTEXT for better relevance and speed
+		$sql = $wpdb->prepare("
             SELECT p.ID, p.post_title, p.post_content, p.post_excerpt, p.post_date, p.post_type,
                    MATCH(p.post_title, p.post_content, p.post_excerpt) AGAINST(%s IN NATURAL LANGUAGE MODE) as relevance
             FROM {$wpdb->posts} p
@@ -474,10 +484,10 @@ function fajnestarocie_optimized_product_search( $posts, $query ) {
             )
             ORDER BY relevance DESC, p.post_title LIKE %s DESC, p.post_date DESC
             LIMIT 20
-        ", $search_term, $search_term, "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%" );
-    } else {
-        // Fallback to LIKE queries
-        $sql = $wpdb->prepare( "
+        ", $search_term, $search_term, "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%");
+	} else {
+		// Fallback to LIKE queries
+		$sql = $wpdb->prepare("
             SELECT p.ID, p.post_title, p.post_content, p.post_excerpt, p.post_date, p.post_type
             FROM {$wpdb->posts} p
             WHERE p.post_type IN ('post', 'page', 'product')
@@ -504,63 +514,65 @@ function fajnestarocie_optimized_product_search( $posts, $query ) {
             )
             ORDER BY p.post_title LIKE %s DESC, p.post_date DESC
             LIMIT 20
-        ", "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%" );
-    }
-    
-    $results = $wpdb->get_results( $sql );
-    
-    if ( $results ) {
-        // Convert to WP_Post objects for theme compatibility
-        $post_objects = array();
-        foreach ( $results as $result ) {
-            $post_objects[] = new WP_Post( $result );
-        }
-        
-        $cache[ $cache_key ] = $post_objects;
-        return $post_objects;
-    }
-    
-    $cache[ $cache_key ] = array();
-    return array();
+        ", "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%", "%{$clean_term}%");
+	}
+
+	$results = $wpdb->get_results($sql);
+
+	if ($results) {
+		// Convert to WP_Post objects for theme compatibility
+		$post_objects = array();
+		foreach ($results as $result) {
+			$post_objects[] = new WP_Post($result);
+		}
+
+		$cache[$cache_key] = $post_objects;
+		return $post_objects;
+	}
+
+	$cache[$cache_key] = array();
+	return array();
 }
 
 // Hook up the optimized search functions
-add_action( 'pre_get_posts', 'fajnestarocie_include_products_in_search' );
-add_action( 'init', 'fajnestarocie_setup_fulltext_indexes' );
-add_filter( 'the_posts', 'fajnestarocie_optimized_product_search', 10, 2 );
+add_action('pre_get_posts', 'fajnestarocie_include_products_in_search');
+add_action('init', 'fajnestarocie_setup_fulltext_indexes');
+add_filter('the_posts', 'fajnestarocie_optimized_product_search', 10, 2);
 
 /**
  * Set products per page for shop archive and alphabetical sorting
  * Also hide out of stock products from catalog
  */
-function fajnestarocie_products_per_page( $query ) {
-	if ( ! is_admin() && $query->is_main_query() && ( is_post_type_archive( 'product' ) || is_tax( 'product_cat' ) ) ) {
-		$query->set( 'posts_per_page', 40 );
-		$query->set( 'orderby', 'title' );
-		$query->set( 'order', 'ASC' );
-		
+function fajnestarocie_products_per_page($query)
+{
+	if (! is_admin() && $query->is_main_query() && (is_post_type_archive('product') || is_tax('product_cat'))) {
+		$query->set('posts_per_page', 40);
+		$query->set('orderby', 'title');
+		$query->set('order', 'ASC');
+
 		// Hide out of stock products from catalog
-		$meta_query = $query->get( 'meta_query' );
-		if ( ! is_array( $meta_query ) ) {
+		$meta_query = $query->get('meta_query');
+		if (! is_array($meta_query)) {
 			$meta_query = array();
 		}
-		
+
 		$meta_query[] = array(
 			'key'     => '_stock_status',
 			'value'   => 'outofstock',
 			'compare' => '!='
 		);
-		
-		$query->set( 'meta_query', $meta_query );
+
+		$query->set('meta_query', $meta_query);
 	}
 }
-add_action( 'pre_get_posts', 'fajnestarocie_products_per_page' );
+add_action('pre_get_posts', 'fajnestarocie_products_per_page');
 
 /**
  * Register REST API endpoint for infinite scroll products
  */
-function fajnestarocie_register_products_api() {
-	register_rest_route( 'fajnestarocie/v1', '/products', array(
+function fajnestarocie_register_products_api()
+{
+	register_rest_route('fajnestarocie/v1', '/products', array(
 		'methods'  => 'GET',
 		'callback' => 'fajnestarocie_get_products_ajax',
 		'permission_callback' => '__return_true',
@@ -574,16 +586,17 @@ function fajnestarocie_register_products_api() {
 				'sanitize_callback' => 'sanitize_text_field',
 			),
 		),
-	) );
+	));
 }
-add_action( 'rest_api_init', 'fajnestarocie_register_products_api' );
+add_action('rest_api_init', 'fajnestarocie_register_products_api');
 
 /**
  * AJAX handler for loading products
  */
-function fajnestarocie_get_products_ajax( $request ) {
-	$page = $request->get_param( 'page' );
-	$category_id = $request->get_param( 'category' );
+function fajnestarocie_get_products_ajax($request)
+{
+	$page = $request->get_param('page');
+	$category_id = $request->get_param('category');
 
 	// Przygotuj argumenty zapytania
 	$args = array(
@@ -603,7 +616,7 @@ function fajnestarocie_get_products_ajax( $request ) {
 	);
 
 	// Dodaj filtr kategorii jeśli jest podany
-	if ( ! empty( $category_id ) ) {
+	if (! empty($category_id)) {
 		$args['tax_query'] = array(
 			array(
 				'taxonomy' => 'product_cat',
@@ -613,31 +626,31 @@ function fajnestarocie_get_products_ajax( $request ) {
 		);
 	}
 
-	$query = new WP_Query( $args );
+	$query = new WP_Query($args);
 	$products = array();
 
 	// Tablica z klasami wysokości obrazków (tak jak w archive-product.php)
-	$height_classes = array( 'h-64', 'h-72', 'h-80', 'h-88', 'h-96' );
+	$height_classes = array('h-64', 'h-72', 'h-80', 'h-88', 'h-96');
 	$index = 0;
 
-	if ( $query->have_posts() ) {
-		while ( $query->have_posts() ) {
+	if ($query->have_posts()) {
+		while ($query->have_posts()) {
 			$query->the_post();
 			global $product;
 
 			// Wybierz klasę wysokości obrazka cyklicznie
-			$image_class = $height_classes[ $index % 5 ];
+			$image_class = $height_classes[$index % 5];
 			$index++;
 
 			// Pobierz obrazek produktu
 			$image_url = has_post_thumbnail()
-				? get_the_post_thumbnail_url( get_the_ID(), 'full' )
+				? get_the_post_thumbnail_url(get_the_ID(), 'full')
 				: get_template_directory_uri() . '/dist/images/placeholder.jpg';
 
 			$products[] = array(
 				'id'        => get_the_ID(),
 				'title'     => get_the_title(),
-				'excerpt'   => wp_trim_words( get_the_excerpt(), 20 ),
+				'excerpt'   => wp_trim_words(get_the_excerpt(), 20),
 				'permalink' => get_permalink(),
 				'image'     => $image_url,
 				'imageClass' => $image_class,
@@ -648,10 +661,10 @@ function fajnestarocie_get_products_ajax( $request ) {
 
 	wp_reset_postdata();
 
-	return rest_ensure_response( array(
+	return rest_ensure_response(array(
 		'products'   => $products,
 		'page'       => $page,
 		'max_pages'  => $query->max_num_pages,
 		'found'      => $query->found_posts,
-	) );
+	));
 }
