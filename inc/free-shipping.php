@@ -215,37 +215,6 @@ function fajnestarocie_make_shipping_free($rates, $package)
 add_filter('woocommerce_package_rates', 'fajnestarocie_make_shipping_free', 100, 2);
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 3. "Darmowa wysyłka" badge on single-product pages
-// ─────────────────────────────────────────────────────────────────────────────
-
-/**
- * Append a "Darmowa wysyłka" badge to the product price HTML.
- * Skipped for products with the 'individual' shipping class (they are
- * non-purchasable and display their own contact message).
- *
- * @param  string     $price_html
- * @param  WC_Product $product
- * @return string
- */
-function fajnestarocie_free_shipping_badge($price_html, $product)
-{
-    if (! is_singular('product')) {
-        return $price_html;
-    }
-
-    if ($product->get_shipping_class() === 'individual') {
-        return $price_html;
-    }
-
-    $badge = '<span class="free-shipping-badge">'
-        . esc_html__('Darmowa wysyłka', 'fajnestarocie')
-        . '</span>';
-
-    return $price_html . $badge;
-}
-add_filter('woocommerce_get_price_html', 'fajnestarocie_free_shipping_badge', 20, 2);
-
-// ─────────────────────────────────────────────────────────────────────────────
 // 4. Admin: show estimated shipping cost in the product list
 // ─────────────────────────────────────────────────────────────────────────────
 

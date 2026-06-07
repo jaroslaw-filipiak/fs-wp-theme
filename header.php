@@ -145,5 +145,6 @@
 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
+    <?php get_template_part( 'template-parts/free-shipping-banner' ); ?>
     <div id="page" class="site">
         <?php get_template_part('template-parts/navigation'); ?>

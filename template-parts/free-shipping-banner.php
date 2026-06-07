@@ -2,16 +2,16 @@
 /**
  * Free Shipping Banner / Popup
  *
- * Displayed on the homepage. Shows a dismissible info bar informing
+ * Displayed site-wide. Shows a dismissible info bar informing
  * visitors that shipping is free for all standard-size items.
- * The dismiss logic is handled by front-page.js.
+ * The dismiss logic uses sessionStorage and works on every page.
  *
  * @package fajnestarocie
  */
 ?>
 <div id="free-shipping-banner" class="free-shipping-banner" role="banner" aria-label="<?php esc_attr_e( 'Informacja o darmowej wysyłce', 'fajnestarocie' ); ?>">
     <div class="free-shipping-banner__inner">
-        <span class="free-shipping-banner__icon" aria-hidden="true">
+        <span class="free-shipping-banner__icon" aria-hidden="true" style="color: #e7e5e4;">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="1" y="3" width="15" height="13" rx="1"></rect>
@@ -40,3 +40,25 @@
         </button>
     </div>
 </div>
+<script>
+    (function() {
+        var STORAGE_KEY = 'fajnestarocie_free_shipping_banner_dismissed';
+        var banner = document.getElementById('free-shipping-banner');
+        var closeBtn = document.getElementById('free-shipping-banner-close');
+
+        if (!banner || !closeBtn) return;
+
+        if (banner.dataset.bound === '1') return;
+        banner.dataset.bound = '1';
+
+        if (sessionStorage.getItem(STORAGE_KEY)) {
+            banner.classList.add('free-shipping-banner--hidden');
+            return;
+        }
+
+        closeBtn.addEventListener('click', function() {
+            banner.classList.add('free-shipping-banner--hidden');
+            sessionStorage.setItem(STORAGE_KEY, '1');
+        });
+    })();
+</script>

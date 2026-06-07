@@ -10,8 +10,6 @@ Template Name: Home
 
 <?php echo the_content(); ?>
 
-<?php get_template_part( 'template-parts/free-shipping-banner' ); ?>
-
 <section class="bg-stone-200 overflow-hidden">
 
     <?php
