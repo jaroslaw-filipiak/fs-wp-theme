@@ -381,3 +381,40 @@ blockquote {
     }
   }
 }
+
+// ─── Free shipping badge (single product page) ───────────────────────────────
+.free-shipping-badge {
+  @apply inline-flex items-center gap-1 ml-3 px-2 py-0.5 text-xs font-medium text-green-800 bg-green-100 border border-green-300 rounded-sm align-middle;
+}
+
+// ─── Free shipping info banner (homepage) ────────────────────────────────────
+.free-shipping-banner {
+  @apply bg-zinc-800 text-white w-full transition-all duration-300;
+
+  &--hidden {
+    @apply hidden;
+  }
+
+  &__inner {
+    @apply container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2;
+  }
+
+  &__icon {
+    @apply flex-shrink-0 text-green-400;
+  }
+
+  &__message {
+    @apply flex-1 text-center text-sm font-medium tracking-wide;
+  }
+
+  &__disclaimer {
+    @apply block text-xs font-normal text-zinc-400 mt-0.5;
+  }
+
+  &__close {
+    @apply flex-shrink-0 p-1 rounded-sm text-zinc-300 hover:text-white hover:bg-zinc-700 transition-colors duration-200 cursor-pointer;
+    background: transparent;
+    border: none;
+    line-height: 1;
+  }
+}
