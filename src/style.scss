@@ -55,9 +55,17 @@
   }
 }
 
-//cart
+// cart checkout CTA (Woo Blocks)
 #page .wc-block-cart__submit-container {
-  @apply h-12 inline-flex w-full mt-3 py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 cursor-pointer;
+  @apply w-full mt-3;
+}
+
+#page .wc-block-cart__submit-button.wc-block-components-button {
+  @apply h-12 inline-flex w-full py-1 px-5 items-center justify-center font-medium border transition duration-200 bg-zinc-500 text-white hover:bg-zinc-800 cursor-pointer no-underline rounded-none;
+}
+
+#page .wc-block-cart__submit-button.wc-block-components-button .wc-block-components-button__text {
+  @apply text-white;
 }
 
 //woo parts
@@ -379,5 +387,37 @@ blockquote {
     h5 {
       @apply pb-4 max-w-[80%] mx-auto text-center;
     }
+  }
+}
+
+// ─── Free shipping info banner (homepage) ────────────────────────────────────
+.free-shipping-banner {
+  @apply bg-zinc-800 text-white w-full transition-all duration-300;
+
+  &--hidden {
+    @apply hidden;
+  }
+
+  &__inner {
+    @apply container mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-2;
+  }
+
+  &__icon {
+    @apply flex-shrink-0 text-stone-200;
+  }
+
+  &__message {
+    @apply flex-1 text-center text-sm font-medium tracking-wide;
+  }
+
+  &__disclaimer {
+    @apply block text-xs font-normal text-zinc-400 mt-0.5;
+  }
+
+  &__close {
+    @apply flex-shrink-0 p-1 rounded-sm text-zinc-300 hover:text-white hover:bg-zinc-700 transition-colors duration-200 cursor-pointer;
+    background: transparent;
+    border: none;
+    line-height: 1;
   }
 }

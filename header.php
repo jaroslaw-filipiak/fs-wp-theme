@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The header for our theme
  *
@@ -14,7 +15,7 @@
 <html <?php language_attributes(); ?>>
 
 <head>
-    <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="profile" href="https://gmpg.org/xfn/11">
 
@@ -40,102 +41,102 @@
         href="<?php echo get_theme_file_uri() ?>/dist/silktide-consent-manager.css">
     <script src="<?php echo get_theme_file_uri() ?>/dist/silktide-consent-manager.js"></script>
     <script>
-    silktideCookieBannerManager.updateCookieBannerConfig({
-        background: {
-            showBackground: true
-        },
-        cookieIcon: {
-            position: "bottomLeft"
-        },
-        cookieTypes: [{
-                id: "niezb_dne",
-                name: "Niezbędne",
-                description: "<p>Te pliki cookie są niezbędne do prawidłowego funkcjonowania witryny i nie można ich wyłączyć. Pomagają one między innymi w logowaniu i ustawianiu preferencji prywatności.</p>",
-                required: true,
-                onAccept: function() {
+        silktideCookieBannerManager.updateCookieBannerConfig({
+            background: {
+                showBackground: true
+            },
+            cookieIcon: {
+                position: "bottomLeft"
+            },
+            cookieTypes: [{
+                    id: "niezb_dne",
+                    name: "Niezbędne",
+                    description: "<p>Te pliki cookie są niezbędne do prawidłowego funkcjonowania witryny i nie można ich wyłączyć. Pomagają one między innymi w logowaniu i ustawianiu preferencji prywatności.</p>",
+                    required: true,
+                    onAccept: function() {
 
-                }
-            },
-            {
-                id: "analityczne",
-                name: "Analityczne",
-                description: "<p>Te pliki cookie pomagają nam ulepszać witrynę, śledząc, które strony są najpopularniejsze i w jaki sposób odwiedzający poruszają się po witrynie.</p>",
-                required: false,
-                onAccept: function() {
-                    gtag('consent', 'update', {
-                        analytics_storage: 'granted',
-                    });
-                    dataLayer.push({
-                        'event': 'consent_accepted_analityczne',
-                    });
+                    }
                 },
-                onReject: function() {
-                    gtag('consent', 'update', {
-                        analytics_storage: 'denied',
-                    });
-                }
-            },
-            {
-                id: "reklamowe",
-                name: "Reklamowe",
-                description: "<p>Te pliki cookie zapewniają dodatkowe funkcje i personalizację, aby ulepszyć Twoje doświadczenia. Mogą być ustawiane przez nas lub przez partnerów, z których usług korzystamy.</p>",
-                required: false,
-                onAccept: function() {
-                    gtag('consent', 'update', {
-                        ad_storage: 'granted',
-                        ad_user_data: 'granted',
-                        ad_personalization: 'granted',
-                    });
-                    dataLayer.push({
-                        'event': 'consent_accepted_reklamowe',
-                    });
+                {
+                    id: "analityczne",
+                    name: "Analityczne",
+                    description: "<p>Te pliki cookie pomagają nam ulepszać witrynę, śledząc, które strony są najpopularniejsze i w jaki sposób odwiedzający poruszają się po witrynie.</p>",
+                    required: false,
+                    onAccept: function() {
+                        gtag('consent', 'update', {
+                            analytics_storage: 'granted',
+                        });
+                        dataLayer.push({
+                            'event': 'consent_accepted_analityczne',
+                        });
+                    },
+                    onReject: function() {
+                        gtag('consent', 'update', {
+                            analytics_storage: 'denied',
+                        });
+                    }
                 },
-                onReject: function() {
-                    gtag('consent', 'update', {
-                        ad_storage: 'denied',
-                        ad_user_data: 'denied',
-                        ad_personalization: 'denied',
-                    });
+                {
+                    id: "reklamowe",
+                    name: "Reklamowe",
+                    description: "<p>Te pliki cookie zapewniają dodatkowe funkcje i personalizację, aby ulepszyć Twoje doświadczenia. Mogą być ustawiane przez nas lub przez partnerów, z których usług korzystamy.</p>",
+                    required: false,
+                    onAccept: function() {
+                        gtag('consent', 'update', {
+                            ad_storage: 'granted',
+                            ad_user_data: 'granted',
+                            ad_personalization: 'granted',
+                        });
+                        dataLayer.push({
+                            'event': 'consent_accepted_reklamowe',
+                        });
+                    },
+                    onReject: function() {
+                        gtag('consent', 'update', {
+                            ad_storage: 'denied',
+                            ad_user_data: 'denied',
+                            ad_personalization: 'denied',
+                        });
+                    }
+                }
+            ],
+            text: {
+                banner: {
+                    description: "<font color=\"#39434c\"><span style=\"letter-spacing: 0.34px;\">Na naszej stronie internetowej używamy plików cookie, aby ulepszyć komfort użytkowania, dostarczać spersonalizowane treści i analizować ruch. <a href=\"https://fajnestarocie.pl/polityka-prywatnosci/\" target=\"_blank\">Polityka prywatności</a>.</span></font>",
+                    acceptAllButtonText: "Akceptuje",
+                    acceptAllButtonAccessibleLabel: "Akceptuje",
+                    rejectNonEssentialButtonText: "Odrzucam",
+                    rejectNonEssentialButtonAccessibleLabel: "Odrzucam",
+                    preferencesButtonText: "Preferencje",
+                    preferencesButtonAccessibleLabel: "Preferencje"
+                },
+                preferences: {
+                    title: "Dostosuj swoje preferencje dotyczące plików cookie",
+                    description: "<p>Szanujemy Twoje prawo do prywatności. Możesz nie zezwolić na niektóre rodzaje plików cookie. Twoje preferencje dotyczące plików cookie będą miały zastosowanie na całej naszej stronie internetowej.</p>",
+                    creditLinkText: "skrypt cookies",
+                    creditLinkAccessibleLabel: "consent manager"
                 }
             }
-        ],
-        text: {
-            banner: {
-                description: "<font color=\"#39434c\"><span style=\"letter-spacing: 0.34px;\">Na naszej stronie internetowej używamy plików cookie, aby ulepszyć komfort użytkowania, dostarczać spersonalizowane treści i analizować ruch. <a href=\"https://fajnestarocie.pl/polityka-prywatnosci/\" target=\"_blank\">Polityka prywatności</a>.</span></font>",
-                acceptAllButtonText: "Akceptuje",
-                acceptAllButtonAccessibleLabel: "Akceptuje",
-                rejectNonEssentialButtonText: "Odrzucam",
-                rejectNonEssentialButtonAccessibleLabel: "Odrzucam",
-                preferencesButtonText: "Preferencje",
-                preferencesButtonAccessibleLabel: "Preferencje"
-            },
-            preferences: {
-                title: "Dostosuj swoje preferencje dotyczące plików cookie",
-                description: "<p>Szanujemy Twoje prawo do prywatności. Możesz nie zezwolić na niektóre rodzaje plików cookie. Twoje preferencje dotyczące plików cookie będą miały zastosowanie na całej naszej stronie internetowej.</p>",
-                creditLinkText: "skrypt cookies",
-                creditLinkAccessibleLabel: "consent manager"
-            }
-        }
-    });
+        });
     </script>
 
 
     <!-- Google Tag Manager -->
     <script>
-    (function(w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-            'gtm.start': new Date().getTime(),
-            event: 'gtm.js'
-        });
-        var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s),
-            dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src =
-            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-P3LWJMMV');
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P3LWJMMV');
     </script>
     <!-- End Google Tag Manager -->
 
@@ -145,5 +146,6 @@
 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
+    <?php get_template_part('template-parts/free-shipping-banner'); ?>
     <div id="page" class="site">
         <?php get_template_part('template-parts/navigation'); ?>

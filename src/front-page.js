@@ -5,6 +5,25 @@ import 'swiper/css/bundle';
 
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Free shipping banner – dismiss on close button click, persist via sessionStorage.
+    (function () {
+        var STORAGE_KEY = 'fajnestarocie_free_shipping_banner_dismissed';
+        var banner = document.getElementById('free-shipping-banner');
+        var closeBtn = document.getElementById('free-shipping-banner-close');
+
+        if (!banner || !closeBtn) return;
+
+        if (sessionStorage.getItem(STORAGE_KEY)) {
+            banner.classList.add('free-shipping-banner--hidden');
+            return;
+        }
+
+        closeBtn.addEventListener('click', function () {
+            banner.classList.add('free-shipping-banner--hidden');
+            sessionStorage.setItem(STORAGE_KEY, '1');
+        });
+    })();
+
     //home page slider
     const productsSlider = new Swiper('.products-slider', {
         direction: 'horizontal',
