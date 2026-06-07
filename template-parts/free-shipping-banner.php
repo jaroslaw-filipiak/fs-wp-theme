@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Free Shipping Banner / Popup
  *
@@ -9,7 +10,7 @@
  * @package fajnestarocie
  */
 ?>
-<div id="free-shipping-banner" class="free-shipping-banner" role="banner" aria-label="<?php esc_attr_e( 'Informacja o darmowej wysyłce', 'fajnestarocie' ); ?>">
+<div id="free-shipping-banner" class="free-shipping-banner" role="banner" aria-label="<?php esc_attr_e('Informacja o darmowej wysyłce', 'fajnestarocie'); ?>">
     <div class="free-shipping-banner__inner">
         <span class="free-shipping-banner__icon" aria-hidden="true" style="color: #e7e5e4;">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -21,15 +22,15 @@
             </svg>
         </span>
         <p class="free-shipping-banner__message">
-            <?php esc_html_e( 'Darmowa wysyłka przedmiotów zakupionych w naszym sklepie', 'fajnestarocie' ); ?>
+            <?php esc_html_e('Darmowa wysyłka przedmiotów zakupionych w naszym sklepie', 'fajnestarocie'); ?>
             <span class="free-shipping-banner__disclaimer">
-                <?php esc_html_e( '* nie dotyczy produktów o ponadstandardowych gabarytach', 'fajnestarocie' ); ?>
+                <?php esc_html_e('* nie dotyczy produktów o ponadstandardowych gabarytach', 'fajnestarocie'); ?>
             </span>
         </p>
         <button
             class="free-shipping-banner__close"
             id="free-shipping-banner-close"
-            aria-label="<?php esc_attr_e( 'Zamknij', 'fajnestarocie' ); ?>"
+            aria-label="<?php esc_attr_e('Zamknij', 'fajnestarocie'); ?>"
             type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
